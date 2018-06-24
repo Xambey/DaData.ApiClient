@@ -86,4 +86,4 @@ fabric.properties
 .idea/
 DadataApiClient/bin/
 DadataApiClient/obj/
-DadataApiClient.sln.DotSettings.user
+/DadataApiClient.sln.DotSettings.user
