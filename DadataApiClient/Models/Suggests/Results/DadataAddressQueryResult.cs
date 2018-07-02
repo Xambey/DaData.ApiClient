@@ -1,7 +1,7 @@
 ﻿using DadataApiClient.Models.Suggests.Data;
 using Newtonsoft.Json;
 
-namespace MarkupFree.Api.Models.Api.Dadata.Suggests.Results
+namespace DadataApiClient.Models.Suggests.Results
 {
     public class DadataAddressQueryResult
     {

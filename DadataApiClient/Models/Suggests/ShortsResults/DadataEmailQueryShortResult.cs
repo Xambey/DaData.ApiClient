@@ -1,4 +1,4 @@
-﻿namespace MarkupFree.Api.Models.Api.Dadata.Suggests.ShortsResults
+﻿namespace DadataApiClient.Models.Suggests.ShortsResults
 {
     public class DadataEmailQueryShortResult
     {

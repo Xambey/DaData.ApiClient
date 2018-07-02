@@ -1,6 +1,6 @@
-﻿using MarkupFree.Api.Models.Api.Dadata.Suggests.Results;
+﻿using DadataApiClient.Models.Suggests.Results;
 
-namespace MarkupFree.Api.Models.Api.Dadata.Suggests.ShortsResults
+namespace DadataApiClient.Models.Suggests.ShortsResults
 {
     public class DadataBankQueryShortResult
     {

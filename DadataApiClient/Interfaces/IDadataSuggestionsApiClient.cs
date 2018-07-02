@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.Responses;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.ShortResponses;
+using DadataApiClient.Models.Suggests.Responses;
+using DadataApiClient.Models.Suggests.ShortResponses;
 
 namespace DadataApiClient
 {
@@ -15,7 +15,7 @@ namespace DadataApiClient
         /// <param name="query">текст для поиска</param>
         /// <param name="count">кол-во подсказок, если равен 1, то заполняются координаты</param>
         /// <returns></returns>
-        Task<DadataAddressQueryResponse> SuggestsQueryAddress(string query, int? count = null);
+        Task<DadataAddressQueryBaseResponse> SuggestsQueryAddress(string query, int? count = null);
 
         /// <summary>
         /// Получить короткие подсказки по адресу
@@ -30,7 +30,7 @@ namespace DadataApiClient
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataFioQueryResponse> SuggestsQueryFio(string query);
+        Task<DadataFioQueryBaseResponse> SuggestsQueryFio(string query);
         
         /// <summary>
         /// Получить короткие подсказки по ФИО
@@ -44,7 +44,7 @@ namespace DadataApiClient
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataPartyQueryResponse> SuggestsQueryParty(string query);
+        Task<DadataPartyQueryBaseResponse> SuggestsQueryParty(string query);
         
         /// <summary>
         /// Получить короткие подсказки по организации
@@ -58,7 +58,7 @@ namespace DadataApiClient
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataBankQueryResponse> SuggestsQueryBank(string query);
+        Task<DadataBankQueryBaseResponse> SuggestsQueryBank(string query);
         
         /// <summary>
         /// Получить короткие подсказки по банку
@@ -72,7 +72,7 @@ namespace DadataApiClient
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataEmailQueryResponse> SuggestsQueryEmail(string query);
+        Task<DadataEmailQueryBaseResponse> SuggestsQueryEmail(string query);
         
         /// <summary>
         /// Получить короткие подсказки по email

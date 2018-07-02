@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -7,10 +8,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Base;
+using DadataApiClient.Commands.Suggestions;
 using DadataApiClient.Exceptions;
+using DadataApiClient.Models;
+using DadataApiClient.Models.Suggests.Responses;
+using DadataApiClient.Models.Suggests.ShortResponses;
 using DadataApiClient.Options;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.Responses;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.ShortResponses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -18,8 +21,19 @@ namespace DadataApiClient
 {
     public class DadataApiClient : IDadataApiClient
     {
-        private readonly DadataApiClientOptions Options;
-
+        private HashSet<CommandBase> Commands { get; set; } = new HashSet<CommandBase>()
+        {
+            //Suggestions
+            new FioCommand(),
+            new AddressCommand(),
+            new BankCommand(),
+            new EmailCommand(),
+            new OrganizationCommand(),
+            
+            //Standartization
+            
+        };
+        
         private HttpClient HttpClient { get; set; }
 
         private readonly Timer _countMessagesTimer;
@@ -83,38 +97,27 @@ namespace DadataApiClient
             Interlocked.Exchange(ref _nowCountMessages, 0);
         }
 
-        private async Task<HttpResponseMessage> ExecuteCommand(CommandBase command)
+        private async Task<BaseResponse> ExecuteCommand(CommandBase command, object query)
         {
             while (_nowCountMessages >= _limitQueries)
                 await Task.Delay(50);
-            if(command is StandartizationCommandBase)
-                _nowCountMessages += ;
-                    
+            if (command is StandartizationCommandBase && query is List<string> temp)
+                _nowCountMessages += temp.Count;
+            else
                 Interlocked.Increment(ref _nowCountMessages);
-            return await HttpClient.SendAsync(msg, HttpCompletionOption.ResponseContentRead);
+            return await command.Execute(query, HttpClient);
         }
 
         /// <inheritdoc />
-        public async Task<DadataAddressQueryResponse> SuggestsQueryAddress(string query, int? count = null)
+        public async Task<DadataAddressQueryBaseResponse> SuggestsQueryAddress(string query, int? count = null)
         {
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, global::DadataApiClient.Options.UrlSuggests + "address");
-            httpRequestMessage.Headers.Add("Authorization", global::DadataApiClient.Options.TokenSuggests);
-
             var value = new JObject();
             value.Add("query", query);
             if (count != null)
                 value.Add("count", count);
+            
+            return JsonConvert.DeserializeObject<DadataAddressQueryBaseResponse>(result);
 
-            httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8,
-                "application/json");
-
-            using (HttpResponseMessage response = await ExecuteCommand(httpRequestMessage))
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<DadataAddressQueryResponse>(result);
-                throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
-            }
         }
 
         /// <inheritdoc />
@@ -123,31 +126,16 @@ namespace DadataApiClient
             (await SuggestsQueryAddress(query, count)).ToShortResponse();
 
         /// <inheritdoc />
-        public async Task<DadataFioQueryResponse> SuggestsQueryFio(string query)
+        public async Task<DadataFioQueryBaseResponse> SuggestsQueryFio(string query)
         {
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, global::DadataApiClient.Options.UrlSuggests + "fio");
-            httpRequestMessage.Headers.Add("Authorization", global::DadataApiClient.Options.TokenSuggests);
-
-            var value = new JObject();
-            value.Add("query", query);
-
-            httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8,
-                "application/json");
-
-            using (HttpResponseMessage response = await ExecuteCommand(httpRequestMessage))
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<DadataFioQueryResponse>(result);
-                throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
-            }
+            var response = await ExecuteCommand(new FioCommand(), query);
         }
 
         /// <inheritdoc />
         public async Task<DadataFioQueryShortResponse> SuggestsShortQueryFio(string query) =>
             (await SuggestsQueryFio(query)).ToShortResponse();
 
-        public async Task<DadataPartyQueryResponse> SuggestsQueryParty(string query)
+        public async Task<DadataPartyQueryBaseResponse> SuggestsQueryParty(string query)
         {
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, global::DadataApiClient.Options.UrlSuggests + "party");
             httpRequestMessage.Headers.Add("Authorization", global::DadataApiClient.Options.TokenSuggests);
@@ -162,7 +150,7 @@ namespace DadataApiClient
             {
                 var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<DadataPartyQueryResponse>(result);
+                    return JsonConvert.DeserializeObject<DadataPartyQueryBaseResponse>(result);
                 throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
             }
         }
@@ -170,7 +158,7 @@ namespace DadataApiClient
         public async Task<DadataPartyQueryShortResponse> SuggestsShortQueryParty(string query) =>
             (await SuggestsQueryParty(query)).ToShortResponse();
 
-        public async Task<DadataBankQueryResponse> SuggestsQueryBank(string query)
+        public async Task<DadataBankQueryBaseResponse> SuggestsQueryBank(string query)
         {
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, Options.UrlSuggests + "bank");
             httpRequestMessage.Headers.Add("Authorization", DadataApiClient.Options.TokenSuggests);
@@ -185,7 +173,7 @@ namespace DadataApiClient
             {
                 var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<DadataBankQueryResponse>(result);
+                    return JsonConvert.DeserializeObject<DadataBankQueryBaseResponse>(result);
                 throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
             }
         }
@@ -193,7 +181,7 @@ namespace DadataApiClient
         public async Task<DadataBankQueryShortResponse> SuggestsShortQueryBank(string query) =>
             (await SuggestsQueryBank(query)).ToShortResponse();
 
-        public async Task<DadataEmailQueryResponse> SuggestsQueryEmail(string query)
+        public async Task<DadataEmailQueryBaseResponse> SuggestsQueryEmail(string query)
         {
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, global::DadataApiClient.Options.UrlSuggests + "email");
             httpRequestMessage.Headers.Add("Authorization", global::DadataApiClient.Options.TokenSuggests);
@@ -208,7 +196,7 @@ namespace DadataApiClient
             {
                 var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<DadataEmailQueryResponse>(result);
+                    return JsonConvert.DeserializeObject<DadataEmailQueryBaseResponse>(result);
                 throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
             }
         }

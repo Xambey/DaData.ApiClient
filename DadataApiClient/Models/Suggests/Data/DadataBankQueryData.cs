@@ -1,4 +1,4 @@
-﻿using MarkupFree.Api.Models.Api.Dadata.Suggests.Results;
+﻿using DadataApiClient.Models.Suggests.Results;
 using Newtonsoft.Json;
 
 namespace DadataApiClient.Models.Suggests.Data

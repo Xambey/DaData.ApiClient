@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.Results;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.ShortResponses;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.ShortsResults;
+using DadataApiClient.Models.Suggests.Results;
+using DadataApiClient.Models.Suggests.ShortResponses;
+using DadataApiClient.Models.Suggests.ShortsResults;
 using Newtonsoft.Json;
 
-namespace MarkupFree.Api.Models.Api.Dadata.Suggests.Responses
+namespace DadataApiClient.Models.Suggests.Responses
 {
-    public class DadataEmailQueryResponse
+    public class DadataEmailQueryBaseResponse : BaseResponse
     {
         [JsonProperty("suggestions")]
         public List<DadataEmailQueryResult> Suggestions { get; set; }

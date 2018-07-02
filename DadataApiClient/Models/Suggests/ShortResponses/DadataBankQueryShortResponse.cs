@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MarkupFree.Api.Models.Api.Dadata.Suggests.ShortsResults;
+using DadataApiClient.Models.Suggests.ShortsResults;
 
-namespace MarkupFree.Api.Models.Api.Dadata.Suggests.ShortResponses
+namespace DadataApiClient.Models.Suggests.ShortResponses
 {
     public class DadataBankQueryShortResponse
     {
