@@ -5,6 +5,7 @@ using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Extensions;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Suggests.Responses;
 using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Commands.Suggestions
@@ -26,7 +27,7 @@ namespace DadataApiClient.Commands.Suggestions
             if (temp.Item2 != null)
                 value.Add("count", temp.Item2);
             
-            return await client.SendResponseAsync(HttpMethod.Post, new Uri(Url), value);
+            return await client.SendResponseAsync<DadataAddressQueryBaseResponse>(HttpMethod.Post, new Uri(Url), value);
         }
     }
 }

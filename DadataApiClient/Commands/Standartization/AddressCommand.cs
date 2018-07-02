@@ -12,9 +12,9 @@ namespace DadataApiClient.Commands.Standartization
             Url = "https://dadata.ru/api/v2/clean/address";
         }
 
-        public override async Task<BaseResponse> Execute(object query, HttpClient client)
+        public override Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            
+            return base.Execute(query, client);
         }
     }
 }

@@ -58,6 +58,8 @@ namespace DadataApiClient
             {typeof(UserBalanceCommand), new UserBalanceCommand()}
         };
         
+        public DadataApiClientOptions Options { get; private set; }
+        
         private HttpClient HttpClient { get; set; }
 
         private readonly Timer _countMessagesTimer;
@@ -99,6 +101,9 @@ namespace DadataApiClient
         {
             if (string.IsNullOrEmpty(options.Token) || !options.Token.Contains("Token") || (useStandartization == true && string.IsNullOrEmpty(options.Secret))) 
                 throw new InvalidTokenException();
+
+            Options = options;
+            
             if(limitQueries != null && limitQueries <= 0)
                 throw new InvalidLimitQueriesException(limitQueries);
             _limitQueries = limitQueries ?? 20; 
@@ -109,10 +114,10 @@ namespace DadataApiClient
                 AutomaticDecompression = DecompressionMethods.GZip
             });
             
-            HttpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("https", Options.Token);
             HttpClient.DefaultRequestHeaders.Add("X-Secret", Options.Secret);
 
+            //Reset count of message for one second (timer)
             _countMessagesTimer = new Timer(ResetCounter, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
