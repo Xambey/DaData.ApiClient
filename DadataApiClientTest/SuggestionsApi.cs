@@ -133,9 +133,9 @@ namespace DadataApiClientTest
         }
         
         [Fact]
-        public async Task SuggestsQueryEmail()
+        public async Task SuggestionstQueryEmail()
         {
-            var result = await ApiClient.SuggestsQueryEmail("xambey@yandex.ru");
+            var result = await ApiClient.SuggestionsQueryEmail("xambey@yandex.ru");
             
             Assert.NotNull(result);
             Assert.NotEmpty(result.Suggestions);
@@ -148,9 +148,9 @@ namespace DadataApiClientTest
         }
         
         [Fact]
-        public async Task SuggestsShortQueryEmail()
+        public async Task SuggestionsShortQueryEmail()
         {
-            var result = await ApiClient.SuggestsShortQueryEmail("xambey@gmail");
+            var result = await ApiClient.SuggestionsShortQueryEmail("xambey@gmail");
             
             Assert.NotNull(result);
             Assert.NotEmpty(result.Suggestions);

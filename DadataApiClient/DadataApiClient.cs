@@ -167,10 +167,10 @@ namespace DadataApiClient
         public async Task<DadataBankQueryShortResponse> SuggestionsShortQueryBank(string query) =>
             (await SuggestionsQueryBank(query)).ToShortResponse();
 
-        public async Task<DadataEmailQueryBaseResponse> SuggestsQueryEmail(string query) =>
+        public async Task<DadataEmailQueryBaseResponse> SuggestionsQueryEmail(string query) =>
             (DadataEmailQueryBaseResponse) await ExecuteCommand(Commands[typeof(EmailCommand)], query);
 
-        public async Task<DadataEmailQueryShortResponse> SuggestsShortQueryEmail(string query) =>
-            (await SuggestsQueryEmail(query)).ToShortResponse();
+        public async Task<DadataEmailQueryShortResponse> SuggestionsShortQueryEmail(string query) =>
+            (await SuggestionsQueryEmail(query)).ToShortResponse();
     }
 }

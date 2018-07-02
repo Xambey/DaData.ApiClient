@@ -72,13 +72,13 @@ namespace DadataApiClient
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataEmailQueryBaseResponse> SuggestsQueryEmail(string query);
+        Task<DadataEmailQueryBaseResponse> SuggestionsQueryEmail(string query);
         
         /// <summary>
         /// Получить короткие подсказки по email
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataEmailQueryShortResponse> SuggestsShortQueryEmail(string query);
+        Task<DadataEmailQueryShortResponse> SuggestionsShortQueryEmail(string query);
     }
 }
