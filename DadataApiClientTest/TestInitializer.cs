@@ -1,4 +1,7 @@
-﻿using DadataApiClient;
+﻿using System;
+using System.IO;
+using DadataApiClient.Options;
+using Newtonsoft.Json;
 
 namespace DadataApiClientTest
 {
@@ -8,8 +11,15 @@ namespace DadataApiClientTest
         
         public TestInitializer()
         {
-            //TODO: hide tokens
-            ApiClient = new DadataApiClient.DadataApiClient("Token f91389fb0453fd7f1e961a0b49bc35dee1c9ee09", "93bf1a6c17c21518cad9f4152de2543cc97f2c31");
+            var directoryInfo = Directory.GetParent(Environment.CurrentDirectory).Parent?.Parent?.Parent;
+            if (directoryInfo != null)
+            {
+                var options = JsonConvert.DeserializeObject<DadataApiClientOptions>(
+                    File.ReadAllText(Path.Combine(directoryInfo.FullName,
+                        "appsettings.json")));
+            
+                ApiClient = new DadataApiClient.DadataApiClient(options);
+            }
         }
     }
 }
