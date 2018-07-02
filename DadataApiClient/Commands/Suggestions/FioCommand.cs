@@ -14,15 +14,14 @@ namespace DadataApiClient.Commands.Suggestions
         public FioCommand()
         {
             Url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio";
-        }
-        
+        }  
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is string))
+            if(!(query is string temp) || string.IsNullOrEmpty(temp))
                 throw new InvalidQueryException(query);
 
             var value = new JObject();
-            value.Add("query", query as string);
+            value.Add("query", temp);
 
             return await client.SendResponseAsync(HttpMethod.Post, new Uri(Url), value);
         }

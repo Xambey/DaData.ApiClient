@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace DadataApiClient.Models.Suggests.Responses
 {
-    public class DadataPartyQueryBaseResponse : BaseResponse
+    public class DadataOrganizationQueryBaseResponse : BaseResponse
     {
         [JsonProperty("suggestions")]
         public List<DadataPartyQueryResult> Suggestions { get; set; }

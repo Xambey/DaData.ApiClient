@@ -15,7 +15,7 @@ namespace DadataApiClient
         /// <param name="query">текст для поиска</param>
         /// <param name="count">кол-во подсказок, если равен 1, то заполняются координаты</param>
         /// <returns></returns>
-        Task<DadataAddressQueryBaseResponse> SuggestsQueryAddress(string query, int? count = null);
+        Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null);
 
         /// <summary>
         /// Получить короткие подсказки по адресу
@@ -23,49 +23,49 @@ namespace DadataApiClient
         /// <param name="query">текст для поиска</param>
         /// <param name="count">кол-во подсказок, если равен 1, то заполняются координаты</param>
         /// <returns></returns>
-        Task<DadataAddressQueryShortResponse> SuggestsShortQueryAddress(string query, int? count = null);
+        Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query, int? count = null);
 
         /// <summary>
         /// Получить полные подсказки по ФИО
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataFioQueryBaseResponse> SuggestsQueryFio(string query);
+        Task<DadataFioQueryBaseResponse> SuggestionsQueryFio(string query);
         
         /// <summary>
         /// Получить короткие подсказки по ФИО
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataFioQueryShortResponse> SuggestsShortQueryFio(string query);
+        Task<DadataFioQueryShortResponse> SuggestionsShortQueryFio(string query);
 
         /// <summary>
         /// Получить полные подсказки по организации
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataPartyQueryBaseResponse> SuggestsQueryParty(string query);
+        Task<DadataOrganizationQueryBaseResponse> SuggestionsQueryOrganization(string query);
         
         /// <summary>
         /// Получить короткие подсказки по организации
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataPartyQueryShortResponse> SuggestsShortQueryParty(string query);
+        Task<DadataPartyQueryShortResponse> SuggestionsShortQueryOrganization(string query);
         
         /// <summary>
         /// Получить полные подсказки по банку
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataBankQueryBaseResponse> SuggestsQueryBank(string query);
+        Task<DadataBankQueryBaseResponse> SuggestionsQueryBank(string query);
         
         /// <summary>
         /// Получить короткие подсказки по банку
         /// </summary>
         /// <param name="query">текст для поиска</param>
         /// <returns></returns>
-        Task<DadataBankQueryShortResponse> SuggestsShortQueryBank(string query);
+        Task<DadataBankQueryShortResponse> SuggestionsShortQueryBank(string query);
         
         /// <summary>
         /// Получить полные подсказки по email
