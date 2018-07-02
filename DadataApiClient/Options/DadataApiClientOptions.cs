@@ -1,4 +1,7 @@
-﻿namespace DadataApiClient.Options
+﻿using System;
+using DadataApiClient.Exceptions;
+
+namespace DadataApiClient.Options
 {
     public class DadataApiClientOptions
     {
