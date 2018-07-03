@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Additional;
@@ -13,12 +10,11 @@ using DadataApiClient.Commands.Base;
 using DadataApiClient.Commands.Standartization;
 using DadataApiClient.Commands.Suggestions;
 using DadataApiClient.Exceptions;
+using DadataApiClient.Interfaces;
 using DadataApiClient.Models;
 using DadataApiClient.Models.Suggests.Responses;
 using DadataApiClient.Models.Suggests.ShortResponses;
 using DadataApiClient.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using AddressCommand = DadataApiClient.Commands.Suggestions.AddressCommand;
 using EmailCommand = DadataApiClient.Commands.Suggestions.EmailCommand;
 using FioCommand = DadataApiClient.Commands.Suggestions.FioCommand;
@@ -28,9 +24,9 @@ namespace DadataApiClient
     public class DadataApiClient : IDadataApiClient
     {
         /// <summary>
-        /// Commands list
+        /// Command list
         /// </summary>
-        private Dictionary<Type, CommandBase> Commands { get; set; } = new Dictionary<Type, CommandBase>
+        private static Dictionary<Type, CommandBase> Commands { get; set; } = new Dictionary<Type, CommandBase>
         {
             //Suggestions
             {typeof(FioCommand), new FioCommand()},
@@ -58,15 +54,15 @@ namespace DadataApiClient
             {typeof(UserBalanceCommand), new UserBalanceCommand()}
         };
         
-        public DadataApiClientOptions Options { get; private set; }
+        public DadataApiClientOptions Options { get; }
         
-        private HttpClient HttpClient { get; set; }
+        public HttpClient HttpClient { get; }
 
-        private readonly Timer _countMessagesTimer;
+        private Timer ResetCountMessagesTimer { get; }
 
         private int _nowCountMessages;
 
-        private int _limitQueries;
+        private readonly int _limitQueries;
 
         /// <summary>
         /// Implementation IDadataApiClient
@@ -74,18 +70,16 @@ namespace DadataApiClient
         /// <param name="token">Authentication token</param>
         /// <param name="secret">Secret authentication token (For api of Standartization)</param>
         /// <param name="limitQueries">Max count of requests for one second (in the api max 20), default 20</param>
-        /// <param name="useStandartization">Flag - check the Secret token on invalid</param>
         /// <exception cref="InvalidTokenException">Throw if one from tokens is invalid</exception>
-        public DadataApiClient(string token, string secret, int limitQueries = 20, bool useStandartization = true) 
+        public DadataApiClient(string token, string secret, int limitQueries = 20) 
             : 
             this(
                     new DadataApiClientOptions
                     {
                         Token = token,
-                        Secret = secret
-                    }, 
-                    limitQueries, 
-                    useStandartization
+                        Secret = secret,
+                        LimitQueries = limitQueries
+                    }
                 )
         {
         }
@@ -94,19 +88,17 @@ namespace DadataApiClient
         /// Implementation IDadataApiClient 
         /// </summary>
         /// <param name="options">Authentication options (Token required!)</param>
-        /// <param name="limitQueries">Max count of requests for one second (in the api max 20), default 20</param>
-        /// <param name="useStandartization">Flag - check the Secret token on invalid</param>
         /// <exception cref="InvalidTokenException">Throw if one from tokens is invalid</exception>
-        public DadataApiClient(DadataApiClientOptions options, int? limitQueries = 20, bool? useStandartization = true)
+        public DadataApiClient(DadataApiClientOptions options)
         {
-            if (string.IsNullOrEmpty(options.Token) || !options.Token.Contains("Token") || (useStandartization == true && string.IsNullOrEmpty(options.Secret))) 
+            if (string.IsNullOrEmpty(options.Token) || !options.Token.Contains("Token")) 
                 throw new InvalidTokenException();
 
             Options = options;
             
-            if(limitQueries != null && limitQueries <= 0)
-                throw new InvalidLimitQueriesException(limitQueries);
-            _limitQueries = limitQueries ?? 20; 
+            if(Options.LimitQueries != null && Options.LimitQueries <= 0)
+                throw new InvalidLimitQueriesException(Options.LimitQueries);
+            _limitQueries = Options.LimitQueries ?? Constants.DefaultLimitQueries; 
             
             
             HttpClient = new HttpClient(new HttpClientHandler
@@ -118,18 +110,29 @@ namespace DadataApiClient
             HttpClient.DefaultRequestHeaders.Add("X-Secret", Options.Secret);
 
             //Reset count of message for one second (timer)
-            _countMessagesTimer = new Timer(ResetCounter, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+            ResetCountMessagesTimer = new Timer(ResetCounter, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// Reset counter of messages
+        /// </summary>
+        /// <param name="state"></param>
         private void ResetCounter(object state)
         {
             Interlocked.Exchange(ref _nowCountMessages, 0);
         }
 
+        /// <summary>
+        /// Execute command 
+        /// </summary>
+        /// <param name="command">Instance of command</param>
+        /// <param name="query">Object of query</param>
+        /// <returns></returns>
+        /// <exception cref="RequestsLimitIsExceededException"></exception>
         private async Task<BaseResponse> ExecuteCommand(CommandBase command, object query)
         {
-            while (_nowCountMessages >= _limitQueries)
-                await Task.Delay(50);
+            if(_nowCountMessages >= _limitQueries)
+                throw new RequestsLimitIsExceededException();
             if (command is StandartizationCommandBase && query is List<string> temp)
                 _nowCountMessages += temp.Count;
             else
@@ -137,6 +140,17 @@ namespace DadataApiClient
             return await command.Execute(query, HttpClient);
         }
 
+        /// <summary>
+        /// Dispose client
+        /// </summary>
+        public void Dispose()
+        {
+            HttpClient?.Dispose();
+            ResetCountMessagesTimer?.Dispose();
+        }
+
+        #region Suggestions API
+        
         /// <inheritdoc />
         public async Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null) =>
             (DadataAddressQueryBaseResponse) await ExecuteCommand(Commands[typeof(AddressCommand)],
@@ -172,5 +186,9 @@ namespace DadataApiClient
 
         public async Task<DadataEmailQueryShortResponse> SuggestionsShortQueryEmail(string query) =>
             (await SuggestionsQueryEmail(query)).ToShortResponse();
+        
+        #endregion
+        
+        
     }
 }

@@ -133,7 +133,7 @@ namespace DadataApiClientTest
         }
         
         [Fact]
-        public async Task SuggestionstQueryEmail()
+        public async Task SuggestionsQueryEmail()
         {
             var result = await ApiClient.SuggestionsQueryEmail("xambey@yandex.ru");
             

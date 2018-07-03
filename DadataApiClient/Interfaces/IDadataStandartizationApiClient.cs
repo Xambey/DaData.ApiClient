@@ -1,6 +1,8 @@
-﻿namespace DadataApiClient
+﻿using System;
+
+namespace DadataApiClient.Interfaces
 {
-    public interface IDadataStandartizationApiClient
+    public interface IDadataStandartizationApiClient : IDisposable
     {
         
     }

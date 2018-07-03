@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace DadataApiClient
+﻿namespace DadataApiClient.Interfaces
 {
     public interface IDadataApiClient : IDadataSuggestionsApiClient, IDadataStandartizationApiClient, IDadataAdditionalApiClient
     {

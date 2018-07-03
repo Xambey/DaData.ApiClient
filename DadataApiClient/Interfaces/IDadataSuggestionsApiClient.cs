@@ -1,83 +1,84 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using DadataApiClient.Models.Suggests.Responses;
 using DadataApiClient.Models.Suggests.ShortResponses;
 
-namespace DadataApiClient
+namespace DadataApiClient.Interfaces
 {
     /// <summary>
     /// Interface for creation client of Suggestions API
     /// </summary>
-    public interface IDadataSuggestionsApiClient
+    public interface IDadataSuggestionsApiClient : IDisposable
     {
         /// <summary>
-        /// Получить полные подсказки по адресу
+        /// Get full hints for the address
         /// </summary>
-        /// <param name="query">текст для поиска</param>
-        /// <param name="count">кол-во подсказок, если равен 1, то заполняются координаты</param>
+        /// <param name="query">text to search for</param>
+        /// <param name="count">the number of hints, if equal to 1, then the coordinates are filled</param>
         /// <returns></returns>
         Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null);
 
         /// <summary>
-        /// Получить короткие подсказки по адресу
+        /// Get short hints for the address
         /// </summary>
-        /// <param name="query">текст для поиска</param>
-        /// <param name="count">кол-во подсказок, если равен 1, то заполняются координаты</param>
+        /// <param name="query">text to search for</param>
+        /// <param name="count">the number of hints, if equal to 1, then the coordinates are filled</param>
         /// <returns></returns>
         Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query, int? count = null);
 
         /// <summary>
-        /// Получить полные подсказки по ФИО
+        /// Get full hints for the FIO
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataFioQueryBaseResponse> SuggestionsQueryFio(string query);
         
         /// <summary>
-        /// Получить короткие подсказки по ФИО
+        /// Get short hints for the FIO
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataFioQueryShortResponse> SuggestionsShortQueryFio(string query);
 
         /// <summary>
-        /// Получить полные подсказки по организации
+        /// Get full hints for the organization
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataOrganizationQueryBaseResponse> SuggestionsQueryOrganization(string query);
         
         /// <summary>
-        /// Получить короткие подсказки по организации
+        /// Get short hints for the organization
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataPartyQueryShortResponse> SuggestionsShortQueryOrganization(string query);
         
         /// <summary>
-        /// Получить полные подсказки по банку
+        /// Get full hints for the bank
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataBankQueryBaseResponse> SuggestionsQueryBank(string query);
         
         /// <summary>
-        /// Получить короткие подсказки по банку
+        /// Get short hints for the bank
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataBankQueryShortResponse> SuggestionsShortQueryBank(string query);
         
         /// <summary>
-        /// Получить полные подсказки по email
+        /// Get full hints for the email
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataEmailQueryBaseResponse> SuggestionsQueryEmail(string query);
         
         /// <summary>
-        /// Получить короткие подсказки по email
+        /// Get short hints for the email
         /// </summary>
-        /// <param name="query">текст для поиска</param>
+        /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<DadataEmailQueryShortResponse> SuggestionsShortQueryEmail(string query);
     }
