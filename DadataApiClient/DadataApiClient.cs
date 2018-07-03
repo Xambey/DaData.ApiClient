@@ -12,10 +12,18 @@ using DadataApiClient.Commands.Suggestions;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Interfaces;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Standartization.Data;
+using DadataApiClient.Models.Standartization.Responses;
+using DadataApiClient.Models.Standartization.ShortResponses;
 using DadataApiClient.Models.Suggests.Responses;
 using DadataApiClient.Models.Suggests.ShortResponses;
 using DadataApiClient.Options;
 using AddressCommand = DadataApiClient.Commands.Suggestions.AddressCommand;
+using DadataAddressQueryBaseResponse = DadataApiClient.Models.Suggests.Responses.DadataAddressQueryBaseResponse;
+using DadataAddressQueryShortResponse = DadataApiClient.Models.Suggestions.ShortResponses.DadataAddressQueryShortResponse;
+using DadataEmailQueryBaseResponse = DadataApiClient.Models.Suggests.Responses.DadataEmailQueryBaseResponse;
+using DadataFioQueryBaseResponse = DadataApiClient.Models.Suggests.Responses.DadataFioQueryBaseResponse;
+using DadataFioQueryShortResponse = DadataApiClient.Models.Suggests.ShortResponses.DadataFioQueryShortResponse;
 using EmailCommand = DadataApiClient.Commands.Suggestions.EmailCommand;
 using FioCommand = DadataApiClient.Commands.Suggestions.FioCommand;
 
@@ -188,7 +196,63 @@ namespace DadataApiClient
             (await SuggestionsQueryEmail(query)).ToShortResponse();
         
         #endregion
+
+        #region Standartization API
+
+        public async Task<Models.Standartization.Responses.DadataAddressQueryBaseResponse> StandartizationQueryAddress(IEnumerable<string> queries) =>
+        (Models.Standartization.Responses.DadataAddressQueryBaseResponse) await ExecuteCommand(Commands[typeof(AddressCommand)],
+        queries);
+
+        public async Task<Models.Standartization.ShortResponses.DadataAddressQueryShortResponse> StandartizationShortQueryAddress(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DadataPhoneQueryBaseResponse> StandartizationQueryPhone(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DadataPhoneQueryShortResponse> StandartizationShortQueryPhone(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DadataPasportQueryBaseResponse> StandartizationQueryPasport(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Models.Standartization.Responses.DadataFioQueryBaseResponse> StandartizationQueryFio(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Models.Standartization.ShortResponses.DadataFioQueryShortResponse> StandartizationShortQueryFio(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Models.Standartization.Responses.DadataEmailQueryBaseResponse> StandartizationQueryEmail(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DadataDateQueryBaseResponse> StandartizationQueryDate(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DadataCarQueryBaseResponse> StandartizationQueryCar(IEnumerable<string> queries)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DadataDateQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryResult queries)
+        {
+            throw new NotImplementedException();
+        }
         
-        
+        #endregion
     }
 }
