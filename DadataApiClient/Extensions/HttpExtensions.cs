@@ -11,6 +11,7 @@ using DadataApiClient.Models;
 using DadataApiClient.Models.Suggests.Responses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace DadataApiClient.Extensions
 {
@@ -27,7 +28,15 @@ namespace DadataApiClient.Extensions
             {
                 var result = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<TResponse>(result);
+                    return JsonConvert.DeserializeObject<TResponse>(result, new JsonSerializerSettings
+                    {
+                        ContractResolver = new DefaultContractResolver()
+                        {
+                            NamingStrategy = new SnakeCaseNamingStrategy()
+                        },
+                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                        Formatting = Formatting.Indented
+                    });
                 throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
             }
         }
