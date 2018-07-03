@@ -1,6 +1,4 @@
-﻿using DadataApiClient.Models.Suggests.Data;
-
-namespace DadataApiClient.Models.Standartization.Data
+﻿namespace DadataApiClient.Models.Standartization.Results
 {
     public class DadataCarQueryResult 
     {

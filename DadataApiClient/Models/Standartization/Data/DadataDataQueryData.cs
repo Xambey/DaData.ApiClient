@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace DadataApiClient.Models.Suggests.Data
+namespace DadataApiClient.Models.Standartization.Data
 {
     public class DadataDataQueryData
     {

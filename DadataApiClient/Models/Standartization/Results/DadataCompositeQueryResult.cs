@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using DadataApiClient.Models.Suggests.Data;
-using Newtonsoft.Json.Linq;
+using DadataApiClient.Models.Standartization.Data;
 
-namespace DadataApiClient.Models.Standartization.Data
+namespace DadataApiClient.Models.Standartization.Results
 {
     public class DadataCompositeQueryResult
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DadataApiClient.Models.Standartization.Data;
+using DadataApiClient.Models.Standartization.Results;
 using DadataApiClient.Models.Standartization.ShortResponses;
 using DadataApiClient.Models.Standartization.ShortsResults;
 

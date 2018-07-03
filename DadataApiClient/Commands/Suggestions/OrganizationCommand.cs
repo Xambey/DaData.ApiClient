@@ -5,7 +5,7 @@ using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Extensions;
 using DadataApiClient.Models;
-using DadataApiClient.Models.Suggests.Responses;
+using DadataApiClient.Models.Suggestions.Responses;
 using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Commands.Suggestions

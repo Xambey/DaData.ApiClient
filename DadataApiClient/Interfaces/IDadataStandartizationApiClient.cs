@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using DadataApiClient.Models.Standartization.Data;
 using DadataApiClient.Models.Standartization.Responses;
+using DadataApiClient.Models.Standartization.Results;
 using DadataApiClient.Models.Standartization.ShortResponses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
@@ -88,6 +88,6 @@ namespace DadataApiClient.Interfaces
         /// </summary>
         /// <param name="queries">requests to search for</param>
         /// <returns></returns>
-        Task<DadataDateQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryResult queries);
+        Task<DadataCompositeQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryResult queries);
     }
 }

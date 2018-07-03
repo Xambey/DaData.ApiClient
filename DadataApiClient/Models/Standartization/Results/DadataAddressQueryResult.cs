@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DadataApiClient.Models.Suggests.Data;
+using DadataApiClient.Models.Additional.Data;
 
-namespace DadataApiClient.Models.Standartization.Data
+namespace DadataApiClient.Models.Standartization.Results
 {
     public class DadataAddressQueryResult 
     {

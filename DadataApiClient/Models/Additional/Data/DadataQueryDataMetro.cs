@@ -1,4 +1,4 @@
-﻿namespace DadataApiClient.Models.Suggests.Data
+﻿namespace DadataApiClient.Models.Additional.Data
 {
     public class DadataQueryDataMetro 
     {

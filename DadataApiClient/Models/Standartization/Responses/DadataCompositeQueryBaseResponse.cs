@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DadataApiClient.Models.Standartization.Data;
+using DadataApiClient.Models.Standartization.Results;
 
 namespace DadataApiClient.Models.Standartization.Responses
 {

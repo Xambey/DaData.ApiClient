@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DadataApiClient.Models.Suggestions.Responses;
 using DadataApiClient.Models.Suggestions.ShortResponses;
-using DadataApiClient.Models.Suggests.Responses;
-using DadataApiClient.Models.Suggests.ShortResponses;
 
 namespace DadataApiClient.Interfaces
 {
