@@ -99,7 +99,7 @@ namespace DadataApiClient
         /// <exception cref="InvalidTokenException">Throw if one from tokens is invalid</exception>
         public DadataApiClient(DadataApiClientOptions options)
         {
-            if (string.IsNullOrEmpty(options.Token) || !options.Token.Contains("Token")) 
+            if (string.IsNullOrEmpty(options.Token)) 
                 throw new InvalidTokenException();
 
             Options = options;
@@ -114,7 +114,7 @@ namespace DadataApiClient
                 AutomaticDecompression = DecompressionMethods.GZip
             });
             
-            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("https", Options.Token);
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Options.Token);
             HttpClient.DefaultRequestHeaders.Add("X-Secret", Options.Secret);
 
             //Reset count of message for one second (timer)

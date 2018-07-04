@@ -21,7 +21,7 @@ namespace DadataApiClient.Commands.Standartization
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is List<string> temp) || temp.Count == 0)
+            if(!(query is IEnumerable<string> temp) || !temp.Any())
                 throw new InvalidQueryException(query);
             
             var value = new JArray(temp);
