@@ -69,5 +69,81 @@ namespace DadataApiClientTest
             Assert.Equal(0, first.QcConflict);
             Assert.Equal(1, first.Qc);
         }
+
+        [Fact]
+        async Task StandartizationQueryPasportTest()
+        {
+            var result = await ApiClient.StandartizationQueryPasport(new[] {"4509 235857"});
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("4509 235857", first.Source);
+            Assert.Equal("45 09", first.Series);
+            Assert.Equal("235857", first.Number);
+            Assert.Equal(0, first.Qc);
+        }
+
+        [Fact]
+        async Task StandartizationQueryFioTest()
+        {
+            var result = await ApiClient.StandartizationQueryFio(new[] { "Срегей владимерович иванов"} );
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("Срегей владимерович иванов", first.Source);
+            Assert.Equal("Иванов Сергей Владимирович", first.Result);
+            Assert.Equal("Иванова Сергея Владимировича", first.ResultGenitive);
+            Assert.Equal("Иванову Сергею Владимировичу", first.ResultDative);
+            Assert.Equal("Ивановым Сергеем Владимировичем", first.ResultAblative);
+            Assert.Equal("Иванов", first.Surname);
+            Assert.Equal("Сергей", first.Name);
+            Assert.Equal("Владимирович", first.Patronymic);
+            Assert.Equal("М", first.Gender);
+            Assert.Equal(1, first.Qc);
+        }
+
+        [Fact]
+        async Task StandartizationQueryEmailTest()
+        {
+            var result = await ApiClient.StandartizationQueryEmail(new[] { "serega@yandex/ru"} );
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("serega@yandex/ru", first.Source);
+            Assert.Equal("serega@yandex.ru", first.Email);
+            Assert.Equal(4, first.Qc);
+        }
+       
+        [Fact]
+        async Task StandartizationQueryDateTest()
+        {
+            var result = await ApiClient.StandartizationQueryDate(new[] { "24/3/12"} );
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("24/3/12", first.Source);
+            Assert.Equal("24.03.2012", first.Birthdate);
+            Assert.Equal(1, first.Qc);
+        }
     }
 }
