@@ -15,12 +15,12 @@ namespace DadataApiClientTest
             
             Assert.NotNull(result.Value);
             
-            Assert.Equal(result.Value.Count, 2);
+            Assert.Equal(2, result.Value.Count);
 
             var first = result.Value.First();
             
             Assert.NotNull(first.Source);
-            Assert.Equal(first.Result, "г Москва, ул Сухонская, д 11, кв 89");
+            Assert.Equal("г Москва, ул Сухонская, д 11, кв 89", first.Result);
             Assert.NotNull(first.Metro);
             Assert.NotEmpty(first.Metro);
         }

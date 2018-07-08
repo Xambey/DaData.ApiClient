@@ -16,11 +16,20 @@ namespace DadataApiClient.Models.Standartization.Responses
             {
                 Value = Value.Select(x => new DadataAddressQueryShortResult
                 {
-                    Name = x.Source,
+                    Source = x.Source,
                     FullName = x.Result,
                     Latitude = x.GeoLat,
                     Longitude = x.GeoLon,
-                    PostalCode = x.PostalCode
+                    PostalCode = x.PostalCode,
+                    Area = x.Area,
+                    Block = x.Block,
+                    Country = x.Country,
+                    Flat = x.Flat,
+                    House = x.House,
+                    Region = x.Region,
+                    Settlement = x.Settlement,
+                    Street = x.Street,
+                    City = x.City
                 }).ToList()
             };
         }
