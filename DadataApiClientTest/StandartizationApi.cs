@@ -24,5 +24,24 @@ namespace DadataApiClientTest
             Assert.NotNull(first.Metro);
             Assert.NotEmpty(first.Metro);
         }
+
+        [Fact]
+        async Task StandartizationQueryCarTest()
+        {
+            var result = await ApiClient.StandartizationQueryCar(new[] {"форд фокус"});
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("форд фокус", first.Source);
+            Assert.Equal("FORD FOCUS", first.Result);
+            Assert.Equal("FORD", first.Brand);
+            Assert.Equal("FOCUS", first.Model);
+            Assert.Equal(0, first.Qc);
+        }
     }
 }
