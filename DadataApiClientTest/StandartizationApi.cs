@@ -43,5 +43,31 @@ namespace DadataApiClientTest
             Assert.Equal("FOCUS", first.Model);
             Assert.Equal(0, first.Qc);
         }
+
+        [Fact]
+        async Task StandartizationQueryPhoneTest()
+        {
+            var result = await ApiClient.StandartizationQueryPhone(new[] {"тел 7165219 доб139"});
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("тел 7165219 доб139", first.Source);
+            Assert.Equal("Стационарный", first.Type);
+            Assert.Equal("+7 495 716-52-19 доб. 139", first.Phone);
+            Assert.Equal("7", first.CountryCode);
+            Assert.Equal("495", first.CityCode);
+            Assert.Equal("7165219", first.Number);
+            Assert.Equal("139", first.Extension);
+            Assert.Equal("ОАО \"МГТС\"", first.Provider);
+            Assert.Equal("Москва", first.Region);
+            Assert.Equal("UTC+3", first.Timezone);
+            Assert.Equal(0, first.QcConflict);
+            Assert.Equal(1, first.Qc);
+        }
     }
 }
