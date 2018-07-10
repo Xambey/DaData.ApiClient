@@ -1,9 +1,9 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClientTest.csproj",
-    "projectName": "DadataApiClientTest",
-    "projectPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClientTest.csproj",
+    "projectUniqueName": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClient.Test.csproj",
+    "projectName": "DadataApiClient.Test",
+    "projectPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClient.Test.csproj",
     "outputPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [

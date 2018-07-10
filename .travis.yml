@@ -3,6 +3,5 @@ mono: none
 dotnet: 2.0.0
 script:
   - dotnet restore
-  - dotnet build ./
   - dotnet build ./DadataApiClient/
   - dotnet test ./DadataApiClientTest/
