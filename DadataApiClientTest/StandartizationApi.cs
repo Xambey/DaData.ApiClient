@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DadataApiClient.Models.Standartization.Data;
 using DadataApiClient.Models.Standartization.Results;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace DadataApiClientTest
@@ -161,7 +162,13 @@ namespace DadataApiClientTest
                     "ADDRESS",
                     "PHONE"
                 },
-                Data = new List<DadataDataQueryData>()
+                Data = new List<DadataDataQueryData>
+                {
+                    new DadataDataQueryData
+                    {
+                        Value = new List<JObject>()
+                    }
+                }
             } );
             
             Assert.NotNull(result);
