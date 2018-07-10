@@ -14,10 +14,10 @@ namespace DadataApiClient.Options
         /// Secret token for authorization in the Dadata standardization API
         /// </summary>
         public string Secret { get; set; }
-        
+
         /// <summary>
         /// Limit of queries for one second to api
         /// </summary>
-        public int? LimitQueries { get; set; }
+        public int? LimitQueries { get; set; } = 20;
     }
 }

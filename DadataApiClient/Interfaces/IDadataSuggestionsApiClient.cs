@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using DadataApiClient.Models.Suggestions.Requests;
 using DadataApiClient.Models.Suggestions.Responses;
 using DadataApiClient.Models.Suggestions.ShortResponses;
+using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Interfaces
 {
@@ -16,15 +19,26 @@ namespace DadataApiClient.Interfaces
         /// <param name="query">text to search for</param>
         /// <param name="count">the number of hints, if equal to 1, then the coordinates are filled</param>
         /// <returns></returns>
-        Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null);
+        Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null,
+            List<JObject> locations = null, List<JObject> locationsBoost = null);
 
         /// <summary>
         /// Get short hints for the address
         /// </summary>
         /// <param name="query">text to search for</param>
         /// <param name="count">the number of hints, if equal to 1, then the coordinates are filled</param>
+        /// <param name="locations"></param>
+        /// <param name="locationsBoost"></param>
         /// <returns></returns>
-        Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query, int? count = null);
+        Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query, int? count = null,
+            List<JObject> locations = null, List<JObject> locationsBoost = null);
+
+        /// <summary>
+        /// Get full hints for the address
+        /// </summary>
+        /// <param name="query">object to search for</param>
+        /// <returns></returns>
+        Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(DadataAddressQueryRequest query);
 
         /// <summary>
         /// Get full hints for the FIO

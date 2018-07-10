@@ -5,8 +5,9 @@ using DadataApiClient.Models.Standartization.Data;
 using DadataApiClient.Models.Standartization.Results;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
-namespace DadataApiClientTest
+namespace DadataApiClient.Test
 {
     public class StandartizationApi : TestInitializer
     {
@@ -153,34 +154,38 @@ namespace DadataApiClientTest
         [Fact]
         async Task StandartizationQueryCompositeTest()
         {
-//            var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryResult
-//            {
-//                Structure = new List<string>
-//                {
-//                    "AS_IS",
-//                    "NAME",
-//                    "ADDRESS",
-//                    "PHONE"
-//                },
-//                Data = new List<DadataDataQueryData>
-//                {
-//                    new DadataDataQueryData
-//                    {
-//                        Value = new List<JObject>()
-//                    }
-//                }
-//            } );
-//            
-//            Assert.NotNull(result);
-//            Assert.NotNull(result.Value);
-//            
-//            var first = result.Value.FirstOrDefault();
-//
-//            Assert.NotNull(first);
+            var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryResult
+            {
+                Structure = new List<string>
+                {
+                    "AS_IS",
+                    "NAME",
+                    "ADDRESS",
+                    "PHONE"
+                },
+                Data = new List<DadataDataQueryData>
+                {
+                    new DadataDataQueryData
+                    {
+                        Value = new List<JObject>()
+                    }
+                }
+            } );
             
-//            Assert.Equal("24/3/12", first.Source);
-//            Assert.Equal("24.03.2012", first.Birthdate);
-//            Assert.Equal(1, first.Qc);
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+            Assert.Equal("24/3/12", first.Source);
+            Assert.Equal("24.03.2012", first.Birthdate);
+            Assert.Equal(1, first.Qc);
+        }
+
+        public StandartizationApi(ITestOutputHelper outputHelper) : base(outputHelper)
+        {
         }
     }
 }

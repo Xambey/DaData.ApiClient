@@ -2,8 +2,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
-namespace DadataApiClientTest
+namespace DadataApiClient.Test
 {
     public class SuggestionsApi : TestInitializer
     {
@@ -11,13 +12,22 @@ namespace DadataApiClientTest
         public async Task SuggestionsQueryAddressTest()
         {
             var result = await ApiClient.SuggestionsQueryAddress("москва хабар");
-
             Assert.NotNull(result);
             Assert.NotEmpty(result.Suggestions);
 
             var firstSuggest = result.Suggestions.FirstOrDefault();
             Assert.NotNull(firstSuggest);
-            Assert.Equal(firstSuggest.Value, "г Москва, ул Хабаровская");
+            Assert.Equal("г Москва, ул Хабаровская", firstSuggest.Value);
+            Assert.NotNull(firstSuggest.Data);
+
+            result = await ApiClient.SuggestionsQueryAddress("москва хабар", 3);
+
+            Assert.NotNull(result);
+            Assert.NotEmpty(result.Suggestions);
+
+            firstSuggest = result.Suggestions.FirstOrDefault();
+            Assert.NotNull(firstSuggest);
+            Assert.Equal("г Москва, ул Хабаровская", firstSuggest.Value);
             Assert.NotNull(firstSuggest.Data);
         }
         
@@ -161,6 +171,10 @@ namespace DadataApiClientTest
             Assert.NotNull(firstSuggest.UnrestrictedValue);
             Assert.NotNull(firstSuggest.Domain);
             Assert.NotNull(firstSuggest.Local);
+        }
+
+        public SuggestionsApi(ITestOutputHelper outputHelper) : base(outputHelper)
+        {
         }
     }
 }

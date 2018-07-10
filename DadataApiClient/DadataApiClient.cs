@@ -21,6 +21,7 @@ using DadataApiClient.Models.Suggestions.Requests;
 using DadataApiClient.Models.Suggestions.Responses;
 using DadataApiClient.Models.Suggestions.ShortResponses;
 using DadataApiClient.Options;
+using Newtonsoft.Json.Linq;
 using AddressCommand = DadataApiClient.Commands.Suggestions.AddressCommand;
 using DadataAddressQueryBaseResponse = DadataApiClient.Models.Suggestions.Responses.DadataAddressQueryBaseResponse;
 using DadataAddressQueryShortResponse = DadataApiClient.Models.Suggestions.ShortResponses.DadataAddressQueryShortResponse;
@@ -32,8 +33,10 @@ using FioCommand = DadataApiClient.Commands.Suggestions.FioCommand;
 
 namespace DadataApiClient
 {
-    public class DadataApiClient : IDadataApiClient
+    public partial class DadataApiClient : IDadataApiClient
     {
+        #region Commands
+
         /// <summary>
         /// Command list
         /// </summary>
@@ -64,6 +67,10 @@ namespace DadataApiClient
             {typeof(MonitoringStandartizationCommand), new MonitoringStandartizationCommand()},
             {typeof(UserBalanceCommand), new UserBalanceCommand()}
         };
+
+        #endregion
+        
+        #region Properties
         
         public DadataApiClientOptions Options { get; }
         
@@ -74,6 +81,8 @@ namespace DadataApiClient
         private int _nowCountMessages;
 
         private readonly int _limitQueries;
+        
+        #endregion
 
         /// <summary>
         /// Implementation IDadataApiClient
@@ -120,7 +129,7 @@ namespace DadataApiClient
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Options.Token);
             HttpClient.DefaultRequestHeaders.Add("X-Secret", Options.Secret);
 
-            //Reset count of message for one second (timer)
+            //Reset count of messages per second (timer)
             ResetCountMessagesTimer = new Timer(ResetCounter, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
@@ -167,20 +176,26 @@ namespace DadataApiClient
         }
 
         #region Suggestions API
-        
-        /// <inheritdoc />
-        public async Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null) =>
-            (DadataAddressQueryBaseResponse) await ExecuteCommand(Commands[typeof(AddressCommand)],
-                new DadataAddressQueryRequest
-                {
-                    Query = query,
-                    Count = count
-                });
 
         /// <inheritdoc />
-        public async Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query,
-            int? count = null) =>
-            (await SuggestionsQueryAddress(query, count)).ToShortResponse();
+        public async Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null,
+            List<JObject> locations = null, List<JObject> locationsBoost = null) =>
+            await SuggestionsQueryAddress(new DadataAddressQueryRequest
+            {
+                Count = count,
+                Locations = locations,
+                LocationsBoost = locationsBoost,
+                Query = query
+            });
+
+        /// <inheritdoc />
+        public async Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(DadataAddressQueryRequest query) =>
+            (DadataAddressQueryBaseResponse) await ExecuteCommand(Commands[typeof(AddressCommand)], query);
+
+        /// <inheritdoc />
+        public async Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query, int? count = null,
+            List<JObject> locations = null, List<JObject> locationsBoost = null) =>
+            (await SuggestionsQueryAddress(query, count, locations, locationsBoost)).ToShortResponse();
 
         /// <inheritdoc />
         public async Task<DadataFioQueryBaseResponse> SuggestionsQueryFio(string query) => 
@@ -211,15 +226,18 @@ namespace DadataApiClient
                 Query = query
             });
 
+        /// <inheritdoc />
         public async Task<DadataBankQueryShortResponse> SuggestionsShortQueryBank(string query) =>
             (await SuggestionsQueryBank(query)).ToShortResponse();
 
+        /// <inheritdoc />
         public async Task<DadataEmailQueryBaseResponse> SuggestionsQueryEmail(string query) =>
             (DadataEmailQueryBaseResponse) await ExecuteCommand(Commands[typeof(EmailCommand)], new DadataEmailQueryRequest
             {
                 Query = query
             });
 
+        /// <inheritdoc />
         public async Task<DadataEmailQueryShortResponse> SuggestionsShortQueryEmail(string query) =>
             (await SuggestionsQueryEmail(query)).ToShortResponse();
         

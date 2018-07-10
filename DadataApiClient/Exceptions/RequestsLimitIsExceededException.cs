@@ -2,7 +2,7 @@
 {
     public class RequestsLimitIsExceededException : BadRequestException
     {
-        public RequestsLimitIsExceededException() : base("Requests limit is exceeded. See the documentation and the set query limit in the client options")
+        public RequestsLimitIsExceededException() : base("Requests limit is exceeded. See the documentation. (Also you can increase the limit in the options of the client at your own risk)")
         {
         }
 

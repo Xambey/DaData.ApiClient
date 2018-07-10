@@ -2,35 +2,45 @@
 using System.IO;
 using DadataApiClient.Options;
 using Newtonsoft.Json;
+using Xunit.Abstractions;
 
-namespace DadataApiClientTest
+namespace DadataApiClient.Test
 {
     public class TestInitializer
     {
-        public DadataApiClient.DadataApiClient ApiClient { get; set; }
+        protected ITestOutputHelper OutputHelper { get; set; }
+
+        protected DadataApiClient ApiClient { get; set; }
         
-        public TestInitializer()
+        public TestInitializer(ITestOutputHelper outputHelper)
+        {
+            OutputHelper = outputHelper;
+            var options = Configure();
+            ApiClient = new DadataApiClient(options);
+        }
+
+        private DadataApiClientOptions Configure()
         {
             var directoryInfo = Directory.GetParent(Environment.CurrentDirectory).Parent?.Parent?.Parent;
-            
-            if(directoryInfo != null && File.Exists(Path.Combine(directoryInfo.FullName,
-                   "appsettings.json"))) {
-                var options = JsonConvert.DeserializeObject<DadataApiClientOptions>(
-                    File.ReadAllText(Path.Combine(directoryInfo.FullName,
-                        "appsettings.json")));
+            DadataApiClientOptions options;
 
-                ApiClient = new DadataApiClient.DadataApiClient(options);
+            var path = Path.Combine(directoryInfo?.FullName ?? "./", "appsettings.json");
+            
+            if (File.Exists(path))
+            {
+                options = JsonConvert.DeserializeObject<DadataApiClientOptions>(File.ReadAllText(path));
             }
             else
             {
-                var options = new DadataApiClientOptions();
+                options = new DadataApiClientOptions();
                 var variables = Environment.GetEnvironmentVariables();
                 if(variables.Contains("TOKEN"))
                     options.Token = Environment.GetEnvironmentVariable("TOKEN");
                 if(variables.Contains("SECRET"))
                     options.Secret = Environment.GetEnvironmentVariable("SECRET");
-                ApiClient = new DadataApiClient.DadataApiClient(options);
             }
+
+            return options;
         }
     }
 }

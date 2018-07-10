@@ -24,24 +24,37 @@ namespace DadataApiClient.Extensions
 
             httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value, new JsonSerializerSettings
                 {
-                    ContractResolver = new LowercaseContractResolver(),
-                    Formatting = Formatting.Indented,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                    ContractResolver = new DefaultContractResolver()
+                    {
+                        NamingStrategy  = new SnakeCaseNamingStrategy()
+                    } 
                 }), Encoding.UTF8,
                 "application/json");
             
             using (HttpResponseMessage response = await client.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseContentRead))
             {
                 var result = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == HttpStatusCode.OK)
-                    return JsonConvert.DeserializeObject<TResponse>(result, new JsonSerializerSettings
-                    {
-                        ContractResolver = new DefaultContractResolver
+                
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.OK:
+                        return JsonConvert.DeserializeObject<TResponse>(result, new JsonSerializerSettings
                         {
-                            NamingStrategy = new SnakeCaseNamingStrategy()
-                        },
-                        Formatting = Formatting.Indented
-                    });
+                            ContractResolver = new DefaultContractResolver
+                            {
+                                NamingStrategy = new SnakeCaseNamingStrategy()
+                            },
+                            Formatting = Formatting.Indented
+                        });
+                    case HttpStatusCode.PaymentRequired:
+                        throw new PaymentRequiredException();
+                    case HttpStatusCode.Forbidden:
+                        throw new KeyIsNotExistException();
+                    case HttpStatusCode.MethodNotAllowed:
+                        throw new MethodAccessException();
+                    case HttpStatusCode.RequestEntityTooLarge:
+                        throw new TooManyRequestsPerSecondException();
+                } 
                 throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");
             }
         }
