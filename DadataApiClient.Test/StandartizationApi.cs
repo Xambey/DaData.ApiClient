@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DadataApiClient.Models.Standartization.Requests;
 using Newtonsoft.Json.Linq;
@@ -153,6 +154,26 @@ namespace DadataApiClient.Test
         [Fact]
         async Task StandartizationQueryCompositeTest()
         {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("[");
+            sb.Append("    [ \"1\",");
+            sb.Append("      \"Федотов Алексей\",");
+            sb.Append("      \"Москва, Сухонская улица, 11 кв 89\",");
+            sb.Append("      \"8 916 823 3454\"");
+            sb.Append("    ],");
+            sb.Append("    [ [\"2\"],");
+            sb.Append("");
+            sb.Append("      [\"мск\", \"улица свободы\", \"65\", \"12\"],");
+            sb.Append("      [\"495 663-12-53\"]");
+            sb.Append("    ],");
+            sb.Append("    [ \"3\",");
+            sb.Append("      [\"Ольга Павловна\", \"Ященко\"],");
+            sb.Append("      [\"\", \"Спб, ул Петрозаводская 8\", \"\", \"\"],");
+            sb.Append("      \"457 07 25\"");
+            sb.Append("    ]");
+            sb.Append("]");
+            
             var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryRequest
             {
                 Structure = new List<string>
@@ -162,24 +183,7 @@ namespace DadataApiClient.Test
                     "ADDRESS",
                     "PHONE"
                 },
-                Data = JArray.Parse("[" +
-                                    "    [ \"1\"," +
-                                    "      \"Федотов Алексей\"," +
-                                    "      \"Москва, Сухонская улица, 11 кв 89\"," +
-                                    "      \"8 916 823 3454\"" +
-                                    "    ]," +
-                                    "    [ [\"2\"]," +
-                                    "" +
-                                    "      [\"мск\", \"улица свободы\", \"65\", \"12\"]," +
-                                    "      [\"495 663-12-53\"]" +
-                                    "    ]," +
-                                    "    [ \"3\"," +
-                                    "      [\"Ольга Павловна\", \"Ященко\"]," +
-                                    "      [\"\", \"Спб, ул Петрозаводская 8\", \"\", \"\"]," +
-                                    "      \"457 07 25\"" +
-                                    "    ]" +
-                                    "  ]"
-                )
+                Data = JArray.Parse(sb.ToString())
             } );
             
             Assert.NotNull(result);

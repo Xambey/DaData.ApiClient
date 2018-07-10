@@ -23,7 +23,7 @@ namespace DadataApiClient.Commands.Standartization
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is DadataCompositeQueryRequest temp && temp.Data != null && temp.Data.Any() && temp.Structure != null && temp.Structure.Any()))
+            if(!(query is DadataCompositeQueryRequest temp && temp.Data != null && temp.Data.HasValues && temp.Structure != null && temp.Structure.Any()))
                 throw new InvalidQueryException(query);
             return await client.SendResponseAsync<DadataCompositeQueryBaseResponse>(HttpMethod.Post, new Uri(Url), query);
         }
