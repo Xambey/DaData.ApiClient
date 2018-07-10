@@ -7,6 +7,7 @@ using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Extensions;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Standartization.Requests;
 using DadataApiClient.Models.Standartization.Responses;
 using DadataApiClient.Models.Standartization.Results;
 using Newtonsoft.Json.Linq;
@@ -22,7 +23,7 @@ namespace DadataApiClient.Commands.Standartization
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is DadataCompositeQueryResult temp && temp.Data.Any() && temp.Structure.Any()))
+            if(!(query is DadataCompositeQueryRequest temp && temp.Data != null && temp.Data.Any() && temp.Structure != null && temp.Structure.Any()))
                 throw new InvalidQueryException(query);
             return await client.SendResponseAsync<DadataCompositeQueryBaseResponse>(HttpMethod.Post, new Uri(Url), query);
         }

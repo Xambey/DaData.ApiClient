@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DadataApiClient.Models.Standartization.Data;
-using DadataApiClient.Models.Standartization.Results;
+using DadataApiClient.Models.Standartization.Requests;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -154,7 +153,7 @@ namespace DadataApiClient.Test
         [Fact]
         async Task StandartizationQueryCompositeTest()
         {
-            var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryResult
+            var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryRequest
             {
                 Structure = new List<string>
                 {
@@ -163,13 +162,24 @@ namespace DadataApiClient.Test
                     "ADDRESS",
                     "PHONE"
                 },
-                Data = new List<DadataDataQueryData>
-                {
-                    new DadataDataQueryData
-                    {
-                        Value = new List<JObject>()
-                    }
-                }
+                Data = JArray.Parse("[" +
+                                    "    [ \"1\"," +
+                                    "      \"Федотов Алексей\"," +
+                                    "      \"Москва, Сухонская улица, 11 кв 89\"," +
+                                    "      \"8 916 823 3454\"" +
+                                    "    ]," +
+                                    "    [ [\"2\"]," +
+                                    "" +
+                                    "      [\"мск\", \"улица свободы\", \"65\", \"12\"]," +
+                                    "      [\"495 663-12-53\"]" +
+                                    "    ]," +
+                                    "    [ \"3\"," +
+                                    "      [\"Ольга Павловна\", \"Ященко\"]," +
+                                    "      [\"\", \"Спб, ул Петрозаводская 8\", \"\", \"\"]," +
+                                    "      \"457 07 25\"" +
+                                    "    ]" +
+                                    "  ]"
+                )
             } );
             
             Assert.NotNull(result);
@@ -179,9 +189,8 @@ namespace DadataApiClient.Test
 
             Assert.NotNull(first);
             
-            Assert.Equal("24/3/12", first.Source);
-            Assert.Equal("24.03.2012", first.Birthdate);
-            Assert.Equal(1, first.Qc);
+            Assert.NotNull(first.Data);
+            Assert.NotEmpty(first.Data);
         }
 
         public StandartizationApi(ITestOutputHelper outputHelper) : base(outputHelper)

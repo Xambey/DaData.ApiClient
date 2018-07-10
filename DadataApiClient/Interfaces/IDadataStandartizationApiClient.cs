@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using DadataApiClient.Models.Standartization.Requests;
 using DadataApiClient.Models.Standartization.Responses;
 using DadataApiClient.Models.Standartization.Results;
 using DadataApiClient.Models.Standartization.ShortResponses;
@@ -88,6 +89,6 @@ namespace DadataApiClient.Interfaces
         /// </summary>
         /// <param name="queries">requests to search for</param>
         /// <returns></returns>
-        Task<DadataCompositeQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryResult queries);
+        Task<DadataCompositeQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryRequest queries);
     }
 }

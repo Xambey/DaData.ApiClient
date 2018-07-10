@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using DadataApiClient.Models.Standartization.Data;
+using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Models.Standartization.Results
 {
     public class DadataCompositeQueryResult
     {
-        public List<string> Structure { get; set; } = new List<string>();
+        public List<string> Structure { get; set; }
 
-        public List<DadataDataQueryData> Data { get; set; } = new List<DadataDataQueryData>();
+        public JArray Data { get; set; } 
     }
 }

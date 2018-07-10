@@ -14,6 +14,7 @@ using DadataApiClient.Commands.Suggestions;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Interfaces;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Standartization.Requests;
 using DadataApiClient.Models.Standartization.Responses;
 using DadataApiClient.Models.Standartization.Results;
 using DadataApiClient.Models.Standartization.ShortResponses;
@@ -159,7 +160,7 @@ namespace DadataApiClient
             if (command is StandartizationCommandBase)
             {
                 if (query is DadataCompositeQueryResult temp)
-                    _nowCountMessages += temp.Data.Sum(x => x.Value.Count);
+                    _nowCountMessages += temp.Data.Count;
                 else if (query is IEnumerable<string> t)
                     _nowCountMessages += t.Count();
             }
@@ -294,7 +295,7 @@ namespace DadataApiClient
                 queries);
 
         /// <inheritdoc />
-        public async Task<DadataCompositeQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryResult queries) =>
+        public async Task<DadataCompositeQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryRequest queries) =>
             (DadataCompositeQueryBaseResponse) await ExecuteCommand(Commands[typeof(CompositeCommand)],
                 queries);
         
