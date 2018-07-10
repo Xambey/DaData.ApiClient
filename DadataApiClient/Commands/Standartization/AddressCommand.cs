@@ -24,13 +24,10 @@ namespace DadataApiClient.Commands.Standartization
         {
             if(!(query is IEnumerable<string> temp) || !temp.Any())
                 throw new InvalidQueryException(query);
-            
-            var value = new JArray(temp);
-
             return new DadataAddressQueryBaseResponse
             {
                 Value = await client.SendResponseAsync<List<DadataAddressQueryResult>>(HttpMethod.Post, new Uri(Url),
-                    value)
+                    query)
             };
         }
     }

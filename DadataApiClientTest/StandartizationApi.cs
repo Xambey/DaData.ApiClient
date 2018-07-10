@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using DadataApiClient.Models.Standartization.Data;
+using DadataApiClient.Models.Standartization.Results;
 using Xunit;
 
 namespace DadataApiClientTest
@@ -144,6 +147,33 @@ namespace DadataApiClientTest
             Assert.Equal("24/3/12", first.Source);
             Assert.Equal("24.03.2012", first.Birthdate);
             Assert.Equal(1, first.Qc);
+        } 
+        
+        [Fact]
+        async Task StandartizationQueryCompositeTest()
+        {
+            var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryResult
+            {
+                Structure = new List<string>
+                {
+                    "AS_IS",
+                    "NAME",
+                    "ADDRESS",
+                    "PHONE"
+                },
+                Data = new List<DadataDataQueryData>()
+            } );
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Value);
+            
+            var first = result.Value.FirstOrDefault();
+
+            Assert.NotNull(first);
+            
+//            Assert.Equal("24/3/12", first.Source);
+//            Assert.Equal("24.03.2012", first.Birthdate);
+//            Assert.Equal(1, first.Qc);
         }
     }
 }

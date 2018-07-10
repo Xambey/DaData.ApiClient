@@ -5,8 +5,8 @@ namespace DadataApiClient.Models.Standartization.Results
 {
     public class DadataCompositeQueryResult
     {
-        public List<string> Structure { get; set; }
+        public List<string> Structure { get; set; } = new List<string>();
 
-        public List<DadataDataQueryData> Data { get; set; }
+        public List<DadataDataQueryData> Data { get; set; } = new List<DadataDataQueryData>();
     }
 }

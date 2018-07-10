@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Base;
@@ -21,12 +22,9 @@ namespace DadataApiClient.Commands.Standartization
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is DadataCompositeQueryResult temp))
+            if(!(query is DadataCompositeQueryResult temp && temp.Data.Any() && temp.Structure.Any()))
                 throw new InvalidQueryException(query);
-            
-            var value = new JObject(temp);
-            
-            return await client.SendResponseAsync<DadataCompositeQueryBaseResponse>(HttpMethod.Post, new Uri(Url), value);
+            return await client.SendResponseAsync<DadataCompositeQueryBaseResponse>(HttpMethod.Post, new Uri(Url), query);
         }
     }
 }

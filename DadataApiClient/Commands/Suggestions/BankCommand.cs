@@ -5,8 +5,8 @@ using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Extensions;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Suggestions.Requests;
 using DadataApiClient.Models.Suggestions.Responses;
-using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Commands.Suggestions
 {
@@ -19,13 +19,9 @@ namespace DadataApiClient.Commands.Suggestions
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is string temp) || string.IsNullOrEmpty(temp))
+            if(!(query is DadataBankQueryRequest temp) || string.IsNullOrEmpty(temp.Query))
                 throw new InvalidQueryException(query);
-            
-            var value = new JObject();
-            value.Add("query", temp);
-
-            return await client.SendResponseAsync<DadataBankQueryBaseResponse>(HttpMethod.Post, new Uri(Url), value);
+            return await client.SendResponseAsync<DadataBankQueryBaseResponse>(HttpMethod.Post, new Uri(Url), query);
         }
     }
 }

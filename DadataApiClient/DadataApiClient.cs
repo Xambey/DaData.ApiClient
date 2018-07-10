@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -15,6 +17,7 @@ using DadataApiClient.Models;
 using DadataApiClient.Models.Standartization.Responses;
 using DadataApiClient.Models.Standartization.Results;
 using DadataApiClient.Models.Standartization.ShortResponses;
+using DadataApiClient.Models.Suggestions.Requests;
 using DadataApiClient.Models.Suggestions.Responses;
 using DadataApiClient.Models.Suggestions.ShortResponses;
 using DadataApiClient.Options;
@@ -141,16 +144,22 @@ namespace DadataApiClient
         {
             if(_nowCountMessages >= _limitQueries)
                 throw new RequestsLimitIsExceededException();
-            if (command is StandartizationCommandBase && query is List<string> temp)
-                _nowCountMessages += temp.Count;
+            var response = await command.Execute(query, HttpClient);
+            
+            //Increment of count messages
+            if (command is StandartizationCommandBase)
+            {
+                if (query is DadataCompositeQueryResult temp)
+                    _nowCountMessages += temp.Data.Sum(x => x.Value.Count);
+                else if (query is IEnumerable<string> t)
+                    _nowCountMessages += t.Count();
+            }
             else
                 Interlocked.Increment(ref _nowCountMessages);
-            return await command.Execute(query, HttpClient);
+            return response;
         }
 
-        /// <summary>
-        /// Dispose client
-        /// </summary>
+        /// <inheritdoc />
         public void Dispose()
         {
             HttpClient?.Dispose();
@@ -162,7 +171,11 @@ namespace DadataApiClient
         /// <inheritdoc />
         public async Task<DadataAddressQueryBaseResponse> SuggestionsQueryAddress(string query, int? count = null) =>
             (DadataAddressQueryBaseResponse) await ExecuteCommand(Commands[typeof(AddressCommand)],
-                new Tuple<string, int?>(query, count));
+                new DadataAddressQueryRequest
+                {
+                    Query = query,
+                    Count = count
+                });
 
         /// <inheritdoc />
         public async Task<DadataAddressQueryShortResponse> SuggestionsShortQueryAddress(string query,
@@ -171,26 +184,41 @@ namespace DadataApiClient
 
         /// <inheritdoc />
         public async Task<DadataFioQueryBaseResponse> SuggestionsQueryFio(string query) => 
-            (DadataFioQueryBaseResponse) await ExecuteCommand(Commands[typeof(FioCommand)], query);
+            (DadataFioQueryBaseResponse) await ExecuteCommand(Commands[typeof(FioCommand)], new DadataFioQueryRequest
+            {
+                Query = query
+            });
 
         /// <inheritdoc />
         public async Task<DadataFioQueryShortResponse> SuggestionsShortQueryFio(string query) =>
             (await SuggestionsQueryFio(query)).ToShortResponse();
 
+        /// <inheritdoc />
         public async Task<DadataOrganizationQueryBaseResponse> SuggestionsQueryOrganization(string query) =>
-            (DadataOrganizationQueryBaseResponse) await ExecuteCommand(Commands[typeof(OrganizationCommand)], query);
-
+            (DadataOrganizationQueryBaseResponse) await ExecuteCommand(Commands[typeof(OrganizationCommand)], new DadataOrganizationQueryRequest
+            {
+                Query = query
+            });
+        
+        /// <inheritdoc />
         public async Task<DadataPartyQueryShortResponse> SuggestionsShortQueryOrganization(string query) =>
             (await SuggestionsQueryOrganization(query)).ToShortResponse();
 
+        /// <inheritdoc />
         public async Task<DadataBankQueryBaseResponse> SuggestionsQueryBank(string query) =>
-            (DadataBankQueryBaseResponse) await ExecuteCommand(Commands[typeof(BankCommand)], query);
+            (DadataBankQueryBaseResponse) await ExecuteCommand(Commands[typeof(BankCommand)], new DadataBankQueryRequest
+            {
+                Query = query
+            });
 
         public async Task<DadataBankQueryShortResponse> SuggestionsShortQueryBank(string query) =>
             (await SuggestionsQueryBank(query)).ToShortResponse();
 
         public async Task<DadataEmailQueryBaseResponse> SuggestionsQueryEmail(string query) =>
-            (DadataEmailQueryBaseResponse) await ExecuteCommand(Commands[typeof(EmailCommand)], query);
+            (DadataEmailQueryBaseResponse) await ExecuteCommand(Commands[typeof(EmailCommand)], new DadataEmailQueryRequest
+            {
+                Query = query
+            });
 
         public async Task<DadataEmailQueryShortResponse> SuggestionsShortQueryEmail(string query) =>
             (await SuggestionsQueryEmail(query)).ToShortResponse();

@@ -17,20 +17,17 @@ using Newtonsoft.Json.Serialization;
 namespace DadataApiClient.Extensions
 {
     public static class HttpExtensions
-    {
-        public static async Task<TResponse> SendResponseAsync<TResponse>(this HttpClient client, HttpMethod method,
-            Uri url, JObject value) where TResponse : class =>
-            await SendResponseAsync<TResponse>(method, url, value, client);
-        
-        public static async Task<TResponse> SendResponseAsync<TResponse>(this HttpClient client, HttpMethod method,
-            Uri url, JArray value) where TResponse : class =>
-            await SendResponseAsync<TResponse>(method, url, value, client);
-        
-        private static async Task<TResponse> SendResponseAsync<TResponse>(HttpMethod method, Uri url, object value, HttpClient client) where TResponse : class
+    {   
+        public static async Task<TResponse> SendResponseAsync<TResponse>(this HttpClient client, HttpMethod method, Uri url, object value) where TResponse : class
         {
             var httpRequestMessage = new HttpRequestMessage(method, url);
 
-            httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8,
+            httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value, new JsonSerializerSettings
+                {
+                    ContractResolver = new LowercaseContractResolver(),
+                    Formatting = Formatting.Indented,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                }), Encoding.UTF8,
                 "application/json");
             
             using (HttpResponseMessage response = await client.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseContentRead))
@@ -43,7 +40,6 @@ namespace DadataApiClient.Extensions
                         {
                             NamingStrategy = new SnakeCaseNamingStrategy()
                         },
-                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                         Formatting = Formatting.Indented
                     });
                 throw new BadRequestException($"{response.StatusCode} {response.ReasonPhrase}");

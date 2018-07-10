@@ -5,7 +5,9 @@ using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
 using DadataApiClient.Extensions;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Suggestions.Requests;
 using DadataApiClient.Models.Suggestions.Responses;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Commands.Suggestions
@@ -19,15 +21,10 @@ namespace DadataApiClient.Commands.Suggestions
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is Tuple<string,int?> temp) || string.IsNullOrEmpty(temp.Item1))
+            if(!(query is DadataAddressQueryRequest temp) || string.IsNullOrEmpty(temp.Query))
                 throw new InvalidQueryException(query);
             
-            var value = new JObject();
-            value.Add("query", temp?.Item1);
-            if (temp.Item2 != null)
-                value.Add("count", temp.Item2);
-            
-            return await client.SendResponseAsync<DadataAddressQueryBaseResponse>(HttpMethod.Post, new Uri(Url), value);
+            return await client.SendResponseAsync<DadataAddressQueryBaseResponse>(HttpMethod.Post, new Uri(Url), query);
         }
     }
 }
