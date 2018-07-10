@@ -12,12 +12,23 @@ namespace DadataApiClientTest
         public TestInitializer()
         {
             var directoryInfo = Directory.GetParent(Environment.CurrentDirectory).Parent?.Parent?.Parent;
-            if (directoryInfo != null)
-            {
+            
+            if(directoryInfo != null && File.Exists(Path.Combine(directoryInfo.FullName,
+                   "appsettings.json"))) {
                 var options = JsonConvert.DeserializeObject<DadataApiClientOptions>(
                     File.ReadAllText(Path.Combine(directoryInfo.FullName,
                         "appsettings.json")));
-            
+
+                ApiClient = new DadataApiClient.DadataApiClient(options);
+            }
+            else
+            {
+                var options = new DadataApiClientOptions();
+                var variables = Environment.GetEnvironmentVariables();
+                if(variables.Contains("TOKEN"))
+                    options.Token = Environment.GetEnvironmentVariable("TOKEN");
+                if(variables.Contains("SECRET"))
+                    options.Secret = Environment.GetEnvironmentVariable("SECRET");
                 ApiClient = new DadataApiClient.DadataApiClient(options);
             }
         }
