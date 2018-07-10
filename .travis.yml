@@ -1,8 +1,8 @@
 language: csharp
-dist: trusty  
-env:  
-  - CLI_VERSION=latest
-branches:  
-only:
-- master
-solution: DadataApiClientTest.sln
+mono: none
+dotnet: 2.0.0
+script:
+  - dotnet restore
+  - dotnet build ./
+  - dotnet build ./DadataApiClient/
+  - dotnet test ./DadataApiClientTest/
