@@ -1,0 +1,8 @@
+language: csharp
+dist: trusty  
+env:  
+  - CLI_VERSION=latest
+branches:  
+only:
+- master
+solution: DadataApiClientTest.sln
