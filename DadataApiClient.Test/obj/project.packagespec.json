@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClient.Test.csproj",
+    "projectUniqueName": "D:\\GitHub\\DadataApiClient\\DadataApiClient.Test\\DadataApiClient.Test.csproj",
     "projectName": "DadataApiClient.Test",
-    "projectPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClient.Test.csproj",
-    "outputPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\obj\\",
+    "projectPath": "D:\\GitHub\\DadataApiClient\\DadataApiClient.Test\\DadataApiClient.Test.csproj",
+    "outputPath": "D:\\GitHub\\DadataApiClient\\DadataApiClient.Test\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

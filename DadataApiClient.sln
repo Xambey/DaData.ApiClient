@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DadataApiClient", "DadataApiClient\DadataApiClient.csproj", "{A2C450E7-E98D-44EB-9FBC-3533146C5905}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DadataApiClient.Test", "DadataApiClientTest\DadataApiClient.Test.csproj", "{8FCE54CF-4902-448A-A446-0F3FEF409137}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DadataApiClient.Test", "DadataApiClient.Test\DadataApiClient.Test.csproj", "{8FCE54CF-4902-448A-A446-0F3FEF409137}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

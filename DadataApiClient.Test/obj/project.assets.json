@@ -5477,11 +5477,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClient.Test.csproj",
+      "projectUniqueName": "D:\\GitHub\\DadataApiClient\\DadataApiClient.Test\\DadataApiClient.Test.csproj",
       "projectName": "DadataApiClient.Test",
-      "projectPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\DadataApiClient.Test.csproj",
+      "projectPath": "D:\\GitHub\\DadataApiClient\\DadataApiClient.Test\\DadataApiClient.Test.csproj",
       "packagesPath": "C:\\Users\\Xambey\\.nuget\\packages\\",
-      "outputPath": "D:\\GitHub\\DadataApiClient\\DadataApiClientTest\\obj\\",
+      "outputPath": "D:\\GitHub\\DadataApiClient\\DadataApiClient.Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

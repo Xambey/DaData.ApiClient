@@ -4,4 +4,4 @@ dotnet: 2.0.0
 script:
   - dotnet restore
   - dotnet build ./DadataApiClient/
-  - dotnet test ./DadataApiClientTest/
+  - dotnet test ./DadataApiClient.Test/
