@@ -8,7 +8,7 @@ namespace DadataApiClient.Models.Standartization.Requests
     public class DadataCompositeQueryRequest
     {
         [JsonProperty("structure")]
-        public List<string> Structure { get; set; }
+        public JArray Structure { get; set; }
         
         [JsonProperty("data")]
         public JArray Data { get; set; }

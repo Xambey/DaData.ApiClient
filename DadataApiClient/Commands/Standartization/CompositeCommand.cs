@@ -25,7 +25,11 @@ namespace DadataApiClient.Commands.Standartization
         {
             if(!(query is DadataCompositeQueryRequest temp && temp.Data != null && temp.Data.HasValues && temp.Structure != null && temp.Structure.Any()))
                 throw new InvalidQueryException(query);
-            return await client.SendResponseAsync<DadataCompositeQueryBaseResponse>(HttpMethod.Post, new Uri(Url), query);
+            return new DadataCompositeQueryBaseResponse
+            {
+                Value = await client.SendResponseAsync<DadataCompositeQueryResult>(HttpMethod.Post, new Uri(Url),
+                    query)
+            };
         }
     }
 }

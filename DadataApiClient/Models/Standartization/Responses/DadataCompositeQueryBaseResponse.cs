@@ -5,6 +5,6 @@ namespace DadataApiClient.Models.Standartization.Responses
 {
     public class DadataCompositeQueryBaseResponse : BaseResponse
     {
-        public List<DadataCompositeQueryResult> Value { get; set; }
+        public DadataCompositeQueryResult Value { get; set; }
     }
 }

@@ -154,47 +154,56 @@ namespace DadataApiClient.Test
         [Fact]
         async Task StandartizationQueryCompositeTest()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb =
+                "[\n" +
+                "    [ \"1\",\n" +
+                "      \"Федотов Алексей\",\n" +
+                "      \"Москва, Сухонская улица, 11 кв 89\",\n" +
+                "      \"8 916 823 3454\"\n" +
+                "    ],\n" +
+                "    [ [\"2\"],\n" +
+                "      [\"Иванов\", \"Сергей Владимирович\"],\n" +
+                "      [\"мск\", \"улица свободы\", \"65\", \"12\"],\n" +
+                "      [\"495 663-12-53\"]\n" +
+                "    ],\n" +
+                "    [ \"3\",\n" +
+                "      [\"Ольга Павловна\", \"Ященко\"],\n" +
+                "      [\"\", \"Спб, ул Петрозаводская 8\", \"\", \"\"],\n" +
+                "      \"457 07 25\"\n" +
+                "    ]\n" +
+                "]";
 
-            sb.Append("[");
-            sb.Append("    [ \"1\",");
-            sb.Append("      \"Федотов Алексей\",");
-            sb.Append("      \"Москва, Сухонская улица, 11 кв 89\",");
-            sb.Append("      \"8 916 823 3454\"");
-            sb.Append("    ],");
-            sb.Append("    [ [\"2\"],");
-            sb.Append("");
-            sb.Append("      [\"мск\", \"улица свободы\", \"65\", \"12\"],");
-            sb.Append("      [\"495 663-12-53\"]");
-            sb.Append("    ],");
-            sb.Append("    [ \"3\",");
-            sb.Append("      [\"Ольга Павловна\", \"Ященко\"],");
-            sb.Append("      [\"\", \"Спб, ул Петрозаводская 8\", \"\", \"\"],");
-            sb.Append("      \"457 07 25\"");
-            sb.Append("    ]");
-            sb.Append("]");
-            
-            var result = await ApiClient.StandartizationQueryComposite(new DadataCompositeQueryRequest
+            var request = new DadataCompositeQueryRequest
             {
-                Structure = new List<string>
+                Structure = new JArray
                 {
                     "AS_IS",
                     "NAME",
                     "ADDRESS",
                     "PHONE"
                 },
-                Data = JArray.Parse(sb.ToString())
-            } );
+                Data = JArray.Parse(sb)
+            };
+            
+            var result = await ApiClient.StandartizationQueryComposite(request);
             
             Assert.NotNull(result);
             Assert.NotNull(result.Value);
-            
-            var first = result.Value.FirstOrDefault();
+
+            var first = result.Value;
 
             Assert.NotNull(first);
             
             Assert.NotNull(first.Data);
             Assert.NotEmpty(first.Data);
+
+            var data = first.Data;
+
+            var requests = data.Children();
+            
+            var firstRequest = requests.First();
+            
+            Assert.Equal("1", firstRequest);
         }
 
         public StandartizationApi(ITestOutputHelper outputHelper) : base(outputHelper)
