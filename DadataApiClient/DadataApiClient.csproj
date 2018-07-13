@@ -8,7 +8,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Additional\Requests" />
-    <Folder Include="Models\Additional\Responses" />
-    <Folder Include="Models\Additional\Results" />
   </ItemGroup>
 </Project>

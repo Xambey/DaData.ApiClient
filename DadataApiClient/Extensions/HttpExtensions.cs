@@ -1,7 +1,9 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -20,7 +22,7 @@ namespace DadataApiClient.Extensions
 {
     public static class HttpExtensions
     {       
-        public static async Task<TResponse> SendResponseAsync<TResponse>(this HttpClient client, HttpMethod method, Uri url, object value) where TResponse : class
+        public static async Task<TResponse> SendResponseAsync<TResponse>(this HttpClient client, HttpMethod method, Uri url, object value = null, Dictionary<string, object> queries = null) where TResponse : class
         {
             var httpRequestMessage = new HttpRequestMessage(method, url);
             var settings = new JsonSerializerSettings
@@ -32,9 +34,15 @@ namespace DadataApiClient.Extensions
                 Formatting = Formatting.Indented
             };
             
-            httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value, settings), Encoding.UTF8,
+            if(value != null)
+                httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value, settings), Encoding.UTF8,
                 "application/json");
-            
+            if (queries != null)
+                foreach (var query in queries)
+                {
+                    httpRequestMessage.Properties.TryAdd(query.Key, query.Value);
+                }
+
             using (HttpResponseMessage response = await client.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseContentRead))
             {
                 var result = await response.Content.ReadAsStringAsync();

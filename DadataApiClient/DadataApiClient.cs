@@ -128,6 +128,7 @@ namespace DadataApiClient
             });
             
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Options.Token);
+            HttpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
             HttpClient.DefaultRequestHeaders.Add("X-Secret", Options.Secret);
 
             //Reset count of messages per second (timer)
@@ -299,6 +300,20 @@ namespace DadataApiClient
             (DadataCompositeQueryBaseResponse) await ExecuteCommand(Commands[typeof(CompositeCommand)],
                 queries);
         
+        #endregion
+
+        #region Additional API
+
+        /// <inheritdoc />
+        public async Task<Models.Additional.Responses.DadataAddressQueryBaseResponse>
+            AdditionalQueryDetectAddressByIp(string ip) =>
+            (Models.Additional.Responses.DadataAddressQueryBaseResponse) await ExecuteCommand(
+                Commands[typeof(DetectAddressByIpCommand)], ip);
+
+        /// <inheritdoc />
+        public async Task<Models.Additional.Responses.DadataAddressQueryBaseResponse>
+            AdditionalQueryDetectAddressByIp(IPAddress ip) => await AdditionalQueryDetectAddressByIp(ip.ToString());
+
         #endregion
     }
 }

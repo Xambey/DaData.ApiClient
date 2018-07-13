@@ -1,7 +1,14 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Base;
+using DadataApiClient.Exceptions;
+using DadataApiClient.Extensions;
 using DadataApiClient.Models;
+using DadataApiClient.Models.Additional.Responses;
+using DadataApiClient.Models.Additional.Results;
 
 namespace DadataApiClient.Commands.Additional
 {
@@ -12,9 +19,17 @@ namespace DadataApiClient.Commands.Additional
             Url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/detectAddressByIp";
         }
 
-        public override Task<BaseResponse> Execute(object query, HttpClient client)
+        public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            return base.Execute(query, client);
+            if(!(query is string temp) || string.IsNullOrEmpty(temp))
+                throw new InvalidQueryException(query);
+            return new DadataAddressQueryBaseResponse
+            {
+                Value = await client.SendResponseAsync<DadataAddressQueryResult>(HttpMethod.Get, new Uri(Url), null, new Dictionary<string, object>
+                {
+                    {"ip", query}
+                })
+            };
         }
     }
 }
