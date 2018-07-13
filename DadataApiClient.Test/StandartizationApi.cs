@@ -199,11 +199,86 @@ namespace DadataApiClient.Test
 
             var data = first.Data;
 
-            var requests = data.Children();
+            var requests = data.Children<JArray>(); 
             
-            var firstRequest = requests.First();
+            var firstRequest = requests.ElementAt(0).Children<JObject>();
+
+            var child1 = firstRequest.ElementAt(0);
             
-            Assert.Equal("1", firstRequest);
+            Assert.Equal("1", child1.Property("source").Value.ToString());
+            
+            var child2 = firstRequest.ElementAt(1);
+            
+            Assert.Equal("Федотов Алексей", child2.Property("source").Value.ToString());
+            Assert.Equal("Федотов Алексей", child2.Property("result").Value.ToString());
+            Assert.Equal(0, child2.Property("qc").Value.ToObject<int>());
+
+            var child3 = firstRequest.ElementAt(2);
+
+            Assert.Equal("Москва, Сухонская улица, 11 кв 89", child3.Property("source").Value.ToString());    
+            Assert.Equal("г Москва, ул Сухонская, д 11, кв 89", child3.Property("result").Value.ToString());    
+            Assert.Empty(child3.Property("unparsed_parts").Value.ToString());    
+            Assert.Equal(0, child3.Property("qc").Value.ToObject<int>());
+
+            var child4 = firstRequest.ElementAt(3);
+            
+            Assert.Equal("8 916 823 3454", child4.Property("source").Value.ToString()); 
+            Assert.Equal("Мобильный", child4.Property("type").Value.ToString()); 
+            Assert.Equal("+7 916 823-34-54", child4.Property("phone").Value.ToString()); 
+            Assert.Equal(0, child4.Property("qc").Value.ToObject<int>());     
+            
+            var secondRequest = requests.ElementAt(1).Children<JObject>();
+            
+            child1 = secondRequest.ElementAt(0);
+            
+            Assert.Equal("2", child1.Property("source").Value.ToString());
+            
+            child2 = secondRequest.ElementAt(1);
+            
+            Assert.Equal("Иванов Сергей Владимирович", child2.Property("source").Value.ToString());
+            Assert.Equal("Иванов Сергей Владимирович", child2.Property("result").Value.ToString());
+            Assert.Equal(0, child2.Property("qc").Value.ToObject<int>());
+
+            child3 = secondRequest.ElementAt(2);
+
+            Assert.Equal("мск,улица свободы,65,12", child3.Property("source").Value.ToString());    
+            Assert.Equal("г Москва, ул Свободы, д 65, кв 12", child3.Property("result").Value.ToString());     
+            Assert.Empty(child3.Property("unparsed_parts").Value.ToString());    
+            Assert.Equal(0, child3.Property("qc").Value.ToObject<int>());
+
+            child4 = secondRequest.ElementAt(3);
+            
+            Assert.Equal("495 663-12-53", child4.Property("source").Value.ToString()); 
+            Assert.Equal("Стационарный", child4.Property("type").Value.ToString()); 
+            Assert.Equal("+7 495 663-12-53", child4.Property("phone").Value.ToString()); 
+            Assert.Equal(0, child4.Property("qc").Value.ToObject<int>());
+            
+            var thirdRequest = requests.ElementAt(2).Children<JObject>();
+            
+            child1 = thirdRequest.ElementAt(0);
+            
+            Assert.Equal("3", child1.Property("source").Value.ToString());
+            
+            child2 = thirdRequest.ElementAt(1);
+            
+            Assert.Equal("Ольга Павловна Ященко", child2.Property("source").Value.ToString());
+            Assert.Equal("Ященко Ольга Павловна", child2.Property("result").Value.ToString());
+            Assert.Equal(0, child2.Property("qc").Value.ToObject<int>());
+
+            child3 = thirdRequest.ElementAt(2);
+
+            Assert.Equal("Спб, ул Петрозаводская 8", child3.Property("source").Value.ToString());    
+            Assert.Equal("г Санкт-Петербург, ул Петрозаводская, д 8", child3.Property("result").Value.ToString());     
+            Assert.Empty(child3.Property("unparsed_parts").Value.ToString());    
+            Assert.Equal(0, child3.Property("qc").Value.ToObject<int>());
+
+            child4 = thirdRequest.ElementAt(3);
+            
+            Assert.Equal("457 07 25", child4.Property("source").Value.ToString()); 
+            Assert.Equal("Стационарный", child4.Property("type").Value.ToString()); 
+            Assert.Equal("+7 812 457-07-25", child4.Property("phone").Value.ToString()); 
+            Assert.Equal(1, child4.Property("qc").Value.ToObject<int>());
+            
         }
 
         public StandartizationApi(ITestOutputHelper outputHelper) : base(outputHelper)
