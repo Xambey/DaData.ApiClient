@@ -21,7 +21,7 @@ namespace DadataApiClient.Test
 
             var location = result.Value.Location;
             
-            Assert.NotEmpty(location.Value);
+            Assert.NotNull(location.Value);
             Assert.NotNull(location.Data);
         }
     }
