@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Additional;
@@ -25,9 +26,12 @@ using DadataApiClient.Options;
 using Newtonsoft.Json.Linq;
 using AddressCommand = DadataApiClient.Commands.Suggestions.AddressCommand;
 using DadataAddressQueryBaseResponse = DadataApiClient.Models.Suggestions.Responses.DadataAddressQueryBaseResponse;
+using DadataAddressQueryRequest = DadataApiClient.Models.Suggestions.Requests.DadataAddressQueryRequest;
 using DadataAddressQueryShortResponse = DadataApiClient.Models.Suggestions.ShortResponses.DadataAddressQueryShortResponse;
 using DadataEmailQueryBaseResponse = DadataApiClient.Models.Suggestions.Responses.DadataEmailQueryBaseResponse;
+using DadataEmailQueryRequest = DadataApiClient.Models.Suggestions.Requests.DadataEmailQueryRequest;
 using DadataFioQueryBaseResponse = DadataApiClient.Models.Suggestions.Responses.DadataFioQueryBaseResponse;
+using DadataFioQueryRequest = DadataApiClient.Models.Suggestions.Requests.DadataFioQueryRequest;
 using DadataFioQueryShortResponse = DadataApiClient.Models.Suggestions.ShortResponses.DadataFioQueryShortResponse;
 using EmailCommand = DadataApiClient.Commands.Suggestions.EmailCommand;
 using FioCommand = DadataApiClient.Commands.Suggestions.FioCommand;
@@ -252,48 +256,84 @@ namespace DadataApiClient
         (Models.Standartization.Responses.DadataAddressQueryBaseResponse) await ExecuteCommand(Commands[typeof(Commands.Standartization.AddressCommand)],
         queries);
 
+        public async Task<Models.Standartization.Responses.DadataAddressQueryBaseResponse> StandartizationQueryAddress(
+            Models.Standartization.Requests.DadataAddressQueryRequest queries) =>
+            await StandartizationQueryAddress(queries.Queries);
+
         /// <inheritdoc />
         public async Task<Models.Standartization.ShortResponses.DadataAddressQueryShortResponse>
             StandartizationShortQueryAddress(IEnumerable<string> queries) =>
             (await StandartizationQueryAddress(queries)).ToShortResponse();
+
+        public async Task<Models.Standartization.ShortResponses.DadataAddressQueryShortResponse>
+            StandartizationShortQueryAddress(Models.Standartization.Requests.DadataAddressQueryRequest queries) =>
+            await StandartizationShortQueryAddress(queries.Queries);
 
         /// <inheritdoc />
         public async Task<DadataPhoneQueryBaseResponse> StandartizationQueryPhone(IEnumerable<string> queries) =>
         (DadataPhoneQueryBaseResponse) await ExecuteCommand(Commands[typeof(PhoneCommand)],
         queries);
 
+        public async Task<DadataPhoneQueryBaseResponse> StandartizationQueryPhone(DadataPhoneQueryRequest queries) =>
+            await StandartizationQueryPhone(queries.Queries);
+
         /// <inheritdoc />
         public async Task<DadataPhoneQueryShortResponse> StandartizationShortQueryPhone(IEnumerable<string> queries) =>
             (await StandartizationQueryPhone(queries)).ToShortResponse();
+
+        public async Task<DadataPhoneQueryShortResponse>
+            StandartizationShortQueryPhone(DadataPhoneQueryRequest queries) =>
+            await StandartizationShortQueryPhone(queries.Queries);
 
         /// <inheritdoc />
         public async Task<DadataPasportQueryBaseResponse> StandartizationQueryPasport(IEnumerable<string> queries) =>
             (DadataPasportQueryBaseResponse) await ExecuteCommand(Commands[typeof(PasportCommand)],
                 queries);
 
+        public async Task<DadataPasportQueryBaseResponse>
+            StandartizationQueryPasport(DadataPasportQueryRequest queries) =>
+            await StandartizationQueryPasport(queries.Queries);
+
         /// <inheritdoc />
         public async Task<Models.Standartization.Responses.DadataFioQueryBaseResponse> StandartizationQueryFio(IEnumerable<string> queries) =>
             (Models.Standartization.Responses.DadataFioQueryBaseResponse) await ExecuteCommand(Commands[typeof(Commands.Standartization.FioCommand)],
                 queries);
 
+        public async Task<Models.Standartization.Responses.DadataFioQueryBaseResponse>
+            StandartizationQueryFio(Models.Standartization.Requests.DadataFioQueryRequest queries) => await StandartizationQueryFio(queries.Queries);
+
         /// <inheritdoc />
         public async Task<Models.Standartization.ShortResponses.DadataFioQueryShortResponse> StandartizationShortQueryFio(IEnumerable<string> queries) =>
             (await StandartizationQueryFio(queries)).ToShortResponse();
+
+        public async Task<Models.Standartization.ShortResponses.DadataFioQueryShortResponse>
+            StandartizationShortQueryFio(Models.Standartization.Requests.DadataFioQueryRequest queries) =>
+            await StandartizationShortQueryFio(queries.Queries);
 
         /// <inheritdoc />
         public async Task<Models.Standartization.Responses.DadataEmailQueryBaseResponse> StandartizationQueryEmail(IEnumerable<string> queries) =>
             (Models.Standartization.Responses.DadataEmailQueryBaseResponse) await ExecuteCommand(Commands[typeof(Commands.Standartization.EmailCommand)],
                 queries);
 
+        public async Task<Models.Standartization.Responses.DadataEmailQueryBaseResponse> StandartizationQueryEmail(
+            Models.Standartization.Requests.DadataEmailQueryRequest queries) =>
+            await StandartizationQueryEmail(queries.Queries);
+
         /// <inheritdoc />
         public async Task<DadataDateQueryBaseResponse> StandartizationQueryDate(IEnumerable<string> queries) =>
             (DadataDateQueryBaseResponse) await ExecuteCommand(Commands[typeof(DateCommand)],
                 queries);
 
+        public async Task<DadataDateQueryBaseResponse> StandartizationQueryDate(DadataDateQueryRequest queries) =>
+            await StandartizationQueryDate(queries.Queries);
+
         /// <inheritdoc />
         public async Task<DadataCarQueryBaseResponse> StandartizationQueryCar(IEnumerable<string> queries) =>
             (DadataCarQueryBaseResponse) await ExecuteCommand(Commands[typeof(CarCommand)],
                 queries);
+
+        public async Task<DadataCarQueryBaseResponse> StandartizationQueryCar(DadataCarQueryRequest queries) =>
+            await StandartizationQueryCar(queries.Queries);
 
         /// <inheritdoc />
         public async Task<DadataCompositeQueryBaseResponse> StandartizationQueryComposite(DadataCompositeQueryRequest queries) =>

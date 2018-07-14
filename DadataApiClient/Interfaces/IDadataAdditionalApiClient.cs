@@ -10,14 +10,14 @@ namespace DadataApiClient.Interfaces
         /// <summary>
         /// Get full hints for the address by ip address
         /// </summary>
-        /// <param name="ip">texts to search for</param>
+        /// <param name="ip">list of queries  search for</param>
         /// <returns></returns>
         Task<DadataAddressQueryBaseResponse> AdditionalQueryDetectAddressByIp(string ip);
         
         /// <summary>
         /// Get full hints for the address by ip address
         /// </summary>
-        /// <param name="ip">texts to search for</param>
+        /// <param name="ip">list of queries\  search for</param>
         /// <returns></returns>
         Task<DadataAddressQueryBaseResponse> AdditionalQueryDetectAddressByIp(IPAddress ip);
     }
