@@ -37,11 +37,6 @@ namespace DadataApiClient.Test
             {
                 options = new DadataApiClientOptions();
                 var variables = Environment.GetEnvironmentVariables();
-                foreach (DictionaryEntry entry in variables)
-                {
-                    if(entry.Key.ToString() == "Secret" || entry.Key.ToString() == "Token")
-                        Console.WriteLine($"{entry.Key}: {entry.Value}");
-                }
                 
                 if(variables.Contains("TOKEN"))
                     options.Token = Environment.GetEnvironmentVariable("TOKEN");
