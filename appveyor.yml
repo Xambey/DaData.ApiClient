@@ -15,10 +15,11 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 environment:
-  Token:
-    secure: EFVcZzUo9GxQ+slLBFQc2zhFzlfA9gULAy0cXu5m6mQbyzRYLxnAw3F+Z0Qx0Jef
-  Secret:
-    secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
+  matrix:
+  - Token:
+      secure: EFVcZzUo9GxQ+slLBFQc2zhFzlfA9gULAy0cXu5m6mQbyzRYLxnAw3F+Z0Qx0Jef
+    Secret:
+      secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
 nuget:
   project_feed: true
   disable_publish_on_pr: true
