@@ -18,11 +18,11 @@ namespace DadataApiClient.Test
             
             Assert.NotNull(result.Value);
             Assert.NotNull(result.Value.Location);
-//
-//            var location = result.Value.Location;
-//            
-//            Assert.NotNull(location.Value);
-//            Assert.NotNull(location.Data);
+
+            var location = result.Value.Location;
+            
+            Assert.NotNull(location.Value);
+            Assert.NotNull(location.Data);
         }
     }
 }
