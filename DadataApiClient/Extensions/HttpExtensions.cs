@@ -50,6 +50,7 @@ namespace DadataApiClient.Extensions
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.OK:
+                        Console.WriteLine(result + "\n" + response.StatusCode + response.ReasonPhrase);
                         return JsonConvert.DeserializeObject<TResponse>(result, new JsonSerializerSettings
                         {
                             ContractResolver = new DefaultContractResolver
