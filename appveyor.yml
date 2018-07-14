@@ -20,16 +20,11 @@ environment:
   Secret:
     secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
 nuget:
-  account_feed: true
   project_feed: true
   disable_publish_on_pr: true
 before_build:
-- ps: dotnet restore
+- ps: nuget restore
 build:
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
-  publish_core_console: true
   verbosity: minimal
 artifacts:
 - path: Working\NuGet\*.nupkg
