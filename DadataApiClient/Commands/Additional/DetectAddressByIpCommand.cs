@@ -9,6 +9,8 @@ using DadataApiClient.Extensions;
 using DadataApiClient.Models;
 using DadataApiClient.Models.Additional.Responses;
 using DadataApiClient.Models.Additional.Results;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DadataApiClient.Commands.Additional
 {
@@ -23,12 +25,17 @@ namespace DadataApiClient.Commands.Additional
         {
             if(!(query is string temp) || string.IsNullOrEmpty(temp))
                 throw new InvalidQueryException(query);
-            return new DadataAddressQueryBaseResponse
-            {
-                Value = await client.SendResponseAsync<DadataAddressQueryResult>(HttpMethod.Get, new Uri(Url), null, new Dictionary<string, object>
+            var response = await client.SendResponseAsync<DadataAddressQueryResult>(HttpMethod.Get, new Uri(Url), null,
+                new Dictionary<string, object>
                 {
                     {"ip", query}
-                })
+                });
+            
+            Console.WriteLine(JsonConvert.SerializeObject(response));
+            
+            return new DadataAddressQueryBaseResponse
+            {
+                Value = response
             };
         }
     }
