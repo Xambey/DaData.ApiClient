@@ -123,7 +123,7 @@ namespace DadataApiClient
             
             if(Options.LimitQueries != null && Options.LimitQueries <= 0)
                 throw new InvalidLimitQueriesException(Options.LimitQueries);
-            _limitQueries = Options.LimitQueries ?? Constants.DefaultLimitQueries; 
+            _limitQueries = Options.LimitQueries ?? (int) DefaultOptions.QueriesLimit; 
             
             
             HttpClient = new HttpClient(new HttpClientHandler
