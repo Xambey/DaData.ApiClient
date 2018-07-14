@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using DadataApiClient.Options;
 using Newtonsoft.Json;
@@ -16,6 +17,8 @@ namespace DadataApiClient.Test
         {
             OutputHelper = outputHelper;
             var options = Configure();
+            
+            
             ApiClient = new DadataApiClient(options);
         }
 
@@ -34,6 +37,11 @@ namespace DadataApiClient.Test
             {
                 options = new DadataApiClientOptions();
                 var variables = Environment.GetEnvironmentVariables();
+                foreach (DictionaryEntry entry in variables)
+                {
+                    Console.WriteLine(entry.Key);
+                }
+                
                 if(variables.Contains("TOKEN"))
                     options.Token = Environment.GetEnvironmentVariable("TOKEN");
                 if(variables.Contains("SECRET"))
