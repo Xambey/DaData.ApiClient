@@ -11,8 +11,8 @@
     <iconUrl>https://dadata.ru/static/i/dadata.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2018</copyright>
+    <releaseNotes>Full supported Standartization and Suggestion API</releaseNotes>
+    <copyright>Copyright 2018 $author$</copyright>
     <tags>C# .Net DaData </tags>
   </metadata>
 </package>
