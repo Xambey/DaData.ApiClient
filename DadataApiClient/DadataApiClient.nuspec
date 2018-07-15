@@ -11,8 +11,13 @@
     <iconUrl>https://dadata.ru/static/i/dadata.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Full supported Standartization and Suggestion API</releaseNotes>
     <copyright>Copyright 2018 $author$</copyright>
     <tags>C# .Net DaData </tags>
+    <dependencies>
+      <group targetFramework="netcore20" >
+        <dependency id="Microsoft.NETCore.App" version="2.0.0"/>
+      </group>
+      <dependency id="Newtonsoft.Json" version="11.0.2"/>
+    </dependencies>
   </metadata>
 </package>
