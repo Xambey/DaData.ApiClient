@@ -32,7 +32,7 @@ build:
 after_test:
 - ps: .\Build\pack.ps1
 artifacts:
-- path: '**\DadataApiClient.dll'
+- path: '**\bin**\DadataApiClient.dll'
   name: DadataApiClient.dll
 - path: '*.nupkg'
 deploy:
