@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$title$</id>
+    <id>DaData.ApiClient</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>$author$</authors>
+    <authors>Andrey Panasenko(Xambey)</authors>
     <owners>$author$</owners>
     <licenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Xambey/DaDataApiClient</projectUrl>
     <iconUrl>https://dadata.ru/static/i/dadata-logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for work with the Dadata service (see more https://github.com/Xambey/DaDataApiClient )</description>
-    <copyright>Copyright 2018 $author$</copyright>
+    <copyright>Copyright 2018 Andrey Panasenko(Xambey)</copyright>
     <tags>C# .Net DaData.ru Client</tags>
     <dependencies>
       <group targetFramework="netcore20" >
