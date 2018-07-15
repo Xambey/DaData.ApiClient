@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Xambey/DaDataApiClient</projectUrl>
+    <iconUrl>https://dadata.ru/static/i/dadata.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>C# .Net DaData </tags>
+  </metadata>
+</package>
