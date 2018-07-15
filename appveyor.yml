@@ -4,6 +4,8 @@ branches:
   - master
 skip_branch_with_pr: true
 image: Visual Studio 2017
+install: 
+- ps: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 configuration: Release
 shallow_clone: true
 dotnet_csproj:
@@ -38,7 +40,7 @@ deploy:
   api_key:
     secure: MgLMMGChxGhyyhSrWuntCcR83vpMU7geCo8YfmNVFbW8FLtf/GZqQLd3ZdNoMMzY
   skip_symbols: true
-  artifact: '*.nupkg'
+  artifact: /.*.nupkg/
   on:
     branch: master
 notifications:
