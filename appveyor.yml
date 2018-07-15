@@ -28,11 +28,11 @@ build:
   publish_nuget: true
   verbosity: minimal
 after_test:
-- ps: .\Nuget\pack.ps1
+- ps: .\Build\pack.ps1
 artifacts:
-- path: DadataApiClient\bin\Release\DadataApiClient.dll
+- path: '**\DadataApiClient.dll'
   name: DadataApiClient.dll
-- path: '*\*.nupkg'
+- path: '**\*.nupkg'
 deploy:
 - provider: NuGet
   api_key:
