@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Dadata.Api.Client</id>
+    <id>$title$</id>
     <version>$version$</version>
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Xambey/DaDataApiClient</projectUrl>
-    <iconUrl>https://dadata.ru/static/i/dadata.png</iconUrl>
+    <iconUrl>https://dadata.ru/static/i/dadata-logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for work with the Dadata service (see more https://github.com/Xambey/DaDataApiClient )</description>
     <copyright>Copyright 2018 $author$</copyright>
