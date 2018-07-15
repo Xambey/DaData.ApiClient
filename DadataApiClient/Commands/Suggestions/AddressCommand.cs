@@ -3,12 +3,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
-using DadataApiClient.Extensions;
+using DadataApiClient.Http;
 using DadataApiClient.Models;
 using DadataApiClient.Models.Suggestions.Requests;
 using DadataApiClient.Models.Suggestions.Responses;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Uri = DadataApiClient.Http.Uri;
 
 namespace DadataApiClient.Commands.Suggestions
 {

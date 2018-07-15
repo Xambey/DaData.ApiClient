@@ -5,11 +5,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using DadataApiClient.Commands.Base;
 using DadataApiClient.Exceptions;
-using DadataApiClient.Extensions;
+using DadataApiClient.Http;
 using DadataApiClient.Models;
 using DadataApiClient.Models.Standartization.Responses;
 using DadataApiClient.Models.Standartization.Results;
 using Newtonsoft.Json.Linq;
+using Uri = DadataApiClient.Http.Uri;
 
 namespace DadataApiClient.Commands.Standartization
 {

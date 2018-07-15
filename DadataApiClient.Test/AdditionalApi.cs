@@ -15,12 +15,12 @@ namespace DadataApiClient.Test
         async Task AdditionalQueryDetectAddressByIpTest()
         {
             var result = await ApiClient.AdditionalQueryDetectAddressByIp("46.226.227.20");
-            
+
             Assert.NotNull(result.Value);
             Assert.NotNull(result.Value.Location);
 
             var location = result.Value.Location;
-            
+
             Assert.NotNull(location.Value);
             Assert.NotNull(location.Data);
         }
