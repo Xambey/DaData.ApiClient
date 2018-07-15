@@ -21,12 +21,12 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="DaDataApiClient/**" exclude="DaDataApiClient.*/obj/**" target="src" />
-    <file src="DaDataApiClient.sln" target="src" />
-    <file src="README.md" target="src" />
-    <file src=".idea/**" exclude="*" />
-    <file src=".git/**" exclude="*"/>
-    <file src="./**" exclude="*.png" />
-    <file src="./**" exclude="*.svg" />
+    <file src="../DaDataApiClient/**" exclude="DaDataApiClient/obj/**" target="src" />
+    <file src="../DaDataApiClient.sln" target="src" />
+    <file src="../README.md" target="src" />
+    <file src="../.idea/**" exclude="*" />
+    <file src="../.git/**" exclude="*"/>
+    <file src=".././**" exclude="*.png" />
+    <file src=".././**" exclude="*.svg" />
   </files>
 </package>
