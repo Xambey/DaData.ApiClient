@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Dadata.Api.Client</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Xambey/DaDataApiClient</projectUrl>
+    <iconUrl>https://dadata.ru/static/i/dadata.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Client for work with the Dadata service (see more https://github.com/Xambey/DaDataApiClient )</description>
+    <copyright>Copyright 2018 $author$</copyright>
+    <tags>C# .Net DaData.ru Client</tags>
+    <dependencies>
+      <group targetFramework="netcore20" >
+        <dependency id="Microsoft.NETCore.App" version="2.0.0"/>
+		<dependency id="Newtonsoft.Json" version="11.0.2"/>
+      </group>
+    </dependencies>
+  </metadata>
+</package>
