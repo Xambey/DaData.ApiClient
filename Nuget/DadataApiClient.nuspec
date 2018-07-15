@@ -21,6 +21,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\DadataApiClient\bin\Release\netcoreapp2.0\DadataApiClient.dll" target="lib\netcore2.0"/>
+    <file src="..\DadataApiClient\bin\Release\netcoreapp2.0\DadataApiClient.dll" target="lib"/>
   </files>
 </package>
