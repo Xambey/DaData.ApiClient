@@ -33,7 +33,7 @@ build:
   publish_core_console: true
   verbosity: minimal
 after_build:
-- ps: cd DadataApiClient & nuget pack
+- ps: cd DadataApiClient; \.nuget pack
 
 deploy:
 - provider: NuGet
