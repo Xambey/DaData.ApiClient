@@ -21,8 +21,8 @@ environment:
     SECRET:
       secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
 nuget:
-  account_feed: true
   project_feed: true
+  disable_publish_on_pr: true
 before_build:
 - ps: nuget restore
 build:
@@ -32,14 +32,14 @@ build:
   publish_core_console: true
   verbosity: minimal
 artifacts:
-- path: Working\NuGet\*.nupkg
+- path: /.*\.nupkg/
   name: Nuget Package
 deploy:
 - provider: NuGet
   api_key:
     secure: MgLMMGChxGhyyhSrWuntCcR83vpMU7geCo8YfmNVFbW8FLtf/GZqQLd3ZdNoMMzY
   skip_symbols: true
-  artifact: Working\NuGet\*.nupkg
+  artifact: /.*\.nupkg/
 notifications:
 - provider: GitHubPullRequest
   on_build_success: true
