@@ -21,19 +21,22 @@ environment:
     SECRET:
       secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
 nuget:
+  account_feed: true
   project_feed: true
   disable_publish_on_pr: true
 before_build:
 - ps: nuget restore
 build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  publish_core_console: true
   verbosity: minimal
-artifacts:
-- path: Working\NuGet\*.nupkg
-  name: Nuget Package
 deploy:
 - provider: NuGet
   api_key:
-    secure: XrGGizR8i1WOI8fgSFleT1AxAy6rqxgDOfGAEfOgqWr7QSqi2xUYr22OMGh6vxUf
+    secure: MgLMMGChxGhyyhSrWuntCcR83vpMU7geCo8YfmNVFbW8FLtf/GZqQLd3ZdNoMMzY
+  skip_symbols: true
 notifications:
 - provider: GitHubPullRequest
   on_build_success: true
