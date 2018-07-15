@@ -6,4 +6,4 @@ $content = $content -replace '\$author\$', $env:APPVEYOR_REPO_COMMIT_AUTHOR
 $content = $content -replace '\$title\$', $env:APPVEYOR_PROJECT_NAME
 
 $content | Out-File $root\Nuget\DadataApiClient.compiled.nuspec
-& $root\NuGet\NuGet.exe pack $root\Nuget\DadataApiClient.compiled.nuspec
+& nuget pack $root\Nuget\DadataApiClient.compiled.nuspec
