@@ -23,7 +23,6 @@ environment:
 nuget:
   account_feed: true
   project_feed: true
-  disable_publish_on_pr: true
 before_build:
 - ps: nuget restore
 build:
@@ -32,11 +31,15 @@ build:
   include_nuget_references: true
   publish_core_console: true
   verbosity: minimal
+artifacts:
+- path: Working\NuGet\*.nupkg
+  name: Nuget Package
 deploy:
 - provider: NuGet
   api_key:
     secure: MgLMMGChxGhyyhSrWuntCcR83vpMU7geCo8YfmNVFbW8FLtf/GZqQLd3ZdNoMMzY
   skip_symbols: true
+  artifact: Working\NuGet\*.nupkg
 notifications:
 - provider: GitHubPullRequest
   on_build_success: true
