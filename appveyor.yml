@@ -29,7 +29,7 @@ build:
   publish_nuget: true
   include_nuget_references: true
   publish_core_console: true
-  verbosity: minimal
+  verbosity: detailed
 artifacts:
 - path: /.*\.nupkg/
   name: Nuget Package
