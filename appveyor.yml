@@ -50,9 +50,9 @@ build:
   verbosity: minimal
   
 artifacts:
-- path: '**\DadataApiClient.dll'
+- path: '..\DadataApiClient\bin\**\DadataApiClient.dll'
   name: DadataApiClient.dll
-- path: /.*.nupkg/
+- path: /.*\.nupkg/
 
 #deploy:
 #- provider: NuGet
