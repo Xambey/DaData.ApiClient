@@ -15,6 +15,7 @@
 	<RepositoryUrl>https://github.com/Xambey/DaDataApiClient</RepositoryUrl>
 	<RepositoryType>public</RepositoryType>
 	<PackageTags>C#, DaData.ru, Client</PackageTags>
+	<PackageId>DaData.ApiClient</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
