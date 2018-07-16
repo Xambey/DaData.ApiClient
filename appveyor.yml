@@ -41,8 +41,6 @@ deploy:
     secure: MgLMMGChxGhyyhSrWuntCcR83vpMU7geCo8YfmNVFbW8FLtf/GZqQLd3ZdNoMMzY
   skip_symbols: true
   artifact: /.*.nupkg/
-  on:
-    branch: master
 notifications:
 - provider: GitHubPullRequest
   on_build_success: true
