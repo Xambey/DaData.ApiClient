@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	<Description>test</Description>
 	<Copyright>Panasenko Andrey</Copyright>
