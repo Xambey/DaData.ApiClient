@@ -29,8 +29,6 @@ before_build:
 build:
   publish_nuget: true
   verbosity: minimal
-after_test:
-- ps: .\Build\pack.ps1
 artifacts:
 - path: 'DadataApiClient\bin**\DadataApiClient.dll'
   name: DadataApiClient.dll
