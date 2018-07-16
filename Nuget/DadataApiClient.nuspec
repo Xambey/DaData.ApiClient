@@ -11,6 +11,7 @@
     <iconUrl>https://dadata.ru/static/i/dadata-logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client for work with the Dadata service (see more https://github.com/Xambey/DaDataApiClient )</description>
+	<releaseNotes>A test version that can be downloaded by mistake. Stable build will be released soon</releaseNotes>
     <copyright>Copyright 2018 Andrey Panasenko(Xambey)</copyright>
     <tags>C# .Net DaData.ru Client</tags>
     <dependencies>
