@@ -83,6 +83,9 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+
+
+.vs/
 .idea/
 DadataApiClient/bin/
 DadataApiClient/obj/

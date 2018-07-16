@@ -3,6 +3,18 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
 	<version>1.0.1</version>
+	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<Description>test</Description>
+	<Copyright>Panasenko Andrey</Copyright>
+	<Authors>test</Authors>
+	<Company>test</Company>
+	<Product>test</Product>
+	<PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
+	<PackageProjectUrl>https://github.com/Xambey/DaDataApiClient</PackageProjectUrl>
+	<PackageIconUrl>https://dadata.ru/static/i/dadata-logo.png</PackageIconUrl>
+	<RepositoryUrl>https://github.com/Xambey/DaDataApiClient</RepositoryUrl>
+	<RepositoryType>public</RepositoryType>
+	<PackageTags>C#, DaData.ru, Client</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
