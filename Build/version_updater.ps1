@@ -1,6 +1,6 @@
 nuget restore
 
-$xmlPath = "$env:appveyor_build_folder\DadataApiClient\DadataApiClient.csproj"
+$xmlPath = "$env:appveyor_build_folder\Dadata\Dadata.csproj"
 $xml = [xml](get-content $xmlPath)
 $propertyGroup = $xml.Project.PropertyGroup | Where { $_.Version}
 $propertyGroup.Version = $env:appveyor_build_version
