@@ -50,8 +50,8 @@ build:
   verbosity: minimal
   
 artifacts:
-- path: '.\DadataApiClient\bin\**\DadataApiClient.dll'
-  name: DadataApiClient.dll
+- path: '.\Dadata\bin\**\Dadata.dll'
+  name: Dadata.dll
 - path: /.*\.nupkg/
 
 

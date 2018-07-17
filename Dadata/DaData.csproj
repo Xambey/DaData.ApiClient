@@ -5,12 +5,12 @@
 	<version>1.0.2</version>
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	<Description>Client for work with API of DaData.ru service.</Description>
-	<Copyright>Panasenko Andrey</Copyright>
+	<Copyright>Copyright © Panasenko Andrey</Copyright>
 	<Authors>Panasenko Andrey</Authors>
 	<Company>test</Company>
 	<Product>test</Product>
 	<PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
-	<PackageProjectUrl>https://github.com/Xambey/DaDataApiClient</PackageProjectUrl>
+	<PackageProjectUrl>https://github.com/Xambey/DaData.ApiClient</PackageProjectUrl>
 	<PackageIconUrl>https://dadata.ru/static/i/dadata-logo.png</PackageIconUrl>
 	<RepositoryUrl>https://github.com/Xambey/DaData.ApiClient</RepositoryUrl>
 	<RepositoryType>public</RepositoryType>
