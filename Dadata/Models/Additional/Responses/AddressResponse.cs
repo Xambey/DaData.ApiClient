@@ -2,7 +2,7 @@
 
 namespace DaData.Models.Additional.Responses
 {
-    public class AddressBaseResponse : BaseResponse
+    public class AddressResponse : BaseResponse
     {
         public AddressResult Value { get; set; }
     }

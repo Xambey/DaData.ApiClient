@@ -13,6 +13,7 @@ using DaData.Commands.Suggestions;
 using DaData.Exceptions;
 using DaData.Interfaces;
 using DaData.Models;
+using DaData.Models.Additional.Requests;
 using DaData.Models.Standartization.Requests;
 using DaData.Models.Standartization.Responses;
 using DaData.Models.Standartization.Results;
@@ -308,14 +309,23 @@ namespace DaData
         #region Additional API
 
         /// <inheritdoc />
-        public async Task<Models.Additional.Responses.AddressBaseResponse>
+        public async Task<Models.Additional.Responses.AddressResponse>
             AdditionalQueryDetectAddressByIp(string ip) =>
-            (Models.Additional.Responses.AddressBaseResponse) await ExecuteCommand(
+            (Models.Additional.Responses.AddressResponse) await ExecuteCommand(
                 new DetectAddressByIpCommand(), ip);
 
         /// <inheritdoc />
-        public async Task<Models.Additional.Responses.AddressBaseResponse>
-            AdditionalQueryDetectAddressByIp(IPAddress ip) => await AdditionalQueryDetectAddressByIp(ip.ToString());
+        public async Task<Models.Additional.Responses.AddressResponse>
+            AdditionalQueryDetectAddressByIp(IPAddress ip = null) => await AdditionalQueryDetectAddressByIp(ip?.ToString());
+
+        public async Task<AddressResponse> AdditionalQueryFindAddressById(string query) =>
+            await AdditionalQueryFindAddressById(new AddressByIdRequest
+            {
+                Query = query
+            });
+
+        public async Task<AddressResponse> AdditionalQueryFindAddressById(AddressByIdRequest query) =>
+            (AddressResponse) await ExecuteCommand(new FindAddressByIdCommand(), query);
 
         #endregion
     }

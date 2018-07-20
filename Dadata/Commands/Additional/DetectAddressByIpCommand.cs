@@ -17,15 +17,12 @@ namespace DaData.Commands.Additional
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            if(!(query is string temp) || string.IsNullOrEmpty(temp))
-                throw new InvalidQueryException(query);
-            
-            return new AddressBaseResponse
+            return new AddressResponse
             {
-                Value = await client.SendResponseAsync<AddressResult>(HttpMethod.Get, new Uri(Url, new[]
+                Value = await client.SendResponseAsync<AddressResult>(HttpMethod.Get, query != null ? new Uri(Url, new[]
                 {
                     new KeyValuePair<string, object>("ip", query)
-                }))
+                }) : new Uri(Url))
             };
         }
     }
