@@ -11,6 +11,7 @@ using DaData.Commands.Base;
 using DaData.Commands.Standartization;
 using DaData.Commands.Suggestions;
 using DaData.Exceptions;
+using DaData.Http.Singleton;
 using DaData.Interfaces;
 using DaData.Models;
 using DaData.Models.Additional.Requests;
@@ -45,8 +46,6 @@ namespace DaData
         #region Properties
         
         public ApiClientOptions Options { get; }
-        
-        public HttpClient HttpClient { get; }
 
         private Timer ResetCountMessagesTimer { get; }
 
@@ -90,17 +89,10 @@ namespace DaData
             
             if(Options.LimitQueries != null && Options.LimitQueries <= 0)
                 throw new InvalidLimitQueriesException(Options.LimitQueries);
-            _limitQueries = Options.LimitQueries ?? (int) DefaultOptions.QueriesLimit; 
+            _limitQueries = Options.LimitQueries ?? (int) DefaultOptions.QueriesLimit;
             
-            
-            HttpClient = new HttpClient(new HttpClientHandler
-            {
-                AutomaticDecompression = DecompressionMethods.GZip
-            });
-            
-            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", Options.Token);
-            HttpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
-            HttpClient.DefaultRequestHeaders.Add("X-Secret", Options.Secret);
+            //Initialization of HttpClientSingleton
+            HttpClientSingleton.GetInstance(options);
 
             //Reset count of messages per second (timer)
             ResetCountMessagesTimer = new Timer(ResetCounter, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
@@ -126,7 +118,7 @@ namespace DaData
         {
             if(_nowCountMessages >= _limitQueries)
                 throw new RequestsLimitIsExceededException();
-            var response = await command.Execute(query, HttpClient);
+            var response = await command.Execute(query);
             //Increment of count messages
             if (command is StandartizationCommandBase)
             {   
@@ -144,7 +136,6 @@ namespace DaData
         /// <inheritdoc />
         public void Dispose()
         {
-            HttpClient?.Dispose();
             ResetCountMessagesTimer?.Dispose();
         }
 

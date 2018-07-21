@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DaData.Commands.Base;
 using DaData.Exceptions;
 using DaData.Http;
+using DaData.Http.Singleton;
 using DaData.Models;
 using DaData.Models.Standartization.Responses;
 using DaData.Models.Standartization.Results;
@@ -16,14 +17,14 @@ namespace DaData.Commands.Standartization
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/clean/vehicle";
 
-        public override async Task<BaseResponse> Execute(object query, HttpClient client)
+        public override async Task<BaseResponse> Execute(object query)
         {
             if(!(query is IEnumerable<string> temp) || !temp.Any())
                 throw new InvalidQueryException(query);
             return new CarResponse
             {
                 Value =
-                    await client.SendResponseAsync<List<CarResult>>(HttpMethod.Post, new Uri(Url), query)
+                    await Client.SendResponseAsync<List<CarResult>>(HttpMethod.Post, new Uri(Url), query)
             };
         }
     }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DaData.Commands.Base;
 using DaData.Exceptions;
 using DaData.Http;
+using DaData.Http.Singleton;
 using DaData.Models;
 using DaData.Models.Standartization.Requests;
 using DaData.Models.Standartization.Responses;
@@ -16,13 +17,13 @@ namespace DaData.Commands.Standartization
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/clean";
 
-        public override async Task<BaseResponse> Execute(object query, HttpClient client)
+        public override async Task<BaseResponse> Execute(object query)
         {
             if(!(query is CompositeRequest temp && temp.Data != null && temp.Data.HasValues && temp.Structure != null && temp.Structure.Any()))
                 throw new InvalidQueryException(query);
             return new CompositeResponse
             {
-                Value = await client.SendResponseAsync<CompositeResult>(HttpMethod.Post, new Uri(Url),
+                Value = await Client.SendResponseAsync<CompositeResult>(HttpMethod.Post, new Uri(Url),
                     query)
             };
         }

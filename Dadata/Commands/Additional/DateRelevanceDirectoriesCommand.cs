@@ -11,9 +11,9 @@ namespace DaData.Commands.Additional
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/version";
 
-        public override async Task<BaseResponse> Execute(object query, HttpClient client)
+        public override async Task<BaseResponse> Execute(object query)
         {
-            return await client.SendResponseAsync<DateRelevanceDirectoriesResponse>(HttpMethod.Get, new Uri(Url));
+            return await Client.SendResponseAsync<DateRelevanceDirectoriesResponse>(HttpMethod.Get, new Uri(Url));
         }
     }
 }

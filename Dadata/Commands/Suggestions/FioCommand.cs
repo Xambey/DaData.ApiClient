@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DaData.Commands.Base;
 using DaData.Exceptions;
 using DaData.Http;
+using DaData.Http.Singleton;
 using DaData.Models;
 using DaData.Models.Suggestions.Requests;
 using DaData.Models.Suggestions.Responses;
@@ -14,11 +15,11 @@ namespace DaData.Commands.Suggestions
     {
         private static string Url { get; } = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio";
         
-        public override async Task<BaseResponse> Execute(object query, HttpClient client)
+        public override async Task<BaseResponse> Execute(object query)
         {
             if(!(query is FioRequest temp) || string.IsNullOrEmpty(temp.Query))
                 throw new InvalidQueryException(query);
-            return await client.SendResponseAsync<FioResponse>(HttpMethod.Post, new Uri(Url), query);
+            return await HttpClientSingleton.GetInstance().SendResponseAsync<FioResponse>(HttpMethod.Post, new Uri(Url), query);
         }
     }
 }
