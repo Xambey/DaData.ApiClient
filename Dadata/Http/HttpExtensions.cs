@@ -77,8 +77,9 @@ namespace DaData.Http
         {
             var httpRequestMessage = new HttpRequestMessage(method, uri);
             
-            httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value, SerializerSettings), Encoding.UTF8,
-                "application/json");
+            if(value != null)
+                httpRequestMessage.Content = new StringContent(JsonConvert.SerializeObject(value, SerializerSettings), Encoding.UTF8,
+                    "application/json");
 
             using (HttpResponseMessage response = await client.SendAsync(httpRequestMessage, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false))
             {

@@ -14,6 +14,7 @@ using DaData.Exceptions;
 using DaData.Interfaces;
 using DaData.Models;
 using DaData.Models.Additional.Requests;
+using DaData.Models.Additional.Responses;
 using DaData.Models.Standartization.Requests;
 using DaData.Models.Standartization.Responses;
 using DaData.Models.Standartization.Results;
@@ -35,6 +36,7 @@ using FioRequest = DaData.Models.Suggestions.Requests.FioRequest;
 using FioResponse = DaData.Models.Suggestions.Responses.FioResponse;
 using FioShortResponse = DaData.Models.Suggestions.ShortResponses.FioShortResponse;
 using OrganizationRequest = DaData.Models.Suggestions.Requests.OrganizationRequest;
+using OrganizationResponse = DaData.Models.Suggestions.Responses.OrganizationResponse;
 
 namespace DaData
 {
@@ -221,6 +223,7 @@ namespace DaData
         (Models.Standartization.Responses.AddressResponse) await ExecuteCommand(new Commands.Standartization.AddressCommand(),
         queries);
 
+        /// <inheritdoc />
         public async Task<Models.Standartization.Responses.AddressResponse> StandartizationQueryAddress(
             Models.Standartization.Requests.AddressRequest queries) =>
             await StandartizationQueryAddress(queries.Queries);
@@ -230,6 +233,7 @@ namespace DaData
             StandartizationShortQueryAddress(IEnumerable<string> queries) =>
             (await StandartizationQueryAddress(queries)).ToShortResponse();
 
+        /// <inheritdoc />
         public async Task<Models.Standartization.ShortResponses.AddressShortResponse>
             StandartizationShortQueryAddress(Models.Standartization.Requests.AddressRequest queries) =>
             await StandartizationShortQueryAddress(queries.Queries);
@@ -238,7 +242,8 @@ namespace DaData
         public async Task<PhoneResponse> StandartizationQueryPhone(IEnumerable<string> queries) =>
         (PhoneResponse) await ExecuteCommand(new PhoneCommand(),
         queries);
-
+        
+        /// <inheritdoc />
         public async Task<PhoneResponse> StandartizationQueryPhone(PhoneRequest queries) =>
             await StandartizationQueryPhone(queries.Queries);
 
@@ -246,6 +251,7 @@ namespace DaData
         public async Task<PhoneShortResponse> StandartizationShortQueryPhone(IEnumerable<string> queries) =>
             (await StandartizationQueryPhone(queries)).ToShortResponse();
 
+        /// <inheritdoc />
         public async Task<PhoneShortResponse>
             StandartizationShortQueryPhone(PhoneRequest queries) =>
             await StandartizationShortQueryPhone(queries.Queries);
@@ -255,6 +261,7 @@ namespace DaData
             (PasportResponse) await ExecuteCommand(new PasportCommand(),
                 queries);
 
+        /// <inheritdoc />
         public async Task<PasportResponse>
             StandartizationQueryPasport(PasportRequest queries) =>
             await StandartizationQueryPasport(queries.Queries);
@@ -264,6 +271,7 @@ namespace DaData
             (Models.Standartization.Responses.FioResponse) await ExecuteCommand(new Commands.Standartization.FioCommand(),
                 queries);
 
+        /// <inheritdoc />
         public async Task<Models.Standartization.Responses.FioResponse>
             StandartizationQueryFio(Models.Standartization.Requests.FioRequest queries) => await StandartizationQueryFio(queries.Queries);
 
@@ -271,6 +279,7 @@ namespace DaData
         public async Task<Models.Standartization.ShortResponses.FioShortResponse> StandartizationShortQueryFio(IEnumerable<string> queries) =>
             (await StandartizationQueryFio(queries)).ToShortResponse();
 
+        /// <inheritdoc />
         public async Task<Models.Standartization.ShortResponses.FioShortResponse>
             StandartizationShortQueryFio(Models.Standartization.Requests.FioRequest queries) =>
             await StandartizationShortQueryFio(queries.Queries);
@@ -280,6 +289,7 @@ namespace DaData
             (Models.Standartization.Responses.EmailResponse) await ExecuteCommand(new Commands.Standartization.EmailCommand(),
                 queries);
 
+        /// <inheritdoc />
         public async Task<Models.Standartization.Responses.EmailResponse> StandartizationQueryEmail(
             Models.Standartization.Requests.EmailRequest queries) =>
             await StandartizationQueryEmail(queries.Queries);
@@ -289,6 +299,7 @@ namespace DaData
             (DateResponse) await ExecuteCommand(new DateCommand(),
                 queries);
 
+        /// <inheritdoc />
         public async Task<DateResponse> StandartizationQueryDate(DateRequest queries) =>
             await StandartizationQueryDate(queries.Queries);
 
@@ -310,29 +321,33 @@ namespace DaData
         #region Additional API
 
         /// <inheritdoc />
-        public async Task<Models.Additional.Responses.AddressByIpResponse>
+        public async Task<AddressByIpResponse>
             AdditionalQueryDetectAddressByIp(string ip) =>
-            (Models.Additional.Responses.AddressByIpResponse) await ExecuteCommand(
+            (AddressByIpResponse) await ExecuteCommand(
                 new DetectAddressByIpCommand(), ip);
 
         /// <inheritdoc />
-        public async Task<Models.Additional.Responses.AddressByIpResponse>
+        public async Task<AddressByIpResponse>
             AdditionalQueryDetectAddressByIp(IPAddress ip = null) => await AdditionalQueryDetectAddressByIp(ip?.ToString());
 
+        /// <inheritdoc />
         public async Task<AddressResponse> AdditionalQueryFindAddressById(string query) =>
             await AdditionalQueryFindAddressById(new AddressByIdRequest
             {
                 Query = query
             });
 
+        /// <inheritdoc />
         public async Task<AddressResponse> AdditionalQueryFindAddressById(AddressByIdRequest query) =>
             (AddressResponse) await ExecuteCommand(new FindAddressByIdCommand(), query);
 
+        /// <inheritdoc />
         public async Task<Models.Additional.Responses.OrganizationResponse> AdditionalQueryOrganizationByInnOrOgrn(
             Models.Additional.Requests.OrganizationRequest query) =>
             (Models.Additional.Responses.OrganizationResponse) await ExecuteCommand(new FindOrganizationByIdCommand(),
                 query);
 
+        /// <inheritdoc />
         public async Task<Models.Additional.Responses.OrganizationResponse>
             AdditionalQueryOrganizationByInnOrOgrn(string query, string type = null, string branchType = null) =>
             await AdditionalQueryOrganizationByInnOrOgrn(new Models.Additional.Requests.OrganizationRequest
@@ -341,6 +356,10 @@ namespace DaData
                 Query = query,
                 Type = type
             });
+
+        /// <inheritdoc />
+        public async Task<DateRelevanceDirectoriesResponse> AdditionalQueryDateRelevanceDirectories() =>
+            (DateRelevanceDirectoriesResponse) await ExecuteCommand(new DateRelevanceDirectoriesCommand(), null);
 
         #endregion
     }

@@ -1,7 +1,9 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using DaData.Commands.Base;
+using DaData.Http;
 using DaData.Models;
+using DaData.Models.Additional.Responses;
 
 namespace DaData.Commands.Additional
 {
@@ -9,9 +11,9 @@ namespace DaData.Commands.Additional
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/version";
 
-        public override Task<BaseResponse> Execute(object query, HttpClient client)
+        public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            return base.Execute(query, client);
+            return await client.SendResponseAsync<DateRelevanceDirectoriesResponse>(HttpMethod.Get, new Uri(Url));
         }
     }
 }

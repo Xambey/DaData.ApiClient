@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DaData.Models.Additional.Requests;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Dadata.Test
 {
@@ -111,6 +112,38 @@ namespace Dadata.Test
             var data = first.Data;
             
             Assert.Equal("773601001", data.Kpp);
+        }
+
+        [Fact]
+        async Task AdditionalQueryDateRelevanceDirectoriesTest()
+        {
+            var result = await ApiClient.AdditionalQueryDateRelevanceDirectories();
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Dadata);
+            Assert.NotNull(result.Factor);
+            Assert.NotNull(result.Suggestions);
+            
+            Assert.NotEmpty(result.Dadata.Version);
+            Assert.NotEmpty(result.Factor.Version);
+            
+            Assert.NotNull(result.Factor.Resources);
+            
+            Assert.NotEmpty(result.Factor.Resources.AreasAppartments);
+            Assert.NotEmpty(result.Factor.Resources.CostAppartments);
+            Assert.NotEmpty(result.Factor.Resources.Fias);
+            Assert.NotEmpty(result.Factor.Resources.GeoCoordinates);
+            Assert.NotEmpty(result.Factor.Resources.IndexesPost);
+            Assert.NotEmpty(result.Factor.Resources.InvalidPassports);
+            Assert.NotEmpty(result.Factor.Resources.Phones);
+            Assert.NotEmpty(result.Factor.Resources.TransferedPhones);
+            
+            Assert.NotEmpty(result.Suggestions.Version);
+            Assert.NotNull(result.Suggestions.Resources);
+            Assert.NotEmpty(result.Suggestions.Resources.Banks);
+            Assert.NotEmpty(result.Suggestions.Resources.Egrul);
+            Assert.NotEmpty(result.Suggestions.Resources.Fias);
+            Assert.NotEmpty(result.Suggestions.Resources.IpAddress);
         }
     }
 }

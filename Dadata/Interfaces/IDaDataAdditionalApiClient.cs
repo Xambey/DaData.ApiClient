@@ -49,5 +49,11 @@ namespace DaData.Interfaces
         /// <param name="query">object of request</param>
         /// <returns></returns>
         Task<OrganizationResponse> AdditionalQueryOrganizationByInnOrOgrn(string query, string type = null, string branchType = null);
+
+        /// <summary>
+        /// Get information about actuality of directories
+        /// </summary>
+        /// <returns></returns>
+        Task<DateRelevanceDirectoriesResponse> AdditionalQueryDateRelevanceDirectories();
     }
 }
