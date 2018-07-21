@@ -16,6 +16,7 @@
     <RepositoryType>public</RepositoryType>
     <PackageTags>C#, DaData.ru, Client</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
+    <PackageReleaseNotes>Added implementation of Additional methods</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
