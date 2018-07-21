@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using DaData.Commands.Base;
 using DaData.Exceptions;
 using DaData.Http;
-using DaData.Http.Singleton;
 using DaData.Models;
 using DaData.Models.Suggestions.Requests;
 using DaData.Models.Suggestions.Responses;
+using DaData.Singleton;
 using Uri = DaData.Http.Uri;
 
 namespace DaData.Commands.Suggestions

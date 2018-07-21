@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using DaData.Http.Singleton;
 using DaData.Models;
+using DaData.Singleton;
 
 namespace DaData.Commands.Base
 {

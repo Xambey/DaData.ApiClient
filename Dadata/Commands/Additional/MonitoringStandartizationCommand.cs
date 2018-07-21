@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using DaData.Commands.Base;
 using DaData.Http;
-using DaData.Http.Singleton;
 using DaData.Models;
 using DaData.Models.Additional.Responses;
 

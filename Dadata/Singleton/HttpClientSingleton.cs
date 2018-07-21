@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using DaData.Options;
 
-namespace DaData.Http.Singleton
+namespace DaData.Singleton
 {
     internal static class HttpClientSingleton
     {

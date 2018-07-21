@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using DaData.Commands.Base;
 using DaData.Exceptions;
 using DaData.Http;
-using DaData.Http.Singleton;
 using DaData.Models;
 using DaData.Models.Standartization.Requests;
 using DaData.Models.Standartization.Responses;
