@@ -361,6 +361,14 @@ namespace DaData
         public async Task<DateRelevanceDirectoriesResponse> AdditionalQueryDateRelevanceDirectories() =>
             (DateRelevanceDirectoriesResponse) await ExecuteCommand(new DateRelevanceDirectoriesCommand(), null);
 
+        /// <inheritdoc />
+        public async Task<MonitoringStandartizationResponse> AdditionalQueryMonitoringStandartization() =>
+            (MonitoringStandartizationResponse) await ExecuteCommand(new MonitoringStandartizationCommand(), null);
+
+        /// <inheritdoc />
+        public async Task<UserBalanceResponse> AdditionalQueryUserBalance() =>
+            (UserBalanceResponse) await ExecuteCommand(new UserBalanceCommand(), null);
+
         #endregion
     }
 }

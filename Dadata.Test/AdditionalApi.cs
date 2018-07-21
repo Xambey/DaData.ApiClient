@@ -145,5 +145,20 @@ namespace Dadata.Test
             Assert.NotEmpty(result.Suggestions.Resources.Fias);
             Assert.NotEmpty(result.Suggestions.Resources.IpAddress);
         }
+
+        [Fact]
+        async Task MonitoringStandartizationTest()
+        {
+            var result = await ApiClient.AdditionalQueryMonitoringStandartization();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        async Task AdditionalQueryUserBalanceTest()
+        {
+            var result = await ApiClient.AdditionalQueryUserBalance();
+            Assert.NotNull(result);
+            Assert.NotNull(result.Balance);
+        }
     }
 }

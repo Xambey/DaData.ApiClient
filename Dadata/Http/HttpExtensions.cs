@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DaData.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace DaData.Http
@@ -88,7 +89,7 @@ namespace DaData.Http
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.OK:
-                        return JsonConvert.DeserializeObject<TResponse>(result, DeserializerSettings);
+                        return JsonConvert.DeserializeObject<TResponse>(string.IsNullOrEmpty(result) ? null : result, DeserializerSettings);
                     case HttpStatusCode.PaymentRequired:
                         throw new PaymentRequiredException();
                     case HttpStatusCode.Forbidden:
@@ -97,8 +98,9 @@ namespace DaData.Http
                         throw new MethodNotAllowedException();
                     case HttpStatusCode.RequestEntityTooLarge:
                         throw new TooManyRequestsPerSecondException();
+                    default:
+                        throw new BadRequestException($"{response.StatusCode.ToString()} {result}");
                 } 
-                throw new BadRequestException($"{response.StatusCode.ToString()} {result}");
             }
         }
     }

@@ -55,5 +55,17 @@ namespace DaData.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<DateRelevanceDirectoriesResponse> AdditionalQueryDateRelevanceDirectories();
+
+        /// <summary>
+        /// Get status of standartization (200 or 500)
+        /// </summary>
+        /// <returns></returns>
+        Task<MonitoringStandartizationResponse> AdditionalQueryMonitoringStandartization();
+        
+        /// <summary>
+        /// Get balance of account
+        /// </summary>
+        /// <returns></returns>
+        Task<UserBalanceResponse> AdditionalQueryUserBalance();
     }
 }
