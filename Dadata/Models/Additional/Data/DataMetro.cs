@@ -2,7 +2,7 @@
 {
     public class DataMetro 
     {
-        public double Distance { get; set; }
+        public double? Distance { get; set; }
 
         public string Line { get; set; }
 

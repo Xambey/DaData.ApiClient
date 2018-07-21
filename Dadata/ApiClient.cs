@@ -34,6 +34,7 @@ using FioCommand = DaData.Commands.Suggestions.FioCommand;
 using FioRequest = DaData.Models.Suggestions.Requests.FioRequest;
 using FioResponse = DaData.Models.Suggestions.Responses.FioResponse;
 using FioShortResponse = DaData.Models.Suggestions.ShortResponses.FioShortResponse;
+using OrganizationRequest = DaData.Models.Suggestions.Requests.OrganizationRequest;
 
 namespace DaData
 {
@@ -309,13 +310,13 @@ namespace DaData
         #region Additional API
 
         /// <inheritdoc />
-        public async Task<Models.Additional.Responses.AddressResponse>
+        public async Task<Models.Additional.Responses.AddressByIpResponse>
             AdditionalQueryDetectAddressByIp(string ip) =>
-            (Models.Additional.Responses.AddressResponse) await ExecuteCommand(
+            (Models.Additional.Responses.AddressByIpResponse) await ExecuteCommand(
                 new DetectAddressByIpCommand(), ip);
 
         /// <inheritdoc />
-        public async Task<Models.Additional.Responses.AddressResponse>
+        public async Task<Models.Additional.Responses.AddressByIpResponse>
             AdditionalQueryDetectAddressByIp(IPAddress ip = null) => await AdditionalQueryDetectAddressByIp(ip?.ToString());
 
         public async Task<AddressResponse> AdditionalQueryFindAddressById(string query) =>
@@ -326,6 +327,20 @@ namespace DaData
 
         public async Task<AddressResponse> AdditionalQueryFindAddressById(AddressByIdRequest query) =>
             (AddressResponse) await ExecuteCommand(new FindAddressByIdCommand(), query);
+
+        public async Task<Models.Additional.Responses.OrganizationResponse> AdditionalQueryOrganizationByInnOrOgrn(
+            Models.Additional.Requests.OrganizationRequest query) =>
+            (Models.Additional.Responses.OrganizationResponse) await ExecuteCommand(new FindOrganizationByIdCommand(),
+                query);
+
+        public async Task<Models.Additional.Responses.OrganizationResponse>
+            AdditionalQueryOrganizationByInnOrOgrn(string query, string type = null, string branchType = null) =>
+            await AdditionalQueryOrganizationByInnOrOgrn(new Models.Additional.Requests.OrganizationRequest
+            {
+                BranchType = branchType,
+                Query = query,
+                Type = type
+            });
 
         #endregion
     }

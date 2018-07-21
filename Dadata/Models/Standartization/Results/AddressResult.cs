@@ -145,13 +145,13 @@ namespace DaData.Models.Standartization.Results
         
         public string BeltwayDistance { get; set; }
 
-        public int QcGeo { get; set; }
+        public int? QcGeo { get; set; }
 
-        public int QcComplete { get; set; }
+        public int? QcComplete { get; set; }
 
-        public int QcHouse { get; set; }
+        public int? QcHouse { get; set; }
 
-        public int Qc { get; set; }
+        public int? Qc { get; set; }
 
         public string Unparsed_parts { get; set; }
 

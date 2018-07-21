@@ -22,8 +22,8 @@
 
         public string Timezone { get; set; }
 
-        public int QcConflict { get; set; }
+        public int? QcConflict { get; set; }
 
-        public int Qc { get; set; }
+        public int? Qc { get; set; }
     }
 }

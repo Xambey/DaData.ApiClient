@@ -10,6 +10,6 @@
 
         public string Model { get; set; }
 
-        public int Qc { get; set; }
+        public int? Qc { get; set; }
     }
 }

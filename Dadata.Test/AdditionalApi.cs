@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DaData.Models.Additional.Requests;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -84,6 +86,31 @@ namespace Dadata.Test
             Assert.NotEmpty(data.GeoLon);
             Assert.Equal("2", data.QcGeo);
             Assert.Equal("г Москва, ул Снежная", data.Source);
+        }
+
+        [Fact]
+        async Task AdditionalQueryOrganizationByInnOrOgrnTest()
+        {
+            var result = await ApiClient.AdditionalQueryOrganizationByInnOrOgrn(new OrganizationRequest
+            {
+                Query = "7707083893",
+                Type = "LEGAL",
+                BranchType = "MAIN"
+            });
+            
+            Assert.NotNull(result);
+            Assert.NotNull(result.Suggestions);
+
+            var first = result.Suggestions.FirstOrDefault();
+            
+            Assert.NotNull(first);
+            Assert.Equal("ПАО СБЕРБАНК", first.Value);
+            Assert.Equal("ПАО СБЕРБАНК", first.UnrestrictedValue);
+            Assert.NotNull(first.Data);
+
+            var data = first.Data;
+            
+            Assert.Equal("773601001", data.Kpp);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DaData.Models.Additional.Results
 {
-    public class AddressResult 
+    public class AddressByIpResult 
     {
         public DataLocation Location { get; set; }
     }

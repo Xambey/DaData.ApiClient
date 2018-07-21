@@ -20,6 +20,6 @@
 
         public string Gender { get; set; }
 
-        public int Qc { get; set; }
+        public int? Qc { get; set; }
     }
 }

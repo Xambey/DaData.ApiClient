@@ -6,6 +6,6 @@
 
         public string Email { get; set; }
 
-        public int Qc { get; set; }
+        public int? Qc { get; set; }
     }
 }

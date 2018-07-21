@@ -17,9 +17,9 @@ namespace DaData.Commands.Additional
 
         public override async Task<BaseResponse> Execute(object query, HttpClient client)
         {
-            return new AddressResponse
+            return new AddressByIpResponse
             {
-                Value = await client.SendResponseAsync<AddressResult>(HttpMethod.Get, query != null ? new Uri(Url, new[]
+                Value = await client.SendResponseAsync<AddressByIpResult>(HttpMethod.Get, query != null ? new Uri(Url, new[]
                 {
                     new KeyValuePair<string, object>("ip", query)
                 }) : new Uri(Url))
