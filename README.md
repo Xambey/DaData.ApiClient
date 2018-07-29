@@ -1,14 +1,9 @@
 
 
 [![NuGet](https://img.shields.io/nuget/v/DaData.ApiClient.svg?style=flat-square)](https://www.nuget.org/packages/DaData.ApiClient/)
-[![NuGet](https://img.shields.io/nuget/dt/DaData.ApiClient.svg?style=flat-square)](https://www.nuget.org/packages/DaData.ApiClient)
-
 [![Build status](https://ci.appveyor.com/api/projects/status/e35qeajuv58oylli?svg=true)](https://ci.appveyor.com/project/Xambey/dadataapiclient)
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/Xambey/dadataapiclient.svg?style=flat-square)](https://ci.appveyor.com/project/Xambey/dadataapiclient)
-
-
-
-**На данный момент рекомендуется обновлять версии пакета по чаще!**
+[![NuGet](https://img.shields.io/nuget/dt/DaData.ApiClient.svg?style=flat-square)](https://www.nuget.org/packages/DaData.ApiClient)
 
 ## Описание
 Этот проект представляет из себя .Net реализацию клиента для работы с сервисом [DaData.ru](https://dadata.ru/)  
@@ -35,11 +30,14 @@
    Пакет требует следующие зависимости:
    -Newtonsoft.Json (nuget)
    
-2) Получить API ключи (токены) на [сайте](https://dadata.ru/profile/#info) сервиса
+#### 2) Получить API ключи (токены) на [сайте](https://dadata.ru/profile/#info) сервиса
 
 ## Использование:
 
 ```C#
+//token - это Token из личного кабинета
+//secret - это Secret из личного кабинета. Он нужен для некоторых методов
+
 var client = new ApiClient(token, secret);
 
 //Или
