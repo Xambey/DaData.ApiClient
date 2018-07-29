@@ -20,10 +20,6 @@ namespace DaData.Http
         }
         
         //*******************************************************************************************************************************************************************************
-        
-        protected Uri(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
-        {
-        }
 
         public Uri(string uriString) : base(uriString)
         {
