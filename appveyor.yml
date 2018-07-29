@@ -52,7 +52,7 @@ build:
 artifacts:
 - path: '.\Dadata\bin\**\Dadata.dll'
   name: Dadata.dll
-- path: '*.nupkg'
+- path: '.\*.nupkg'
 
 
 #deploy:
