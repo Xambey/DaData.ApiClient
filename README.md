@@ -23,10 +23,12 @@
 
 #### 1) Подключить клиент к проекту через [Nuget](https://www.nuget.org/packages/DaData.ApiClient/1.1.7) (Gui менеджер или CLI). Подробнее [тут](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui).
 *ps:*   
-   #Install package "PackageName"
+```
+   //Install package "PackageName"
    Install-Package PackageName
-
+```
 **Примечание:**
+
    Пакет требует следующие зависимости:
    -Newtonsoft.Json (nuget)
    
@@ -73,7 +75,7 @@ var response = await client.StandartizationQueryAddress(new AddressRequest()
 //Аналогично происходят обращения и к другим методам API
 ```
 
-**Примечание**
+**Дополнительно:**
 
   ***Стоит заметить, что в проекте присутствуют интерфейсы для использования (и реализации) клиента(ов) со следующими наборами методов:***
   - Подсказок
@@ -83,7 +85,7 @@ var response = await client.StandartizationQueryAddress(new AddressRequest()
   Которые удобно использовать например для DI.
   Также клиент умеет выбрасывать исключения (включая ответы об ошибках от API из документации)
   
-## Для советов, критики и предложений (или просто передачи спасибо):
+## Для связи:
 
   Писать на xambey@yandex.ru или в телеграм @xambey.
 
