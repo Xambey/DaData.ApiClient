@@ -39,14 +39,14 @@ environment:
       secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
       
 nuget:
-  project_feed: true
+  #project_feed: true
   disable_publish_on_pr: true
   
 before_build:
 - ps: .\Build\version_updater.ps1
 
 build:
-  #publish_nuget: true
+  publish_nuget: true
   verbosity: minimal
   
 artifacts:

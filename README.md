@@ -1,7 +1,12 @@
 
 
 [![NuGet](https://img.shields.io/nuget/v/DaData.ApiClient.svg?style=flat-square)](https://www.nuget.org/packages/DaData.ApiClient/)
+[![NuGet](https://img.shields.io/nuget/dt/DaData.ApiClient.svg?style=flat-square)](https://www.nuget.org/packages/DaData.ApiClient)
+
 [![Build status](https://ci.appveyor.com/api/projects/status/e35qeajuv58oylli?svg=true)](https://ci.appveyor.com/project/Xambey/dadataapiclient)
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/Xambey/dadataapiclient.svg?style=flat-square)](https://ci.appveyor.com/project/Xambey/dadataapiclient)
+
+
 
 **На данный момент рекомендуется обновлять версии пакета по чаще!**
 
@@ -17,9 +22,23 @@
 
 ## Планы 
 - Добавить возможность автоматических уведомлений о превышении минимального, установленного вами лимита баланса
+- Добавить возможность включать автоматический контроль за ограничениями на количество сообщений в секунду (очереди сообщений с балансировщиком), с поддержкой асинхронности
 
-## Как использовать
-**Сначала требуется так или иначе создать клиент:**
+## Установка
+
+#### 1) Подключить клиент к проекту через Nuget (https://www.nuget.org/packages/DaData.ApiClient/1.1.7) через Gui менеджер или командную строку. Подробнее [тут](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui).
+*ps:*   
+   #Install package "PackageName"
+   Install-Package PackageName
+
+**Примечание:**
+   Пакет требует следующие зависимости:
+   -Newtonsoft.Json (nuget)
+   
+2) Получить API ключи (токены) на [сайте](https://dadata.ru/profile/#info) сервиса
+
+## Использование:
+
 ```C#
 var client = new ApiClient(token, secret);
 
