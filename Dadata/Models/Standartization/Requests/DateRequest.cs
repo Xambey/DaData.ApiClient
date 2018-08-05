@@ -2,7 +2,7 @@
 
 namespace DaData.Models.Standartization.Requests
 {
-    public class DateRequest
+    public class DateRequest : BaseRequest
     {
         public List<string> Queries { get; set; }
     }

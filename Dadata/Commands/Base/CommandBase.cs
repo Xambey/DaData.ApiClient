@@ -9,7 +9,7 @@ namespace DaData.Commands.Base
     {
         protected static HttpClient Client => HttpClientSingleton.GetInstance();
 
-        public virtual Task<BaseResponse> Execute(object query) => Task.FromResult(new BaseResponse());
+        public virtual Task<BaseResponse> Execute(BaseRequest query) => Task.FromResult(new BaseResponse());
 
         protected CommandBase()
         {

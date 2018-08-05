@@ -6,6 +6,7 @@ using DaData.Commands.Base;
 using DaData.Exceptions;
 using DaData.Http;
 using DaData.Models;
+using DaData.Models.Standartization.Requests;
 using DaData.Models.Standartization.Responses;
 using DaData.Models.Standartization.Results;
 using Uri = DaData.Http.Uri;
@@ -16,14 +17,14 @@ namespace DaData.Commands.Standartization
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/clean/passport";
 
-        public override async Task<BaseResponse> Execute(object query)
+        public override async Task<BaseResponse> Execute(BaseRequest query)
         {
-            if(!(query is IEnumerable<string> temp) || !temp.Any())
+            if(!(query is PasportRequest temp) || temp.Queries == null || !temp.Queries.Any())
                 throw new InvalidQueryException(query);
             return new PasportResponse
             {
                 Value = await Client.SendResponseAsync<List<PasportResult>>(HttpMethod.Post, new Uri(Url),
-                    query)
+                    temp.Queries)
             };
         }
     }

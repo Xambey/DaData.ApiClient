@@ -1,6 +1,6 @@
 ﻿namespace DaData.Models.Additional.Requests
 {
-    public class OrganizationRequest
+    public class OrganizationRequest : BaseRequest
     {
         public string Query { get; set; }
         

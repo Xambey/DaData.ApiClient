@@ -13,7 +13,7 @@ namespace DaData.Commands.Additional
     {
         private static string Url { get; } = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/party";
 
-        public override async Task<BaseResponse> Execute(object query)
+        public override async Task<BaseResponse> Execute(BaseRequest query)
         {
             if(!(query is OrganizationRequest temp) || string.IsNullOrEmpty(temp.Query))
                 throw new InvalidQueryException(query);

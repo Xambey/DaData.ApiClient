@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Runtime.Serialization;
 
 namespace DaData.Http
@@ -12,7 +13,6 @@ namespace DaData.Http
 
         public Uri(System.Uri baseUri, string relativeUri, IEnumerable<KeyValuePair<string, object>> queryParameters) : base(baseUri, relativeUri.AddQueryParameters(queryParameters))
         {
-            
         }
         
         public Uri(System.Uri baseUri, System.Uri relativeUri, IEnumerable<KeyValuePair<string, object>> queryParameters) : base(baseUri.AddQueryParameters(queryParameters), relativeUri)

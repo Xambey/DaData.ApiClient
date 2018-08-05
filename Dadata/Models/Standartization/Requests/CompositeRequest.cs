@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace DaData.Models.Standartization.Requests
 {
-    public class CompositeRequest
+    public class CompositeRequest : BaseRequest
     {
         [JsonProperty("structure")]
         public JArray Structure { get; set; }

@@ -16,7 +16,7 @@ namespace DaData.Commands.Standartization
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/clean";
 
-        public override async Task<BaseResponse> Execute(object query)
+        public override async Task<BaseResponse> Execute(BaseRequest query)
         {
             if(!(query is CompositeRequest temp && temp.Data != null && temp.Data.HasValues && temp.Structure != null && temp.Structure.Any()))
                 throw new InvalidQueryException(query);

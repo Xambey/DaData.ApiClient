@@ -11,7 +11,7 @@ namespace DaData.Commands.Additional
     {
         private static string Url { get; } = "https://dadata.ru/api/v2/status/CLEAN";
 
-        public override async Task<BaseResponse> Execute(object query)
+        public override async Task<BaseResponse> Execute(BaseRequest query)
         {
             return await Client.SendResponseAsync<MonitoringStandartizationResponse>(HttpMethod.Get, new Uri(Url));
         }

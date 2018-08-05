@@ -1,6 +1,6 @@
 ﻿namespace DaData.Models.Suggestions.Requests
 {
-    public class EmailRequest
+    public class EmailRequest : BaseRequest
     {
         public string Query { get; set; }
     }

@@ -14,13 +14,13 @@ namespace DaData.Interfaces
         /// <param name="ip">ip address (if null, then the client address will be used by default)</param>
         /// <returns></returns>
         Task<AddressByIpResponse> AdditionalQueryDetectAddressByIp(string ip);
-        
+
         /// <summary>
         /// Get full hints for the address by ip address
         /// </summary>
-        /// <param name="ip">ip address (if null, then the client address will be used by default)</param>
+        /// <param name="query">ip address (if null, then the client address will be used by default)</param>
         /// <returns></returns>
-        Task<AddressByIpResponse> AdditionalQueryDetectAddressByIp(IPAddress ip = null);
+        Task<AddressByIpResponse> AdditionalQueryDetectAddressByIp(AddressByIpRequest query = null);
 
         /// <summary>
         /// Get full hints for the address by ip KLADR or FIAS

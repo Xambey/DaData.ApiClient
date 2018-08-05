@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using DaData.Commands.Additional;
@@ -17,7 +14,6 @@ using DaData.Models.Additional.Requests;
 using DaData.Models.Additional.Responses;
 using DaData.Models.Standartization.Requests;
 using DaData.Models.Standartization.Responses;
-using DaData.Models.Standartization.Results;
 using DaData.Models.Standartization.ShortResponses;
 using DaData.Models.Suggestions.Requests;
 using DaData.Models.Suggestions.Responses;
@@ -114,18 +110,16 @@ namespace DaData
         /// <param name="query">Object of query</param>
         /// <returns></returns>
         /// <exception cref="RequestsLimitIsExceededException"></exception>
-        private async Task<BaseResponse> ExecuteCommand(CommandBase command, object query)
+        private async Task<BaseResponse> ExecuteCommand(CommandBase command, BaseRequest query)
         {
             if(_nowCountMessages >= _limitQueries)
                 throw new RequestsLimitIsExceededException();
             var response = await command.Execute(query);
             //Increment of count messages
             if (command is StandartizationCommandBase)
-            {   
+            {
                 //TODO: need to do a smart handler
-                if (query is CompositeResult temp)
-                    _nowCountMessages += temp.Data.Count;
-                else if (query is IEnumerable<string> t)
+                if (query is IEnumerable<string> t)
                     _nowCountMessages += t.Count();
             }
             else
@@ -210,14 +204,18 @@ namespace DaData
         #region Standartization API
 
         /// <inheritdoc />
-        public async Task<Models.Standartization.Responses.AddressResponse> StandartizationQueryAddress(IEnumerable<string> queries) =>
-        (Models.Standartization.Responses.AddressResponse) await ExecuteCommand(new Commands.Standartization.AddressCommand(),
-        queries);
+        public async Task<Models.Standartization.Responses.AddressResponse> StandartizationQueryAddress(
+            IEnumerable<string> queries) =>
+            await StandartizationQueryAddress(new Models.Standartization.Requests.AddressRequest
+            {
+                Queries = queries.ToList()
+            });
 
         /// <inheritdoc />
         public async Task<Models.Standartization.Responses.AddressResponse> StandartizationQueryAddress(
             Models.Standartization.Requests.AddressRequest queries) =>
-            await StandartizationQueryAddress(queries.Queries);
+            (Models.Standartization.Responses.AddressResponse) await ExecuteCommand(new Commands.Standartization.AddressCommand(),
+                queries);
 
         /// <inheritdoc />
         public async Task<Models.Standartization.ShortResponses.AddressShortResponse>
@@ -231,12 +229,15 @@ namespace DaData
 
         /// <inheritdoc />
         public async Task<PhoneResponse> StandartizationQueryPhone(IEnumerable<string> queries) =>
-        (PhoneResponse) await ExecuteCommand(new PhoneCommand(),
-        queries);
+            await StandartizationQueryPhone(new PhoneRequest
+            {
+                Queries  = queries.ToList()
+            });
         
         /// <inheritdoc />
         public async Task<PhoneResponse> StandartizationQueryPhone(PhoneRequest queries) =>
-            await StandartizationQueryPhone(queries.Queries);
+            (PhoneResponse) await ExecuteCommand(new PhoneCommand(),
+                queries);
 
         /// <inheritdoc />
         public async Task<PhoneShortResponse> StandartizationShortQueryPhone(IEnumerable<string> queries) =>
@@ -249,22 +250,30 @@ namespace DaData
 
         /// <inheritdoc />
         public async Task<PasportResponse> StandartizationQueryPasport(IEnumerable<string> queries) =>
-            (PasportResponse) await ExecuteCommand(new PasportCommand(),
-                queries);
+            await StandartizationQueryPasport(new PasportRequest
+            {
+                Queries = queries.ToList()
+            });
 
         /// <inheritdoc />
         public async Task<PasportResponse>
             StandartizationQueryPasport(PasportRequest queries) =>
-            await StandartizationQueryPasport(queries.Queries);
-
-        /// <inheritdoc />
-        public async Task<Models.Standartization.Responses.FioResponse> StandartizationQueryFio(IEnumerable<string> queries) =>
-            (Models.Standartization.Responses.FioResponse) await ExecuteCommand(new Commands.Standartization.FioCommand(),
+            (PasportResponse) await ExecuteCommand(new PasportCommand(),
                 queries);
 
         /// <inheritdoc />
+        public async Task<Models.Standartization.Responses.FioResponse> StandartizationQueryFio(
+            IEnumerable<string> queries) =>
+            await StandartizationQueryFio(new Models.Standartization.Requests.FioRequest
+            {
+                Queries = queries.ToList()
+            });
+
+        /// <inheritdoc />
         public async Task<Models.Standartization.Responses.FioResponse>
-            StandartizationQueryFio(Models.Standartization.Requests.FioRequest queries) => await StandartizationQueryFio(queries.Queries);
+            StandartizationQueryFio(Models.Standartization.Requests.FioRequest queries) => 
+            (Models.Standartization.Responses.FioResponse) await ExecuteCommand(new Commands.Standartization.FioCommand(),
+                queries);
 
         /// <inheritdoc />
         public async Task<Models.Standartization.ShortResponses.FioShortResponse> StandartizationShortQueryFio(IEnumerable<string> queries) =>
@@ -276,31 +285,41 @@ namespace DaData
             await StandartizationShortQueryFio(queries.Queries);
 
         /// <inheritdoc />
-        public async Task<Models.Standartization.Responses.EmailResponse> StandartizationQueryEmail(IEnumerable<string> queries) =>
-            (Models.Standartization.Responses.EmailResponse) await ExecuteCommand(new Commands.Standartization.EmailCommand(),
-                queries);
+        public async Task<Models.Standartization.Responses.EmailResponse> StandartizationQueryEmail(
+            IEnumerable<string> queries) =>
+            await StandartizationQueryEmail(new Models.Standartization.Requests.EmailRequest
+            {
+                Queries = queries.ToList()
+            });
 
         /// <inheritdoc />
         public async Task<Models.Standartization.Responses.EmailResponse> StandartizationQueryEmail(
             Models.Standartization.Requests.EmailRequest queries) =>
-            await StandartizationQueryEmail(queries.Queries);
+            (Models.Standartization.Responses.EmailResponse) await ExecuteCommand(new Commands.Standartization.EmailCommand(),
+                queries);
 
         /// <inheritdoc />
         public async Task<DateResponse> StandartizationQueryDate(IEnumerable<string> queries) =>
+            await StandartizationQueryDate(new DateRequest
+            {
+                Queries = queries.ToList()
+            });
+
+        /// <inheritdoc />
+        public async Task<DateResponse> StandartizationQueryDate(DateRequest queries) =>
             (DateResponse) await ExecuteCommand(new DateCommand(),
                 queries);
 
         /// <inheritdoc />
-        public async Task<DateResponse> StandartizationQueryDate(DateRequest queries) =>
-            await StandartizationQueryDate(queries.Queries);
-
-        /// <inheritdoc />
         public async Task<CarResponse> StandartizationQueryCar(IEnumerable<string> queries) =>
-            (CarResponse) await ExecuteCommand(new CarCommand(),
-                queries);
+            await StandartizationQueryCar(new CarRequest
+            {
+                Queries = queries.ToList()
+            });
 
         public async Task<CarResponse> StandartizationQueryCar(CarRequest queries) =>
-            await StandartizationQueryCar(queries.Queries);
+            (CarResponse) await ExecuteCommand(new CarCommand(),
+                queries);
 
         /// <inheritdoc />
         public async Task<CompositeResponse> StandartizationQueryComposite(CompositeRequest queries) =>
@@ -314,12 +333,15 @@ namespace DaData
         /// <inheritdoc />
         public async Task<AddressByIpResponse>
             AdditionalQueryDetectAddressByIp(string ip) =>
-            (AddressByIpResponse) await ExecuteCommand(
-                new DetectAddressByIpCommand(), ip);
+            await AdditionalQueryDetectAddressByIp(new AddressByIpRequest
+            {
+                Ip = ip
+            });
 
         /// <inheritdoc />
-        public async Task<AddressByIpResponse>
-            AdditionalQueryDetectAddressByIp(IPAddress ip = null) => await AdditionalQueryDetectAddressByIp(ip?.ToString());
+        public async Task<AddressByIpResponse> AdditionalQueryDetectAddressByIp(AddressByIpRequest query = null) => 
+            (AddressByIpResponse) await ExecuteCommand(
+                new DetectAddressByIpCommand(), query);
 
         /// <inheritdoc />
         public async Task<AddressResponse> AdditionalQueryFindAddressById(string query) =>

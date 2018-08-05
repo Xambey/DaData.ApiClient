@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace DaData.Models.Suggestions.Requests
 {
-    public class AddressRequest
+    public class AddressRequest : BaseRequest
     {
         public string Query { get; set; }
         
