@@ -24,8 +24,7 @@
 #### 1) Подключить клиент к проекту через [Nuget](https://www.nuget.org/packages/DaData.ApiClient/1.1.7) (Gui менеджер или CLI). Подробнее [тут](https://docs.microsoft.com/en-us/nuget/tools/package-manager-ui).
 *ps:*   
 ```
-   //Install package "PackageName"
-   Install-Package PackageName
+   Install-Package DaData.ApiClient
 ```
 **Примечание:**
 
