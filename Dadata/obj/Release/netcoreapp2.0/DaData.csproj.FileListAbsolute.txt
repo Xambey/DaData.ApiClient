@@ -1,8 +1,0 @@
-D:\Source\DaData.ApiClient\DaData\bin\Release\netcoreapp2.0\DaData.deps.json
-D:\Source\DaData.ApiClient\DaData\bin\Release\netcoreapp2.0\DaData.dll
-D:\Source\DaData.ApiClient\DaData\bin\Release\netcoreapp2.0\DaData.pdb
-D:\Source\DaData.ApiClient\DaData\obj\Release\netcoreapp2.0\DaData.csproj.CoreCompileInputs.cache
-D:\Source\DaData.ApiClient\DaData\obj\Release\netcoreapp2.0\DaData.AssemblyInfoInputs.cache
-D:\Source\DaData.ApiClient\DaData\obj\Release\netcoreapp2.0\DaData.AssemblyInfo.cs
-D:\Source\DaData.ApiClient\DaData\obj\Release\netcoreapp2.0\DaData.dll
-D:\Source\DaData.ApiClient\DaData\obj\Release\netcoreapp2.0\DaData.pdb

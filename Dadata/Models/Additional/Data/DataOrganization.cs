@@ -36,7 +36,7 @@ namespace DaData.Models.Additional.Data
 
         public string Inn { get; set; }
 
-        public string Ogrn { get; set; }
+        public string Orgn { get; set; }
 
         public string Okpo { get; set; }
 

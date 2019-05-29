@@ -1,9 +1,0 @@
-D:\Source\DaData.ApiClient\DaData\bin\Release\netstandard1.4\DaData.deps.json
-D:\Source\DaData.ApiClient\DaData\bin\Release\netstandard1.4\DaData.dll
-D:\Source\DaData.ApiClient\DaData\bin\Release\netstandard1.4\DaData.pdb
-D:\Source\DaData.ApiClient\DaData\obj\Release\netstandard1.4\DaData.csprojAssemblyReference.cache
-D:\Source\DaData.ApiClient\DaData\obj\Release\netstandard1.4\DaData.csproj.CoreCompileInputs.cache
-D:\Source\DaData.ApiClient\DaData\obj\Release\netstandard1.4\DaData.AssemblyInfoInputs.cache
-D:\Source\DaData.ApiClient\DaData\obj\Release\netstandard1.4\DaData.AssemblyInfo.cs
-D:\Source\DaData.ApiClient\DaData\obj\Release\netstandard1.4\DaData.dll
-D:\Source\DaData.ApiClient\DaData\obj\Release\netstandard1.4\DaData.pdb
