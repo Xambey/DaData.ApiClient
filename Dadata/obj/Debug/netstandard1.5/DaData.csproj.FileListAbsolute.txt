@@ -1,0 +1,9 @@
+D:\Source\DaData.ApiClient\DaData\bin\Debug\netstandard1.5\DaData.deps.json
+D:\Source\DaData.ApiClient\DaData\bin\Debug\netstandard1.5\DaData.dll
+D:\Source\DaData.ApiClient\DaData\bin\Debug\netstandard1.5\DaData.pdb
+D:\Source\DaData.ApiClient\DaData\obj\Debug\netstandard1.5\DaData.csprojAssemblyReference.cache
+D:\Source\DaData.ApiClient\DaData\obj\Debug\netstandard1.5\DaData.csproj.CoreCompileInputs.cache
+D:\Source\DaData.ApiClient\DaData\obj\Debug\netstandard1.5\DaData.AssemblyInfoInputs.cache
+D:\Source\DaData.ApiClient\DaData\obj\Debug\netstandard1.5\DaData.AssemblyInfo.cs
+D:\Source\DaData.ApiClient\DaData\obj\Debug\netstandard1.5\DaData.dll
+D:\Source\DaData.ApiClient\DaData\obj\Debug\netstandard1.5\DaData.pdb

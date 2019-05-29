@@ -1,0 +1,17 @@
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\Dadata.Test.deps.json
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\Dadata.Test.runtimeconfig.json
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\Dadata.Test.runtimeconfig.dev.json
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\Dadata.Test.dll
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\Dadata.Test.pdb
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\DaData.dll
+D:\Source\DaData.ApiClient\DaData.Test\bin\Debug\netcoreapp2.0\DaData.pdb
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\DaData.Test.csprojAssemblyReference.cache
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\DaData.Test.csproj.CoreCompileInputs.cache
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\DaData.Test.AssemblyInfoInputs.cache
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\DaData.Test.AssemblyInfo.cs
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\DaData.Test.csproj.CopyComplete
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\Dadata.Test.dll
+D:\Source\DaData.ApiClient\DaData.Test\obj\Debug\netcoreapp2.0\Dadata.Test.pdb
