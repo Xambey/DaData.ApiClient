@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.0.2</version>
+    <version>1.0.8</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
     <Authors>Panasenko Andrey</Authors>
-    <Company>test</Company>
-    <Product>test</Product>
+    <Company>-</Company>
+    <Product>-</Product>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Xambey/DaData.ApiClient</PackageProjectUrl>
     <PackageIconUrl>https://dadata.ru/static/i/dadata-logo.png</PackageIconUrl>
@@ -15,7 +15,7 @@
     <RepositoryType>public</RepositoryType>
     <PackageTags>C#, DaData.ru, Client</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
-    <PackageReleaseNotes>Increased productivity of library, added support platforms: .Net Core(all) and other(net standart 1.3-2.0)</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed tests, updated models</PackageReleaseNotes>
     <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
