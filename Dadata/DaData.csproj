@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.0.8</version>
+    <version>1.1.32</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
