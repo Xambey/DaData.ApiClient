@@ -1,4 +1,6 @@
-﻿namespace DaData.Models.Additional.Data
+﻿using System;
+
+namespace DaData.Models.Additional.Data
 {
     public class DataDocumentInfo
     {
@@ -8,7 +10,7 @@
 
         public string Number { get; set; }
 
-        public string IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
 
         public string IssueAuthority { get; set; }
     }

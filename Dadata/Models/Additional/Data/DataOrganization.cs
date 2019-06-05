@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using DaData.Models.Suggestions.Results;
 
@@ -56,7 +57,7 @@ namespace DaData.Models.Additional.Data
 
         public List<string> Emails { get; set; }
 
-        public long? OgrnDate { get; set; }
+        public DateTime? OgrnDate { get; set; }
 
         public string OkvedType { get; set; }
     }
