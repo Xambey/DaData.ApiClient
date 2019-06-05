@@ -94,6 +94,7 @@ namespace Dadata.Test
         }
         
         [Fact]
+      
         public async Task SuggestionsShortQueryBankTest()
         {
             var result = await ApiClient.SuggestionsShortQueryBank("Сбер");
@@ -106,7 +107,7 @@ namespace Dadata.Test
             Assert.NotNull(firstSuggest.Value);
             Assert.NotNull(firstSuggest.UnrestrictedValue);
             Assert.NotNull(firstSuggest.Address);
-            Assert.NotNull(firstSuggest.Okpo);
+            //Assert.NotNull(firstSuggest.Okpo);
             Assert.NotNull(firstSuggest.Bic);
         }
         

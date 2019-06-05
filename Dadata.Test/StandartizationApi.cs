@@ -66,7 +66,7 @@ namespace Dadata.Test
             Assert.Equal("495", first.CityCode);
             Assert.Equal("7165219", first.Number);
             Assert.Equal("139", first.Extension);
-            Assert.Equal("ОАО \"МГТС\"", first.Provider);
+            Assert.Equal("ПАО \"МГТС\"", first.Provider);
             Assert.Equal("Москва", first.Region);
             Assert.Equal("UTC+3", first.Timezone);
             Assert.Equal(0, first.QcConflict);

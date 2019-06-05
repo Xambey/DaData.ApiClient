@@ -15,14 +15,14 @@ namespace DaData.Models.Suggestions.Responses
             {
                 Suggestions = Suggestions.Select(x => new BankShortResult
                 {
-                    Address = x.Data.Address,
-                    Bic = x.Data.Bic,
-                    Okpo = x.Data.Okpo,
-                    Phone = x.Data.Phone,
-                    Rkc = x.Data.Rkc.Rkc,
-                    Swift = x.Data.Swift,
-                    UnrestrictedValue = x.UnrestrictedValue,
-                    Value = x.Value
+                    Address = x.Data?.Address,
+                    Bic = x.Data?.Bic,
+                    Okpo = x.Data?.Okpo,
+                    Phone = x.Data?.Phone,
+                    Rkc = x.Data?.Rkc?.Rkc,
+                    Swift = x.Data?.Swift,
+                    UnrestrictedValue = x?.UnrestrictedValue,
+                    Value = x?.Value
                 }).ToList()
             };
         }
