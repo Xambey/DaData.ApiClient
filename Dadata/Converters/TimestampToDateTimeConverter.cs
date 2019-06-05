@@ -1,27 +1,39 @@
 ﻿using DaData.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Globalization;
 
 namespace DaData.Converters
 {
-    public class TimestampToDateTimeConverter : JsonConverter<DateTime?>
+    public class TimestampToDateTimeConverter : DateTimeConverterBase
     {
-        public override void WriteJson(JsonWriter writer, DateTime? value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            if (value.HasValue)
+            TimeSpan offset;
+
+            switch (value)
             {
-                var timestamp = value.Value.Subtract(TimestampBase).Ticks / TimeSpan.TicksPerMillisecond;
-                writer.WriteValue(timestamp);
+                case null:
+                    writer.WriteNull();
+                    return;
+
+                case DateTime dateTime:
+                    offset = dateTime.ToUniversalTime().Subtract(TimestampBase);
+                    break;
+
+                case DateTimeOffset dateTimeOffset:
+                    offset = dateTimeOffset.ToUniversalTime().Subtract(TimestampOffsetBase);
+                    break;
+
+                default:
+                    throw new JsonSerializationException("Expected date object value.");
             }
-            else
-            {
-                writer.WriteNull();
-            }
+
+            writer.WriteValue(offset.Ticks / TimeSpan.TicksPerMillisecond);
         }
 
-        public override DateTime? ReadJson(JsonReader reader, Type objectType, DateTime? existingValue,
-            bool hasExistingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             try
             {
@@ -30,7 +42,8 @@ namespace DaData.Converters
                 switch (reader.TokenType)
                 {
                     case JsonToken.Null:
-                        return null;
+                        if (IsNullableType(objectType)) return null;
+                        throw new Exception($"Cannot convert null value to {objectType}.");
 
                     case JsonToken.String:
                         timestamp = long.Parse((string) reader.Value);
@@ -44,7 +57,9 @@ namespace DaData.Converters
                         throw new Exception($"Unsupported token type: {reader.TokenType}");
                 }
 
-                return TimestampBase.AddMilliseconds(timestamp);
+                return IsDateTimeOffsetType(objectType)
+                    ? (object) TimestampOffsetBase.AddMilliseconds(timestamp)
+                    : (object) TimestampBase.AddMilliseconds(timestamp);
             }
             catch (Exception ex)
             {
@@ -53,6 +68,23 @@ namespace DaData.Converters
             }
         }
 
-        private static readonly DateTime TimestampBase = new DateTime(1970, 1, 1);
+        private static readonly DateTime TimestampBase = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+        private static readonly DateTimeOffset TimestampOffsetBase = new DateTimeOffset(TimestampBase);
+
+        private static bool IsNullableType(Type type)
+        {
+            if (type.IsByRef) return true;
+            if (!type.IsConstructedGenericType) return false;
+            return type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        }
+
+        private static bool IsDateTimeOffsetType(Type type)
+        {
+            if (type == typeof(DateTimeOffset)) return true;
+            if (!type.IsConstructedGenericType) return false;
+            if (type.GetGenericTypeDefinition() != typeof(Nullable<>)) return false;
+            return Nullable.GetUnderlyingType(type) == typeof(DateTimeOffset);
+        }
     }
 }

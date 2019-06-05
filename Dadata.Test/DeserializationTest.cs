@@ -6,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Globalization;
 using System.Linq;
+using Newtonsoft.Json.Converters;
 using Xunit;
 
 namespace Dadata.Test
@@ -27,8 +28,6 @@ namespace Dadata.Test
         }
 
         [Theory]
-        [InlineData("{}", null)]
-        [InlineData("{Date:null}", null)]
         [InlineData("{Date:0}", "01/01/1970")]
         [InlineData("{Date:\"0\"}", "01/01/1970")]
         [InlineData("{Date:86400000}", "01/02/1970")]
@@ -39,15 +38,63 @@ namespace Dadata.Test
         [InlineData("{Date:\"1577836800000\"}", "01/01/2020")]
         [InlineData("{Date:-2208988800000}", "01/01/1900")]
         [InlineData("{Date:\"-2208988800000\"}", "01/01/1900")]
-        public void TimestampConverterTest(string serialized, string expected)
+        public void TimestampToDateTimeConverterTest(string serialized, string expected)
         {
-            var expectedResult = expected == null ? default(DateTime?) : DateTime.Parse(expected, CultureInfo.InvariantCulture);
-            var result = JsonConvert.DeserializeObject<TestModel>(serialized);
+            var expectedResult = DateTime.Parse(expected, CultureInfo.InvariantCulture);
+            var result = JsonConvert.DeserializeObject<DateTimeTestModel>(serialized);
             Assert.NotNull(result);
             Assert.Equal(expectedResult, result.Date);
         }
 
         [Theory]
+        [InlineData("{Date:0}", "01/01/1970")]
+        [InlineData("{Date:\"0\"}", "01/01/1970")]
+        [InlineData("{Date:86400000}", "01/02/1970")]
+        [InlineData("{Date:\"86400000\"}", "01/02/1970")]
+        [InlineData("{Date:-86400000}", "12/31/1969")]
+        [InlineData("{Date:\"-86400000\"}", "12/31/1969")]
+        [InlineData("{Date:1577836800000}", "01/01/2020")]
+        [InlineData("{Date:\"1577836800000\"}", "01/01/2020")]
+        [InlineData("{Date:-2208988800000}", "01/01/1900")]
+        [InlineData("{Date:\"-2208988800000\"}", "01/01/1900")]
+        public void TimestampToDateTimeOffsetConverterTest(string serialized, string expected)
+        {
+            var expectedResult = DateTimeOffset.Parse(expected, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            var result = JsonConvert.DeserializeObject<DateTimeOffsetTestModel>(serialized);
+            Assert.NotNull(result);
+            Assert.Equal(expectedResult, result.Date);
+        }
+
+        [Theory]
+        [InlineData("{}", null)]
+        [InlineData("{Date:null}", null)]
+        [InlineData("{Date:\"0\"}", "01/01/1970")]
+        [InlineData("{Date:1577836800000}", "01/01/2020")]
+        [InlineData("{Date:\"-2208988800000\"}", "01/01/1900")]
+        public void TimestampToNullableDateTimeConverterTest(string serialized, string expected)
+        {
+            var expectedResult = expected == null ? default(DateTime?) : DateTime.Parse(expected, CultureInfo.InvariantCulture);
+            var result = JsonConvert.DeserializeObject<NullableDateTimeTestModel>(serialized);
+            Assert.NotNull(result);
+            Assert.Equal(expectedResult, result.Date);
+        }
+
+        [Theory]
+        [InlineData("{}", null)]
+        [InlineData("{Date:null}", null)]
+        [InlineData("{Date:\"0\"}", "01/01/1970")]
+        [InlineData("{Date:1577836800000}", "01/01/2020")]
+        [InlineData("{Date:\"-2208988800000\"}", "01/01/1900")]
+        public void TimestampToNullableDateTimeOffsetConverterTest(string serialized, string expected)
+        {
+            var expectedResult = expected == null ? default(DateTimeOffset?) : DateTimeOffset.Parse(expected, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            var result = JsonConvert.DeserializeObject<NullableDateTimeOffsetTestModel>(serialized);
+            Assert.NotNull(result);
+            Assert.Equal(expectedResult, result.Date);
+        }
+
+        [Theory]
+        [InlineData("{Date:null}")]
         [InlineData("{Date:\"\"}")]
         [InlineData("{Date:true}")]
         [InlineData("{Date:false}")]
@@ -55,13 +102,37 @@ namespace Dadata.Test
         [InlineData("{Date:\"15.34\"}")]
         public void TimestampConverterThrowsTest(string serialized)
         {
-            Assert.Throws<JsonConverterException>(() => JsonConvert.DeserializeObject<TestModel>(serialized));
+            Assert.Throws<JsonConverterException>(() => JsonConvert.DeserializeObject<DateTimeTestModel>(serialized));
         }
 
         private class TestModel
         {
             [JsonConverter(typeof(TimestampToDateTimeConverter))]
+            public string Date { get; set; }
+        }
+
+        private class DateTimeTestModel
+        {
+            [JsonConverter(typeof(TimestampToDateTimeConverter))]
+            public DateTime Date { get; set; }
+        }
+
+        private class NullableDateTimeTestModel
+        {
+            [JsonConverter(typeof(TimestampToDateTimeConverter))]
             public DateTime? Date { get; set; }
+        }
+
+        private class DateTimeOffsetTestModel
+        {
+            [JsonConverter(typeof(TimestampToDateTimeConverter))]
+            public DateTimeOffset Date { get; set; }
+        }
+
+        private class NullableDateTimeOffsetTestModel
+        {
+            [JsonConverter(typeof(TimestampToDateTimeConverter))]
+            public DateTimeOffset? Date { get; set; }
         }
 
         private static readonly JsonSerializerSettings DeserializerSettings = new JsonSerializerSettings
