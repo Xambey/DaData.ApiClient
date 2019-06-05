@@ -44,9 +44,9 @@ namespace DaData.Models.Additional.Data
         
         public List<DataOkved> Okveds { get; set; }
 
-        public List<DataAuthority> Authorities { get; set; }
+        public DataAuthority Authorities { get; set; }
 
-        public List<DataDocument> Documents { get; set; }
+        public DataDocument Documents { get; set; }
 
         public List<DataLicense> Licenses { get; set; }
 
