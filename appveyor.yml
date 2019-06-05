@@ -33,8 +33,8 @@ build:
   publish_nuget: true
   publish_core_console: true
   verbosity: minimal
-after_test:
-- ps: .\Nuget\pack.ps1
+#after_test:
+#- ps: .\Nuget\pack.ps1
 artifacts:
 - path: "'*\\*.nupkg'"
 deploy:
