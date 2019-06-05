@@ -1,13 +1,15 @@
-﻿namespace DaData.Models.Additional.Data
+﻿using System;
+
+namespace DaData.Models.Additional.Data
 {
     public class DataState
     {
         public string Status { get; set; }
 
-        public long? ActualityDate { get; set; }
+        public DateTime? ActualityDate { get; set; }
 
-        public long? RegistrationDate { get; set; }
+        public DateTime? RegistrationDate { get; set; }
 
-        public long? LiquidationDate { get; set; }
+        public DateTime? LiquidationDate { get; set; }
     }
 }

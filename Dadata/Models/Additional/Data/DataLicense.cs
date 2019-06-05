@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DaData.Models.Additional.Data
 {
@@ -8,17 +9,17 @@ namespace DaData.Models.Additional.Data
 
         public string Number { get; set; }
 
-        public string IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
 
         public string IssueAuthority { get; set; }
 
-        public string SuspendDate { get; set; }
+        public DateTime? SuspendDate { get; set; }
 
         public string SuspendAuthority { get; set; }
 
-        public long? ValidFrom { get; set; }
+        public DateTime? ValidFrom { get; set; }
 
-        public long? ValidTo { get; set; }
+        public DateTime? ValidTo { get; set; }
 
         public string Type { get; set; }
 

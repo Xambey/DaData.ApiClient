@@ -6,7 +6,6 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Globalization;
 using System.Linq;
-using Newtonsoft.Json.Converters;
 using Xunit;
 
 namespace Dadata.Test
@@ -141,6 +140,7 @@ namespace Dadata.Test
             {
                 NamingStrategy = new SnakeCaseNamingStrategy()
             },
+            Converters = { new TimestampToDateTimeConverter() },
             Formatting = Formatting.Indented
         };
 
