@@ -49,7 +49,7 @@ namespace Dadata.Test
                 {
                     options.Secret = Environment.GetEnvironmentVariable("SECRET");
                 }
-                Console.WriteLine(JsonConvert.SerializeObject(options));
+//                Console.WriteLine(JsonConvert.SerializeObject(options));
             }
 
             return options;
