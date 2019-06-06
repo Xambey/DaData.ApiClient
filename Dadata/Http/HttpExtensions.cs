@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using DaData.Converters;
 using DaData.Exceptions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace DaData.Http
 {
     public static class HttpExtensions
     {
-        private static JsonSerializerSettings SerializerSettings { get; set; } = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
             ContractResolver = new DefaultContractResolver
             {
@@ -23,12 +22,13 @@ namespace DaData.Http
             Formatting = Formatting.Indented
         };
 
-        private static JsonSerializerSettings DeserializerSettings = new JsonSerializerSettings
+        private static readonly JsonSerializerSettings DeserializerSettings = new JsonSerializerSettings
         {
             ContractResolver = new DefaultContractResolver
             {
                 NamingStrategy = new SnakeCaseNamingStrategy()
             },
+            Converters = {new TimestampToDateTimeConverter()},
             Formatting = Formatting.Indented
         };
         

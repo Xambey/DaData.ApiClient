@@ -1,4 +1,5 @@
-﻿using DaData.Models.Suggestions.Results;
+﻿using System;
+using DaData.Models.Suggestions.Results;
 
 namespace DaData.Models.Suggestions.Data
 {
@@ -54,7 +55,7 @@ namespace DaData.Models.Suggestions.Data
         
         public string Emails { get; set; }
         
-        public string OrgnDate { get; set; }
+        public DateTime? OrgnDate { get; set; }
         
         public string OkvedType { get; set; }
     }
