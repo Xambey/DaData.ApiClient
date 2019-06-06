@@ -86,7 +86,6 @@ namespace Dadata.Test
             Assert.NotEmpty(data.GeoLat);
             Assert.NotEmpty(data.GeoLon);
             Assert.Equal("2", data.QcGeo);
-            Assert.Equal("г Москва, ул Снежная", data.Source);
         }
 
         [Fact]

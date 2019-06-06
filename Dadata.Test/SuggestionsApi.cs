@@ -106,7 +106,6 @@ namespace Dadata.Test
             Assert.NotNull(firstSuggest.Value);
             Assert.NotNull(firstSuggest.UnrestrictedValue);
             Assert.NotNull(firstSuggest.Address);
-            Assert.NotNull(firstSuggest.Okpo);
             Assert.NotNull(firstSuggest.Bic);
         }
         

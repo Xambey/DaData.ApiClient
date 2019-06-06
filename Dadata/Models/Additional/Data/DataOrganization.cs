@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using DaData.Models.Enums;
 using DaData.Models.Suggestions.Results;
 
 namespace DaData.Models.Additional.Data
@@ -27,7 +28,7 @@ namespace DaData.Models.Additional.Data
 
         public string Hid { get; set; }
 
-        public string Type { get; set; }
+        public OrganizationType Type { get; set; }
 
         public DataState State { get; set; }
 

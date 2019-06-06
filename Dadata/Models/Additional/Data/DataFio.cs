@@ -1,4 +1,6 @@
-﻿namespace DaData.Models.Additional.Data
+﻿using DaData.Models.Enums;
+
+namespace DaData.Models.Additional.Data
 {
     public class DataFio
     {
@@ -8,7 +10,7 @@
 
         public string Patronymic { get; set; }
 
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public string Source { get; set; }
 

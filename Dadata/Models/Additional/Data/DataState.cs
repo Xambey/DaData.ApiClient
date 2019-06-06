@@ -1,10 +1,11 @@
 ﻿using System;
+using DaData.Models.Enums;
 
 namespace DaData.Models.Additional.Data
 {
     public class DataState
     {
-        public string Status { get; set; }
+        public OrganizationState Status { get; set; }
 
         public DateTime? ActualityDate { get; set; }
 
