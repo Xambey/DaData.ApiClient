@@ -147,7 +147,7 @@ namespace Dadata.Test
             Assert.NotNull(first);
             
             Assert.Equal("24/3/12", first.Source);
-            Assert.Equal(new DateTime(2012, 03, 24), first.Birthdate);
+            Assert.Equal("24.03.2012", first.Birthdate);
             Assert.Equal(1, first.Qc);
         } 
         
