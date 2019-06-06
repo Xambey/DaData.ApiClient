@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using DaData.Models.Enums;
 using DaData.Models.Standartization.Requests;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -111,7 +113,7 @@ namespace Dadata.Test
             Assert.Equal("Иванов", first.Surname);
             Assert.Equal("Сергей", first.Name);
             Assert.Equal("Владимирович", first.Patronymic);
-            Assert.Equal("М", first.Gender);
+            Assert.Equal(Gender.Male, first.Gender);
             Assert.Equal(1, first.Qc);
         }
 
@@ -145,7 +147,7 @@ namespace Dadata.Test
             Assert.NotNull(first);
             
             Assert.Equal("24/3/12", first.Source);
-            Assert.Equal("24.03.2012", first.Birthdate);
+            Assert.Equal(new DateTime(2012, 03, 24), first.Birthdate);
             Assert.Equal(1, first.Qc);
         } 
         

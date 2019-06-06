@@ -1,4 +1,6 @@
-﻿namespace DaData.Models.Standartization.Results
+﻿using DaData.Models.Enums;
+
+namespace DaData.Models.Standartization.Results
 {
     public class FioResult
     {
@@ -18,7 +20,7 @@
 
         public string Patronymic { get; set; }
 
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public int? Qc { get; set; }
     }

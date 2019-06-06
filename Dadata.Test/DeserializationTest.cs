@@ -6,6 +6,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Globalization;
 using System.Linq;
+using DaData.Models.Enums;
 using Xunit;
 
 namespace Dadata.Test
@@ -20,10 +21,14 @@ namespace Dadata.Test
             Assert.NotNull(data.Suggestions);
             Assert.NotEmpty(data.Suggestions);
             var organization = data.Suggestions.First();
-            Assert.NotNull(organization.Data);
+            Assert.NotNull(organization?.Data);
             Assert.NotNull(organization.Data.Address);
             Assert.NotNull(organization.Data.Authorities);
             Assert.NotNull(organization.Data.Documents);
+            Assert.Equal(OrganizationType.Legal, organization.Data.Type);
+            var manager = organization.Data.Managers.First();
+            Assert.Equal(ManagerType.Employee, manager.Type);
+            Assert.Equal(Gender.Male, manager.Fio.Gender);
         }
 
         [Theory]
