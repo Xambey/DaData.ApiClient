@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.1.32</version>
+    <version>1.1.33</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
@@ -15,7 +15,7 @@
     <RepositoryType>public</RepositoryType>
     <PackageTags>C#, DaData.ru, Client</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
-    <PackageReleaseNotes>Fixed tests, updated models</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support DateTime fields</PackageReleaseNotes>
     <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
