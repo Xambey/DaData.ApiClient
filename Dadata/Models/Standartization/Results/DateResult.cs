@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using DaData.Converters;
 
 namespace DaData.Models.Standartization.Results
 {
@@ -8,7 +9,7 @@ namespace DaData.Models.Standartization.Results
     {
         public string Source { get; set; }
 
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonConverter(typeof(DateFormatConverter), "dd.MM.yyyy")]
         public DateTime Birthdate { get; set; }
 
         public int? Qc { get; set; }
