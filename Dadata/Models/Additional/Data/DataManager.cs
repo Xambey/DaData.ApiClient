@@ -1,4 +1,6 @@
-﻿namespace DaData.Models.Additional.Data
+﻿using DaData.Models.Enums;
+
+namespace DaData.Models.Additional.Data
 {
     public class DataManager
     {
@@ -10,6 +12,6 @@
 
         public string Hid { get; set; }
 
-        public string Type { get; set; }
+        public ManagerType Type { get; set; }
     }
 }

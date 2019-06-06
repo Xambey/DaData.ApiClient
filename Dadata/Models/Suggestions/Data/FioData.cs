@@ -1,4 +1,6 @@
-﻿namespace DaData.Models.Suggestions.Data
+﻿using DaData.Models.Enums;
+
+namespace DaData.Models.Suggestions.Data
 {
     public class FioData 
     {
@@ -8,7 +10,7 @@
         
         public string Patronymic { get; set; }
         
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
         
         public string Qc { get; set; }
     }
