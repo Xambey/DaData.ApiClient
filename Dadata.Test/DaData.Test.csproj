@@ -12,6 +12,6 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DaData\DaData.csproj" />
+    <ProjectReference Include="..\Dadata\DaData.csproj" />
   </ItemGroup>
 </Project>

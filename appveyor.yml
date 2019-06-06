@@ -1,68 +1,1 @@
-version: 1.1.{build}
-  
-branches:
-  only:
-  - master 
-  
-skip_commits:
-  files:
-    - docs/*
-    - '**/*.html'  
-    
-skip_branch_with_pr: true
-
-skip_tags: true
-
-image: Visual Studio 2017
-
-install: 
-- ps: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-
-configuration: Release
-
-shallow_clone: true
-
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: '{version}'
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
-  
-environment:
-  matrix:
-  - TOKEN:
-      secure: EFVcZzUo9GxQ+slLBFQc2zhFzlfA9gULAy0cXu5m6mQbyzRYLxnAw3F+Z0Qx0Jef
-    SECRET:
-      secure: Wz456M9HIV13gTGBd4Eh1F+EsMcmwKgqJhG44BFaXTdC0TyX3k02vAoqOSMo9Xd7
-      
-nuget:
-  #project_feed: true
-  disable_publish_on_pr: true
-  
-before_build:
-- ps: .\Build\version_updater.ps1
-
-build:
-  publish_nuget: true
-  verbosity: minimal
-  
-artifacts:
-- path: '.\Dadata\bin\**\Dadata.dll'
-  name: Dadata.dll
-
-
-#deploy:
-#- provider: NuGet
-#  api_key:
-#    secure: MgLMMGChxGhyyhSrWuntCcR83vpMU7geCo8YfmNVFbW8FLtf/GZqQLd3ZdNoMMzY
-#  skip_symbols: true
-#  artifact: /.*.nupkg/
-  
-notifications:
-- provider: GitHubPullRequest
-  on_build_success: true
-  on_build_failure: false
-  on_build_status_changed: false 
+version: 1.1.{build}branches:  only:  - masterskip_branch_with_pr: trueimage: Visual Studio 2019configuration: Releaseshallow_clone: truedotnet_csproj:  patch: true  file: '**\*.csproj'  version: '{version}'  package_version: '{version}'  assembly_version: '{version}'  file_version: '{version}'  informational_version: '{version}'environment:  SECRET: b9d0bce0146d293e9c05eb110d33eb800e7fa559  TOKEN:    secure: zpz3jONG+a22We2Yw9AtDTcGOPF44gWAVocqhPER46gBaJTtu+QJqROp0ze9LeM6  matrix:  - TOKEN:      secure: zpz3jONG+a22We2Yw9AtDTcGOPF44gWAVocqhPER46gBaJTtu+QJqROp0ze9LeM6    SECRET:      secure: +EGl4F4NWcUnCQLQsZGI4QnF88PfoODoe+TtFQm8A49ndqcH/yvIQwiMMF316ODHinstall:- ps: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exenuget:  project_feed: truebefore_build:- ps: nuget restorebuild:  publish_nuget: true  publish_core_console: true  verbosity: minimalafter_test:- ps: ''artifacts:- path: '**\*.nupkg'deploy:- provider: NuGet  api_key:    secure: 6RiLMSOyoUusD3QW1pU9Em5N9T98NI2kh2NWPJtzq9550ogcWMm2PJCQp6Ya+xw5  skip_symbols: true  on:    branch: masternotifications:- provider: GitHubPullRequest  on_build_success: true  on_build_failure: true  on_build_status_changed: false

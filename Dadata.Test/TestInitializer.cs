@@ -39,11 +39,17 @@ namespace Dadata.Test
             {
                 options = new ApiClientOptions();
                 var variables = Environment.GetEnvironmentVariables();
-                
-                if(variables.Contains("TOKEN"))
+
+                if (variables.Contains("TOKEN"))
+                {
                     options.Token = Environment.GetEnvironmentVariable("TOKEN");
-                if(variables.Contains("SECRET"))
+                }
+
+                if (variables.Contains("SECRET"))
+                {
                     options.Secret = Environment.GetEnvironmentVariable("SECRET");
+                }
+//                Console.WriteLine(JsonConvert.SerializeObject(options));
             }
 
             return options;
