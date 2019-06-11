@@ -1,4 +1,6 @@
-﻿namespace DaData.Models.Additional.Data
+﻿using System;
+
+namespace DaData.Models.Additional.Data
 {
     public class DataFounder
     {
@@ -12,6 +14,7 @@
 
         public string Type { get; set; }
 
+        [Obsolete]
         public string Share { get; set; }
     }
 }
