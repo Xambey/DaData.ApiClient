@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.1.33</version>
+    <version>1.1.44</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
-    <Authors>Panasenko Andrey</Authors>
+    <Authors>Panasenko Andrey, Khobotov Lev</Authors>
     <Company>-</Company>
     <Product>-</Product>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
@@ -15,7 +15,7 @@
     <RepositoryType>public</RepositoryType>
     <PackageTags>C#, DaData.ru, Client</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
-    <PackageReleaseNotes>Added support DateTime fields</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support Enum for fields</PackageReleaseNotes>
     <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
