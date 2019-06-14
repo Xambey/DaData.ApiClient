@@ -22,8 +22,10 @@ namespace DaData.Models.Additional.Data
         
         public long? BranchCount { get; set; }
 
+        [Obsolete]
         public string Source { get; set; }
 
+        [Obsolete]
         public int? Qc { get; set; }
 
         public string Hid { get; set; }
@@ -54,9 +56,11 @@ namespace DaData.Models.Additional.Data
 
         public AddressResult Address { get; set; }
 
-        public List<string> Phones { get; set; }
+        [Obsolete]
+        public List<object> Phones { get; set; }
 
-        public List<string> Emails { get; set; }
+        [Obsolete]
+        public List<EmailResult> Emails { get; set; }
 
         public DateTime? OgrnDate { get; set; }
 
