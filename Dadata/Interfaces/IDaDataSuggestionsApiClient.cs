@@ -97,5 +97,12 @@ namespace DaData.Interfaces
         /// <param name="query">text to search for</param>
         /// <returns></returns>
         Task<EmailShortResponse> SuggestionsShortQueryEmail(string query);
+
+        /// <summary>
+        /// Get hint for "issued by" field in passport
+        /// </summary>
+        /// <param name="query">object to search for</param>
+        /// <returns></returns>
+        Task<FmsUnitResponse> SuggestionsQueryFmsUnit(FmsUnitRequest query);
     }
 }
