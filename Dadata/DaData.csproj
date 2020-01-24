@@ -16,7 +16,7 @@
     <PackageTags>C#, DaData.ru, Client</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
     <PackageReleaseNotes>Added support Enum for fields</PackageReleaseNotes>
-    <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Net" />

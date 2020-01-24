@@ -1,11 +1,8 @@
-﻿using System.IO;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using DaData.Models.Additional.Requests;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace Dadata.Test
 {
@@ -45,7 +42,7 @@ namespace Dadata.Test
             Assert.NotNull(first);
             
             Assert.Equal("г Москва, ул Снежная", first.Value);
-            Assert.Equal("г Москва, ул Снежная", first.UnrestrictedValue);
+            Assert.Equal("129323, г Москва, ул Снежная", first.UnrestrictedValue);
             
             Assert.NotNull(first.Data);
 

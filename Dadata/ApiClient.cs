@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using DaData.Commands.Additional;
@@ -44,7 +42,7 @@ namespace DaData
     public class ApiClient : IDaDataApiClient
     {
         #region Properties
-        
+
         public ApiClientOptions Options { get; }
 
         private Timer ResetCountMessagesTimer { get; }
@@ -52,7 +50,7 @@ namespace DaData
         private int _nowCountMessages;
 
         private readonly int _limitQueries;
-        
+
         #endregion
 
         /// <summary>
@@ -62,16 +60,16 @@ namespace DaData
         /// <param name="secret">Secret authentication token (For api of Standartization)</param>
         /// <param name="limitQueries">Max count of requests for one second (in the api max 20), default 20</param>
         /// <exception cref="InvalidTokenException">Throw if one from tokens is invalid</exception>
-        public ApiClient(string token, string secret, int limitQueries = 20) 
-            : 
+        public ApiClient(string token, string secret, int limitQueries = 20)
+            :
             this(
-                    new ApiClientOptions
-                    {
-                        Token = token,
-                        Secret = secret,
-                        LimitQueries = limitQueries
-                    }
-                )
+                new ApiClientOptions
+                {
+                    Token = token,
+                    Secret = secret,
+                    LimitQueries = limitQueries
+                }
+            )
         {
         }
 
@@ -82,15 +80,15 @@ namespace DaData
         /// <exception cref="InvalidTokenException">Throw if one from tokens is invalid</exception>
         public ApiClient(ApiClientOptions options)
         {
-            if (string.IsNullOrEmpty(options.Token)) 
+            if (string.IsNullOrEmpty(options.Token))
                 throw new InvalidTokenException();
 
             Options = options;
-            
-            if(Options.LimitQueries != null && Options.LimitQueries <= 0)
+
+            if (Options.LimitQueries != null && Options.LimitQueries <= 0)
                 throw new InvalidLimitQueriesException(Options.LimitQueries);
             _limitQueries = Options.LimitQueries ?? (int) DefaultOptions.QueriesLimit;
-            
+
             //Initialization of HttpClientSingleton
             HttpClientSingleton.GetInstance(options);
 
@@ -116,12 +114,12 @@ namespace DaData
         /// <exception cref="RequestsLimitIsExceededException"></exception>
         private async Task<BaseResponse> ExecuteCommand(CommandBase command, object query)
         {
-            if(_nowCountMessages >= _limitQueries)
+            if (_nowCountMessages >= _limitQueries)
                 throw new RequestsLimitIsExceededException();
             var response = await command.Execute(query);
             //Increment of count messages
             if (command is StandartizationCommandBase)
-            {   
+            {
                 //TODO: need to do a smart handler
                 if (query is CompositeResult temp)
                     _nowCountMessages += temp.Data.Count;
@@ -130,6 +128,7 @@ namespace DaData
             }
             else
                 Interlocked.Increment(ref _nowCountMessages);
+
             return response;
         }
 
@@ -142,8 +141,10 @@ namespace DaData
         #region Suggestions API
 
         /// <inheritdoc />
-        public async Task<AddressResponse> SuggestionsQueryAddress(string query, int? count = null,
-            List<JObject> locations = null, List<JObject> locationsBoost = null) =>
+        public async Task<AddressResponse> SuggestionsQueryAddress(string query,
+            int? count = null,
+            List<JObject> locations = null,
+            List<JObject> locationsBoost = null) =>
             await SuggestionsQueryAddress(new AddressRequest
             {
                 Count = count,
@@ -157,12 +158,14 @@ namespace DaData
             (AddressResponse) await ExecuteCommand(new AddressCommand(), query);
 
         /// <inheritdoc />
-        public async Task<AddressShortResponse> SuggestionsShortQueryAddress(string query, int? count = null,
-            List<JObject> locations = null, List<JObject> locationsBoost = null) =>
+        public async Task<AddressShortResponse> SuggestionsShortQueryAddress(string query,
+            int? count = null,
+            List<JObject> locations = null,
+            List<JObject> locationsBoost = null) =>
             (await SuggestionsQueryAddress(query, count, locations, locationsBoost)).ToShortResponse();
 
         /// <inheritdoc />
-        public async Task<FioResponse> SuggestionsQueryFio(string query) => 
+        public async Task<FioResponse> SuggestionsQueryFio(string query) =>
             (FioResponse) await ExecuteCommand(new FioCommand(), new FioRequest
             {
                 Query = query
@@ -178,7 +181,7 @@ namespace DaData
             {
                 Query = query
             });
-        
+
         /// <inheritdoc />
         public async Task<PartyShortResponse> SuggestionsShortQueryOrganization(string query) =>
             (await SuggestionsQueryOrganization(query)).ToShortResponse();
@@ -204,15 +207,19 @@ namespace DaData
         /// <inheritdoc />
         public async Task<EmailShortResponse> SuggestionsShortQueryEmail(string query) =>
             (await SuggestionsQueryEmail(query)).ToShortResponse();
-        
+
+        /// <inheritdoc />
+        public async Task<FmsUnitResponse> SuggestionsQueryFmsUnit(FmsUnitRequest query) =>
+            (FmsUnitResponse) await ExecuteCommand(new FmsUnitCommand(), query);
+
         #endregion
 
         #region Standartization API
 
         /// <inheritdoc />
         public async Task<Models.Standartization.Responses.AddressResponse> StandartizationQueryAddress(IEnumerable<string> queries) =>
-        (Models.Standartization.Responses.AddressResponse) await ExecuteCommand(new Commands.Standartization.AddressCommand(),
-        queries);
+            (Models.Standartization.Responses.AddressResponse) await ExecuteCommand(new Commands.Standartization.AddressCommand(),
+                queries);
 
         /// <inheritdoc />
         public async Task<Models.Standartization.Responses.AddressResponse> StandartizationQueryAddress(
@@ -231,9 +238,9 @@ namespace DaData
 
         /// <inheritdoc />
         public async Task<PhoneResponse> StandartizationQueryPhone(IEnumerable<string> queries) =>
-        (PhoneResponse) await ExecuteCommand(new PhoneCommand(),
-        queries);
-        
+            (PhoneResponse) await ExecuteCommand(new PhoneCommand(),
+                queries);
+
         /// <inheritdoc />
         public async Task<PhoneResponse> StandartizationQueryPhone(PhoneRequest queries) =>
             await StandartizationQueryPhone(queries.Queries);
@@ -267,7 +274,8 @@ namespace DaData
             StandartizationQueryFio(Models.Standartization.Requests.FioRequest queries) => await StandartizationQueryFio(queries.Queries);
 
         /// <inheritdoc />
-        public async Task<Models.Standartization.ShortResponses.FioShortResponse> StandartizationShortQueryFio(IEnumerable<string> queries) =>
+        public async Task<Models.Standartization.ShortResponses.FioShortResponse>
+            StandartizationShortQueryFio(IEnumerable<string> queries) =>
             (await StandartizationQueryFio(queries)).ToShortResponse();
 
         /// <inheritdoc />
@@ -306,7 +314,7 @@ namespace DaData
         public async Task<CompositeResponse> StandartizationQueryComposite(CompositeRequest queries) =>
             (CompositeResponse) await ExecuteCommand(new CompositeCommand(),
                 queries);
-        
+
         #endregion
 
         #region Additional API
