@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using DaData;
-using DaData.Models.Standartization.Requests;
 using DaData.Options;
 using Newtonsoft.Json;
 using Xunit.Abstractions;

@@ -1,11 +1,8 @@
-﻿using System.IO;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using DaData.Models.Additional.Requests;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace Dadata.Test
 {
