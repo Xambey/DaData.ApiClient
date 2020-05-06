@@ -8,6 +8,10 @@ namespace DaData.Models.Suggestions.Data
 		 public string PostalCode { get; set; }
         
          public string Country { get; set; }
+         
+         public string CountryIsoCode { get; set; }
+         
+         public string RegionIsoCode { get; set; }
 
 		 public string RegionFiasId { get; set; }
         
