@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.1.49</version>
+    <version>1.1.50</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
-    <Authors>Panasenko Andrey, Khobotov Lev</Authors>
+    <Authors>Panasenko Andrey</Authors>
     <Company>-</Company>
     <PackageReleaseNotes>
-      -Добавлена подсказка для поля "кем выдан" в паспорте
+      -Добавлен метод для получения статистики использования
+      -Добавлены поля CountryIsoCode и RegionIsoCode в модель AddressData
     </PackageReleaseNotes>
     <Product>-</Product>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
