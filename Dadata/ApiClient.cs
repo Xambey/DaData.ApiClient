@@ -368,6 +368,20 @@ namespace DaData
         public async Task<UserBalanceResponse> AdditionalQueryUserBalance() =>
             (UserBalanceResponse) await ExecuteCommand(new UserBalanceCommand(), null);
 
+        /// <inheritdoc />
+        public async Task<UsageStatisticsResponse> AdditionalQueryUsageStatistics(
+            UsageStatisticsRequest query = null) =>
+            (UsageStatisticsResponse) await ExecuteCommand(new UsageStatisticsCommand(),
+                query);
+
+        /// <inheritdoc />
+        public async Task<UsageStatisticsResponse>
+            AdditionalQueryUsageStatistics(DateTime? date) =>
+            await AdditionalQueryUsageStatistics(new UsageStatisticsRequest()
+            {
+                Date = date
+            });
+        
         #endregion
     }
 }

@@ -14,7 +14,7 @@ namespace DaData.Commands.Standartization
 {
     public class CompositeCommand : StandartizationCommandBase
     {
-        private static string Url { get; } = "https://dadata.ru/api/v2/clean";
+        private static string Url { get; } = "https://dadata.ru/api/v1/clean";
 
         public override async Task<BaseResponse> Execute(object query)
         {

@@ -67,5 +67,16 @@ namespace DaData.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<UserBalanceResponse> AdditionalQueryUserBalance();
+        /// <summary>
+        /// Get usage statistics by date (default current date by DaData)
+        /// </summary>
+        /// <returns></returns>
+        Task<UsageStatisticsResponse> AdditionalQueryUsageStatistics(DateTime? date);
+        
+        /// <summary>
+        /// Get usage statistics by date (default current date by DaData)
+        /// </summary>
+        /// <returns></returns>
+        Task<UsageStatisticsResponse> AdditionalQueryUsageStatistics(UsageStatisticsRequest query);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DaData.Models.Additional.Requests;
 using Xunit;
@@ -156,6 +157,24 @@ namespace Dadata.Test
             var result = await ApiClient.AdditionalQueryUserBalance();
             Assert.NotNull(result);
             Assert.NotNull(result.Balance);
+        }
+        
+        [Fact]
+        async Task AdditionalQueryUsageStatisticsTest()
+        {
+            var result = await ApiClient.AdditionalQueryUsageStatistics();
+            Assert.NotNull(result);
+            Assert.NotNull(result.Services);
+            Assert.Equal(result.Date.Year, DateTime.Now.Year);
+            Assert.Equal(result.Date.Month, DateTime.Now.Month);
+            Assert.Equal(result.Date.Day, DateTime.Now.Day);
+            
+            result = await ApiClient.AdditionalQueryUsageStatistics(new DateTime(2007, 4, 15));
+            Assert.NotNull(result);
+            Assert.NotNull(result.Services);
+            Assert.Equal(2007, result.Date.Year);
+            Assert.Equal(4,result.Date.Month);
+            Assert.Equal(15, result.Date.Day);
         }
     }
 }
