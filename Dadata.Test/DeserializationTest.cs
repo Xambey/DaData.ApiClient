@@ -385,7 +385,10 @@ namespace Dadata.Test
                                     ""name"": ""ЦЕНТРАЛЬНЫЙ БАНК РОССИЙСКОЙ ФЕДЕРАЦИИ"",
                                     ""hid"": ""33b78a80c782d847d02a7e7a53d3aa17a5dff9a1cb5ec73d0311423dcc065a89"",
                                     ""type"": ""LEGAL"",
-                                    ""share"": null
+                                    ""share"": {
+                                        ""value"": 100,
+                                        ""type"": ""PERCENT""
+                                    }
                                 }
                             ],
                             ""managers"": [
