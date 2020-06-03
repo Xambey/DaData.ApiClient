@@ -15,6 +15,6 @@ namespace DaData.Models.Additional.Data
         public string Type { get; set; }
 
         [Obsolete]
-        public string Share { get; set; }
+        public DataShare Share { get; set; }
     }
 }
