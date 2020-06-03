@@ -155,8 +155,7 @@ namespace Dadata.Test
         async Task AdditionalQueryUserBalanceTest()
         {
             var result = await ApiClient.AdditionalQueryUserBalance();
-            Assert.NotNull(result);
-            Assert.NotNull(result.Balance);
+            Assert.True(result.Balance > 0);
         }
         
         [Fact]
