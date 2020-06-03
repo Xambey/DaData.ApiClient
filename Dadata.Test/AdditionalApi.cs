@@ -45,7 +45,7 @@ namespace Dadata.Test
             Assert.NotNull(first);
             
             Assert.Equal("г Москва, ул Снежная", first.Value);
-            Assert.Equal("г Москва, ул Снежная", first.UnrestrictedValue);
+            Assert.Equal("129323, г Москва, ул Снежная", first.UnrestrictedValue);
             
             Assert.NotNull(first.Data);
 
