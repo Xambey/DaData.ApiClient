@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.1.50</version>
+    <version>1.1.51</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
     <Authors>Panasenko Andrey</Authors>
     <Company>-</Company>
     <PackageReleaseNotes>
-      -Добавлен метод для получения статистики использования
-      -Добавлены поля CountryIsoCode и RegionIsoCode в модель AddressData
+        - В DataFounder добавлен тип Share { value, type } 
+        - Balance больше не nullable тип
     </PackageReleaseNotes>
     <Product>-</Product>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
@@ -17,9 +17,10 @@
     <PackageIconUrl>https://dadata.ru/static/i/dadata-logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/Xambey/DaData.ApiClient</RepositoryUrl>
     <RepositoryType>public</RepositoryType>
-    <PackageTags>C#, DaData.ru, Client</PackageTags>
+    <PackageTags>C#, DaData.ru, Client, Api</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
     <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <Title>Dadata.ApiClient</Title>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Net" />
