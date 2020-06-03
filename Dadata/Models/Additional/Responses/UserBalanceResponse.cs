@@ -2,6 +2,6 @@
 {
     public class UserBalanceResponse : BaseResponse
     {
-        public decimal? Balance { get; set; }
+        public decimal Balance { get; set; }
     }
 }
