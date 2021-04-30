@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
@@ -18,7 +18,7 @@
     <RepositoryType>public</RepositoryType>
     <PackageTags>C#, DaData.ru, Client, Api</PackageTags>
     <PackageId>DaData.ApiClient</PackageId>
-    <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp1.0;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;net5.0;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1</TargetFrameworks>
     <Title>Dadata.ApiClient</Title>
   </PropertyGroup>
   <ItemGroup>

@@ -78,7 +78,7 @@ namespace Dadata.Test
             Assert.Equal("0", data.FiasActualityState);
             Assert.Equal("77000000000268400", data.KladrId);
             Assert.Equal("0", data.CapitalMarker);
-            Assert.Equal("45000000000", data.Okato);
+            Assert.Equal("45280580000", data.Okato);
             Assert.Equal("7716", data.TaxOffice);
             Assert.Equal("7716", data.TaxOfficeLegal);
             Assert.NotEmpty(data.GeoLat);
