@@ -15,6 +15,11 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=A2C450E7_002DE98D_002D44EB_002D9FBC_002D3533146C5905_002Fd_003AOptions_002Ff_003ADadataApiClientOptions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=A2C450E7_002DE98D_002D44EB_002D9FBC_002D3533146C5905_002Ff_003ADadataApiClient_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:Int64 x:Key="/Default/CodeStyle/Naming/CSharpAutoNaming/AutoNamingCompletedVersion/@EntryValue">2</s:Int64>
+	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">/usr/share/dotnet/sdk/5.0.202/MSBuild.dll</s:String>
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e4bb7aa6_002Df636_002D4437_002D8e30_002D0ecbadb98098/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;DaData.Test&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/home/xambey/Documents/Homebrew/Github/DaData.ApiClient/Dadata.Test" Presentation="&amp;lt;DaData.Test&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
 	
 	
 	
