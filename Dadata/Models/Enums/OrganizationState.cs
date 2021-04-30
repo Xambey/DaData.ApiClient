@@ -17,6 +17,9 @@ namespace DaData.Models.Enums
         Liquidated,
 
         [EnumMember(Value = "REORGANIZING")]
-        Reorganizing
+        Reorganizing,
+        
+        [EnumMember(Value = "BANKRUPT")]
+        Bankrupt
     }
 }
