@@ -1,15 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <version>1.1.51</version>
+    <version>1.2.0</version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Client for work with API of DaData.ru service.</Description>
     <Copyright>Copyright © Panasenko Andrey</Copyright>
     <Authors>Panasenko Andrey</Authors>
     <Company>-</Company>
     <PackageReleaseNotes>
-        - В DataFounder добавлен тип Share { value, type } 
-        - Balance больше не nullable тип
+        - Добавлен тип BANKRUPT в OrganizationState
     </PackageReleaseNotes>
     <Product>-</Product>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Xambey/DaDataApiClient/master/LICENSE</PackageLicenseUrl>
